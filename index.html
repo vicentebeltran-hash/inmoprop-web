@@ -386,30 +386,6 @@ section{padding-block:clamp(56px,8vw,110px)}
 .mod-card .chip{margin-top:auto;align-self:flex-start}
 
 /* ============================================================
-   EJE DE PRODUCCIÓN
-   ============================================================ */
-.eje{display:flex;gap:var(--sp-3);overflow-x:auto;padding-bottom:var(--sp-4);scrollbar-width:thin}
-.eje::-webkit-scrollbar{height:6px}
-.eje::-webkit-scrollbar-thumb{background:var(--border);border-radius:var(--r-full)}
-.paso{
-  flex:0 0 168px;padding:var(--sp-4);
-  border:1px solid var(--card-borde);border-radius:var(--r-m);
-  background:var(--surface);box-shadow:var(--sombra-s);
-  transition:border-color var(--trans)
-}
-.paso:hover{border-color:var(--acento)}
-.paso b{
-  display:grid;place-items:center;width:28px;height:28px;margin-bottom:var(--sp-3);
-  border-radius:var(--r-full);background:var(--acento-soft);color:var(--acento);
-  font-size:var(--txt-mini);font-weight:var(--peso-negro)
-}
-.paso span{font-size:var(--txt-small);font-weight:var(--peso-medio);line-height:1.35;display:block}
-.orbitales{display:grid;gap:var(--sp-3);grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:var(--sp-5)}
-.orbital{padding:var(--sp-4);border:1px dashed var(--border);border-radius:var(--r-m);background:transparent}
-.orbital b{display:block;font-size:var(--txt-small);font-weight:var(--peso-fuerte);color:var(--secundario);margin-bottom:2px}
-.orbital span{font-size:var(--txt-mini);color:var(--dim)}
-
-/* ============================================================
    CICLO
    ============================================================ */
 .ciclo{display:grid;gap:var(--sp-4);grid-template-columns:repeat(auto-fit,minmax(200px,1fr));position:relative}
@@ -1049,16 +1025,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 @keyframes escribir{to{max-width:100%}}
 @keyframes caret{0%,100%{border-right-color:var(--acento)}50%{border-right-color:transparent}}
 
-/* --- eje de producción: línea que se llena --- */
-.eje-wrap{position:relative}
-.eje-linea{height:2px;margin:0 0 var(--sp-4);border-radius:var(--r-full);background:var(--border);overflow:hidden}
-.eje-linea i{display:block;height:100%;width:0;background:var(--grad-secundario);transition:width 1.4s var(--curva)}
-.visible .eje-linea i{width:100%}
-.paso{transition:border-color var(--trans),transform var(--trans),box-shadow var(--trans)}
-.paso:hover{transform:translateY(-3px);box-shadow:var(--sombra-m)}
-.paso b{transition:background var(--trans),color var(--trans),transform var(--trans)}
-.paso:hover b{background:var(--grad-acento);color:#fff;transform:scale(1.1)}
-
 /* --- ciclo: hilo que une los pasos --- */
 .ciclo{position:relative}
 @media(min-width:820px){
@@ -1096,7 +1062,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   html{scroll-behavior:auto}
   .aurora,.grano,.progreso-scroll{display:none}
   .objecion span{max-width:100%;border-right-color:transparent}
-  .eje-linea i{width:100%}
   .movil{transform:none}
 }
 </style>
@@ -1512,33 +1477,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   </div>
 </section>
 
-<!-- ============ SECCIÓN 10 · EJE DE PRODUCCIÓN ============ -->
-<section class="rev">
-  <div class="contenedor">
-    <span class="etiqueta">El eje de producción</span>
-    <h2>Del contacto a la firma, en este orden.</h2>
-    <p class="subtitulo" style="margin-bottom:var(--sp-5)">No entras por módulos: entras por lo que quieres conseguir hoy. Cada paso te trae sus cursos, sus piezas de marketing y sus contactos del CRM.</p>
-    <div class="eje-wrap">
-      <div class="eje-linea" aria-hidden="true"><i></i></div>
-    <div class="eje">
-      <div class="paso"><b>1</b><span>Generación de contactos</span></div>
-      <div class="paso"><b>2</b><span>Captación en exclusiva</span></div>
-      <div class="paso"><b>3</b><span>Fijación de precio</span></div>
-      <div class="paso"><b>4</b><span>Alta del inmueble</span></div>
-      <div class="paso"><b>5</b><span>Comercialización</span></div>
-      <div class="paso"><b>6</b><span>Compradores</span></div>
-      <div class="paso"><b>7</b><span>Negociación de ofertas</span></div>
-      <div class="paso"><b>8</b><span>Notaría y postventa</span></div>
-    </div>
-    </div>
-    <div class="orbitales">
-      <div class="orbital"><b>Estrategia y coaching</b><span>Tu plan de negocio y tus indicadores, acompañando toda la cadena</span></div>
-      <div class="orbital"><b>Skills</b><span>Las habilidades del agente, transversales a todos los pasos</span></div>
-      <div class="orbital"><b>Técnico</b><span>Valoración técnica, legal y fiscal</span></div>
-    </div>
-  </div>
-</section>
-
 <!-- ============ SECCIÓN 11 · CÓMO FUNCIONA ============ -->
 <section class="rev" id="como-funciona">
   <div class="contenedor">
@@ -1756,7 +1694,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </details>
       <details>
         <summary>¿Qué escenarios puedo entrenar? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Los ocho pasos del eje de producción, desde la generación de contactos hasta notaría y postventa, más las áreas orbitales: estrategia y coaching, skills y la parte técnica. El role play cubre las objeciones reales de captación, exclusiva y cierre.</p>
+        <p>Toda la cadena, desde conseguir el contacto hasta la firma: prospección y recomendación, captación en exclusiva, fijación de precio, comercialización, compradores, negociación de ofertas y postventa. Más las áreas transversales: estrategia y coaching, skills del agente y la parte técnica, legal y fiscal. El role play cubre las objeciones reales de captación, exclusiva y cierre.</p>
       </details>
       <details>
         <summary>¿El role play es por voz o escribiendo? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
