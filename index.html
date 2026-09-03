@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inmoprop AI · Tu plataforma inmobiliaria. Entrena. Conecta. Crece.</title>
 <meta name="description" content="Role play con IA por voz, formación viva y herramientas de marketing para agentes y gerentes inmobiliarios. Sin canon, sin permanencia, sin cambiar de marca. 30 días con todo abierto.">
-<link rel="icon" href="assets/favicon.png">
-<link rel="apple-touch-icon" href="assets/favicon.png">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Inmoprop AI · Tu plataforma inmobiliaria">
 <meta property="og:description" content="Entrena a tu equipo con role play de IA en español. Sin canon, sin permanencia, sin cambiar de marca.">
-<meta property="og:image" content="assets/lockup-oscuro.png">
+<meta property="og:image" content="lockup-oscuro.png">
 <meta property="og:locale" content="es_ES">
 <meta name="theme-color" content="#f5f6fc">
 
@@ -440,6 +440,7 @@ section{padding-block:clamp(56px,8vw,110px)}
 .plan__precio b{font-family:var(--fuente-titulo);font-size:2.6rem;font-weight:var(--peso-black);line-height:1;letter-spacing:-.03em}
 .plan__precio small{font-size:var(--txt-small);font-weight:var(--peso-medio);color:var(--dim);padding-bottom:5px}
 .plan__nota{font-size:var(--txt-mini);color:var(--faint);margin:0 0 var(--sp-4);min-height:2.6em}
+.plan__nota b{color:var(--text);font-weight:var(--peso-fuerte)}
 .plan__hereda{font-size:var(--txt-small);font-weight:var(--peso-fuerte);margin:0 0 var(--sp-2)}
 .plan ul{list-style:none;margin:0 0 var(--sp-5);padding:0;display:grid;gap:var(--sp-2)}
 .plan li{display:flex;gap:var(--sp-2);align-items:flex-start;font-size:var(--txt-small);color:var(--dim)}
@@ -466,6 +467,91 @@ section{padding-block:clamp(56px,8vw,110px)}
 .plan--multi h3{background:var(--grad-oro);-webkit-background-clip:text;background-clip:text;color:transparent}
 .precios__pie{margin-top:var(--sp-6);text-align:center;font-size:var(--txt-small);color:var(--dim)}
 .precios__pie b{color:var(--text)}
+
+
+/* ============================================================
+   ROADMAP DE PLATAFORMAS
+   ============================================================ */
+.roadmap{display:grid;gap:var(--sp-5)}
+.roadmap__hoy{display:grid;gap:var(--sp-4);grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.roadmap__futuro{display:grid;gap:var(--sp-4);grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+@media(min-width:920px){.roadmap__futuro{grid-template-columns:repeat(3,1fr)}}
+.roadmap__bloque h3{
+  font-family:var(--fuente);font-size:var(--txt-h3);font-weight:var(--peso-fuerte);
+  text-transform:uppercase;letter-spacing:.12em;color:var(--dim);
+  display:flex;align-items:center;gap:var(--sp-3);margin-bottom:var(--sp-4)
+}
+.roadmap__bloque h3::after{content:"";flex:1;height:1px;background:var(--border)}
+.plat{position:relative;padding:var(--sp-5) var(--sp-4)}
+.plat h4{font-family:var(--fuente-titulo);font-size:1rem;font-weight:var(--peso-negro);margin-bottom:4px}
+.plat p{font-size:var(--txt-mini);color:var(--dim);margin:0 0 var(--sp-4)}
+.plat .chip{margin-top:auto;align-self:flex-start}
+.plat--hoy{border-color:var(--secundario);box-shadow:var(--sombra-m)}
+.plat--futuro{background:transparent;border-style:dashed}
+.roadmap__nota{
+  display:flex;gap:var(--sp-3);align-items:flex-start;
+  margin-top:var(--sp-5);padding:var(--sp-4) var(--sp-5);
+  border:1px solid var(--card-borde);border-radius:var(--r-m);
+  background:var(--surface);box-shadow:var(--sombra-s)
+}
+.roadmap__nota svg{width:20px;height:20px;flex-shrink:0;color:var(--acento);stroke-width:2;margin-top:2px}
+.roadmap__nota b{display:block;font-size:var(--txt-small)}
+.roadmap__nota span{font-size:var(--txt-mini);color:var(--dim)}
+
+/* ============================================================
+   CALCULADORA MULTI
+   ============================================================ */
+.calc{
+  margin-top:var(--sp-6);padding:clamp(24px,3vw,40px);
+  border:1px solid var(--acento);border-radius:var(--r-l);
+  background:var(--grad-superficie);box-shadow:var(--sombra-l)
+}
+.calc__grid{display:grid;gap:clamp(24px,3vw,44px);grid-template-columns:1fr;align-items:center}
+@media(min-width:840px){.calc__grid{grid-template-columns:1fr 1fr}}
+.calc h3{font-size:1.3rem;margin-bottom:var(--sp-2)}
+.calc__intro{font-size:var(--txt-small);color:var(--dim);margin-bottom:var(--sp-5)}
+.calc__valor{
+  display:flex;align-items:baseline;gap:var(--sp-2);margin-bottom:var(--sp-2);
+  font-family:var(--fuente-titulo);font-weight:var(--peso-black)
+}
+.calc__valor b{font-size:2.4rem;line-height:1;letter-spacing:-.03em;color:var(--acento)}
+.calc__valor span{font-family:var(--fuente);font-size:var(--txt-small);font-weight:var(--peso-medio);color:var(--dim)}
+.calc input[type=range]{
+  -webkit-appearance:none;appearance:none;width:100%;height:6px;margin:var(--sp-3) 0 var(--sp-2);
+  border-radius:var(--r-full);background:var(--surface-2);cursor:pointer
+}
+.calc input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:24px;height:24px;border-radius:var(--r-full);
+  background:var(--acento);border:3px solid var(--surface);box-shadow:var(--glow-acento);cursor:pointer
+}
+.calc input[type=range]::-moz-range-thumb{
+  width:24px;height:24px;border:3px solid var(--surface);border-radius:var(--r-full);
+  background:var(--acento);box-shadow:var(--glow-acento);cursor:pointer
+}
+.calc__limites{display:flex;justify-content:space-between;font-size:var(--txt-mini);color:var(--faint)}
+.calc__desglose{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-3)}
+.calc__desglose li{
+  display:flex;justify-content:space-between;gap:var(--sp-4);align-items:baseline;
+  font-size:var(--txt-small);color:var(--dim)
+}
+.calc__desglose li i{font-style:normal;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--text);font-weight:var(--peso-medio)}
+.calc__total{
+  display:flex;justify-content:space-between;gap:var(--sp-4);align-items:baseline;
+  margin-top:var(--sp-4);padding-top:var(--sp-4);border-top:1px solid var(--border)
+}
+.calc__total span{font-size:var(--txt-small);font-weight:var(--peso-fuerte)}
+.calc__total b{
+  font-family:var(--fuente-titulo);font-size:2rem;font-weight:var(--peso-black);
+  line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap
+}
+.calc__ahorro{
+  display:flex;gap:var(--sp-2);align-items:center;margin-top:var(--sp-4);
+  padding:var(--sp-3) var(--sp-4);border-radius:var(--r-m);
+  background:var(--secundario-soft);color:var(--secundario);
+  font-size:var(--txt-small);font-weight:var(--peso-medio)
+}
+.calc__ahorro svg{width:18px;height:18px;flex-shrink:0;stroke-width:2.5}
+.calc__pie{margin:var(--sp-4) 0 0;font-size:var(--txt-mini);color:var(--faint)}
 
 /* ============================================================
    SEGURIDAD
@@ -541,8 +627,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <header class="header">
   <div class="contenedor header__in">
     <a href="#" class="logo" aria-label="Inmoprop AI — inicio">
-      <img class="logo__claro" src="assets/logo-claro.png" alt="Inmoprop AI" width="664" height="160">
-      <img class="logo__oscuro" src="assets/logo-oscuro.png" alt="Inmoprop AI" width="725" height="160">
+      <img class="logo__claro" src="logo-claro.png" alt="Inmoprop AI" width="664" height="160">
+      <img class="logo__oscuro" src="logo-oscuro.png" alt="Inmoprop AI" width="725" height="160">
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="#plataforma">Plataforma</a>
@@ -585,7 +671,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="hero__txt">
       <span class="chip" style="margin-bottom:var(--sp-4)">Role play con IA por voz · en español</span>
       <h1>Tu equipo inmobiliario, <span class="grad-marca-txt">entrenado por IA</span>.</h1>
-      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Formación viva, marketing con tu marca y un copiloto que te acompaña en cualquier pantalla. Sin canon, sin permanencia y sin cambiar de marca.</p>
+      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y la plataforma crece contigo: marketing, valoración, inversión, captación y expedientes llegan a la misma cuenta. Sin canon, sin permanencia y sin cambiar de marca.</p>
       <div class="hero__ctas">
         <a href="#precios" class="btn">Empezar gratis</a>
         <a href="#demo" class="btn btn--sec">Ver la demo</a>
@@ -599,7 +685,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div id="demo">
       <div class="movil">
         <div class="movil__pantalla">
-          <video id="video-demo" playsinline preload="metadata" poster="assets/demo-poster.jpg" src="assets/demo.mp4"></video>
+          <video id="video-demo" playsinline preload="metadata" poster="demo-poster.jpg" src="demo.mp4"></video>
           <button class="movil__play" id="play-demo" aria-label="Reproducir la demo de Inmoprop AI">
             <span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
           </button>
@@ -704,7 +790,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="centrado" style="margin-bottom:var(--sp-6)">
       <span class="etiqueta">Por qué Inmoprop AI</span>
       <h2>Inteligencia, formación, herramientas y resultados.</h2>
-      <p class="subtitulo">Cuatro piezas que trabajan juntas dentro de la misma plataforma, con un solo acceso y un solo censo de personas.</p>
+      <p class="subtitulo">Cuatro piezas de una misma plataforma, con un solo acceso y un solo censo de personas. Hoy entras por la formación; el resto se va activando sobre tu cuenta.</p>
     </div>
     <div class="rejilla">
       <article class="tarjeta tarjeta--elev">
@@ -720,11 +806,13 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <article class="tarjeta tarjeta--elev">
         <div class="icono icono--oro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7.5h11l5 4.5-5 4.5H4z"/><path d="M7.5 12h5"/></svg></div>
         <h3>Marketing con tu marca, a un clic</h3>
+        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino</span>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Dejas de pedir la pieza y esperar. La eliges, se adapta a tu marca y la tienes en un momento — redactor e imagen incluidos.</p>
       </article>
       <article class="tarjeta tarjeta--elev">
         <div class="icono icono--lima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v5A3.5 3.5 0 0 1 16 16.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 13V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg></div>
         <h3>Un copiloto en cualquier pantalla</h3>
+        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino</span>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Sabe en qué pantalla estás y qué puede hacer por ti: busca un contacto, lee un expediente, lanza una valoración. Sin salir de donde trabajas.</p>
       </article>
     </div>
@@ -805,47 +893,75 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   </div>
 </section>
 
-<!-- ============ SECCIÓN 9 · MÓDULOS DE LA PLATAFORMA ============ -->
+<!-- ============ SECCIÓN 9 · LA PLATAFORMA COMPLETA (ROADMAP) ============ -->
 <section class="rev" id="modulos">
   <div class="contenedor">
     <div class="centrado" style="margin-bottom:var(--sp-6)">
-      <span class="etiqueta">Tus módulos</span>
-      <h2>Una plataforma, no diez herramientas sueltas.</h2>
-      <p class="subtitulo">Un solo acceso y un solo censo de personas: nadie escribe dos contraseñas ni existe dos veces. Contratas los módulos que necesitas y los demás te esperan.</p>
+      <span class="etiqueta">La plataforma completa</span>
+      <h2>Empiezas por la formación. No te quedas ahí.</h2>
+      <p class="subtitulo">Inmoprop AI no es una plataforma de formación: la formación es la puerta de entrada. Detrás vienen las herramientas que cubren todo tu negocio, y se activan sobre la misma cuenta que ya tienes.</p>
     </div>
-    <div class="rejilla">
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Formación</h3><p>Role plays con IA, niveles, insignias y directo</p>
-        <span class="chip chip--teal">Funcionando</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Captación</h3><p>Entrevistas por prospección y por recomendación</p>
-        <span class="chip chip--teal">Funcionando</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Valoración</h3><p>Pon precio y saca el informe</p>
-        <span class="chip chip--teal">Funcionando</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Marketing</h3><p>Tu pieza con tu marca, en un momento</p>
-        <span class="chip">Muy pronto</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Documentos</h3><p>Todo el material, a un clic</p>
-        <span class="chip">Muy pronto</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Copiloto</h3><p>Te acompaña en cualquier pantalla</p>
-        <span class="chip">Muy pronto</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Expedientes</h3><p>La ficha del cliente con todo</p>
-        <span class="chip chip--neutro">En el plan</span>
-      </article>
-      <article class="tarjeta tarjeta--elev mod-card">
-        <h3>Inversiones</h3><p>NPL y REO, con su conversación</p>
-        <span class="chip chip--neutro">En el plan</span>
-      </article>
+
+    <div class="roadmap">
+      <div class="roadmap__bloque">
+        <h3>Disponible hoy · incluido en tu licencia</h3>
+        <div class="roadmap__hoy">
+          <article class="tarjeta tarjeta--elev plat plat--hoy">
+            <h4>Formación</h4>
+            <p>Role plays con IA por voz, cursos en cuatro formatos, niveles, insignias, ranking y directo periódico.</p>
+            <span class="chip chip--teal">Funcionando</span>
+          </article>
+          <article class="tarjeta tarjeta--elev plat plat--hoy">
+            <h4>Progreso y estadísticas</h4>
+            <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente.</p>
+            <span class="chip chip--teal">Funcionando</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="roadmap__bloque">
+        <h3>En camino · se añaden a tu misma cuenta</h3>
+        <div class="roadmap__futuro">
+          <article class="tarjeta plat plat--futuro">
+            <h4>Marketing</h4>
+            <p>Creatividades específicas para agentes inmobiliarios, adaptadas a tu marca en un momento. Dejas de pedir la pieza y esperar.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+          <article class="tarjeta plat plat--futuro">
+            <h4>Valoración de propiedades</h4>
+            <p>Pones precio con criterio y sacas el informe que le entregas al propietario en la misma visita.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+          <article class="tarjeta plat plat--futuro">
+            <h4>Inversión en inmuebles</h4>
+            <p>Oportunidades de inversión, NPL y REO, con el análisis y la conversación dentro de la plataforma.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+          <article class="tarjeta plat plat--futuro">
+            <h4>Captación</h4>
+            <p>Prospección y recomendación con sus programas, sus entrevistas y el seguimiento de cada contacto.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+          <article class="tarjeta plat plat--futuro">
+            <h4>Expedientes</h4>
+            <p>La ficha del cliente con todo dentro: el sistema completo de la operación, de la firma a la postventa.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+          <article class="tarjeta plat plat--futuro">
+            <h4>Copiloto</h4>
+            <p>Transversal a todo: sabe en qué pantalla estás y actúa por ti sin que salgas de donde trabajas.</p>
+            <span class="chip">Próxima plataforma</span>
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="roadmap__nota">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
+      <div>
+        <b>Contratas lo que necesitas, cuando lo necesitas.</b>
+        <span>Cada plataforma se activa sobre tu cuenta actual: un solo acceso, un solo censo de personas y nada que migrar. Sin fecha comprometida todavía — te avisamos antes de que salga cada una, y nunca sube el precio de lo que ya tienes contratado.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -922,8 +1038,9 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 </section>
 
 <!-- ============ SECCIÓN 13 · PRECIOS ============
-     ⚠️  PRECIOS EDITABLES: cambia los data-mes / data-anual de cada .plan__precio b
-         y las listas <ul> de cada plan. Nada más.
+     PRECIOS EDITABLES — todo se cambia en dos sitios:
+       1) Los atributos data-mes / data-anual de cada .plan__precio b
+       2) El bloque CONFIG del <script> al final (base Multi, extra, descuento, suelo)
 ================================================== -->
 <section class="rev" id="precios">
   <div class="contenedor">
@@ -945,60 +1062,85 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <article class="tarjeta plan">
         <h3>Licencia Agente</h3>
         <p class="plan__perfil">Para el agente que quiere cerrar más.</p>
-        <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / agente / mes</small></div>
-        <p class="plan__nota">Formación de agente completa. Facturación mensual, cancelable en cualquier momento.</p>
+        <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / mes</small></div>
+        <p class="plan__nota">Un usuario. Facturación mensual, cancelable en cualquier momento.</p>
         <ul>
           <li>Catálogo de formación de agente completo</li>
           <li>Role plays con IA por voz, ilimitados</li>
           <li>Niveles, insignias y ranking</li>
           <li>Directo periódico con el formador</li>
-          <li>Módulos de Captación y Valoración</li>
+          <li>Tu progreso y tus estadísticas</li>
           <li>Soporte por email</li>
         </ul>
         <a href="#" class="btn btn--sec">Empezar gratis</a>
       </article>
 
-      <!-- ---- LICENCIA GERENTE (recomendada) ---- -->
-      <article class="tarjeta plan plan--rec">
-        <span class="plan__badge">Más elegida</span>
+      <!-- ---- LICENCIA GERENTE ---- -->
+      <article class="tarjeta plan">
         <h3>Licencia Gerente</h3>
-        <p class="plan__perfil">Para el responsable de una oficina y su equipo.</p>
-        <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes · agente + gerente</small></div>
-        <p class="plan__nota">Licencias adicionales para el equipo al mismo precio de agente. No existe licencia de solo gerente.</p>
+        <p class="plan__perfil">Para quien dirige, y también vende.</p>
+        <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes</small></div>
+        <p class="plan__nota">Un usuario con los dos roles. No existe licencia de solo gerente.</p>
         <p class="plan__hereda">Todo lo de Agente, más:</p>
         <ul>
-          <li>Panel del gerente: puntuación por agente</li>
-          <li>Evolución semanal y comparativa de equipo</li>
-          <li>Alertas de agentes que necesitan apoyo</li>
           <li>Formación específica de gerente</li>
-          <li>Sistema retributivo con nuestros valores recomendados</li>
-          <li>Gestión de licencias del equipo</li>
+          <li>Panel del gerente y estadísticas de equipo</li>
+          <li>Puede agrupar licencias de agente por debajo</li>
+          <li>Evolución semanal y comparativa</li>
+          <li>Alertas de agentes que necesitan apoyo</li>
+          <li>Sistema retributivo con valores recomendados</li>
           <li>Soporte prioritario</li>
         </ul>
-        <a href="#" class="btn">Empezar gratis</a>
+        <a href="#" class="btn btn--sec">Empezar gratis</a>
       </article>
 
-      <!-- ---- LICENCIA MULTI ---- -->
-      <article class="tarjeta plan plan--multi">
-        <span class="plan__badge plan__badge--oro">Redes y franquicias</span>
+      <!-- ---- LICENCIA MULTI (recomendada) ---- -->
+      <article class="tarjeta plan plan--rec">
+        <span class="plan__badge">Mejor para una oficina</span>
         <h3>Licencia Multi</h3>
-        <p class="plan__perfil">Para redes, franquicias y varias oficinas.</p>
-        <div class="plan__precio"><b style="font-size:2rem">A medida</b></div>
-        <p class="plan__nota">Según número de oficinas y volumen de licencias. Precio local por país, en su moneda.</p>
-        <p class="plan__hereda">Todo lo de Gerente, más:</p>
+        <p class="plan__perfil">Para el gerente con equipo. Y para el equipo que crece.</p>
+        <div class="plan__precio"><b data-mes="179" data-anual="143">179</b><small>€ / mes</small></div>
+        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Agentes adicionales desde <span data-precio-extra>39</span> € y bajando.</p>
+        <p class="plan__hereda">Todo lo de Gerente, para los 4, más:</p>
         <ul>
-          <li>Varias oficinas bajo una misma administración</li>
-          <li>Panel consolidado de toda la red</li>
-          <li>Contenido y escenarios propios de tu red</li>
-          <li>Capítulo por país y multiidioma</li>
-          <li>Integración con tu CRM por API</li>
-          <li>Onboarding, formación y responsable de cuenta</li>
+          <li>Equipo agrupado bajo una sola cuenta</li>
+          <li>Estadísticas y progresos de todo el equipo</li>
+          <li>Añades y quitas agentes cuando quieras</li>
+          <li>Cada agente que sumas abarata a todos los demás</li>
+          <li>Una sola factura para toda la oficina</li>
         </ul>
-        <a href="#" class="btn btn--sec">Hablar con ventas</a>
+        <a href="#calc" class="btn">Calcular mi equipo</a>
       </article>
     </div>
 
-    <p class="precios__pie"><b>Los primeros 30 días, todo abierto.</b> Entras con la formación entera desbloqueada y sin tarjeta. A los 30 días eliges tu escalón — o te vas.</p>
+    <!-- ---- CALCULADORA DE VOLUMEN ---- -->
+    <div class="calc" id="calc">
+      <div class="calc__grid">
+        <div>
+          <h3>¿Cuántos agentes tienes?</h3>
+          <p class="calc__intro">La Multi arranca con el gerente y tres agentes. Cada agente que añades cuesta un 5&nbsp;% menos que el anterior, hasta el suelo de <span data-suelo>29</span>&nbsp;€ por licencia.</p>
+          <div class="calc__valor"><b id="calc-n">3</b><span id="calc-n-txt">agentes en el equipo</span></div>
+          <input type="range" id="calc-slider" min="3" max="25" step="1" value="3" aria-label="Número de agentes en el equipo">
+          <div class="calc__limites"><span>3 incluidos</span><span>25+</span></div>
+          <p class="calc__pie">Por encima de 25 agentes, hablamos: <a href="#" style="color:var(--acento);font-weight:var(--peso-medio)">contacta con ventas</a>.</p>
+        </div>
+        <div>
+          <ul class="calc__desglose">
+            <li><span>Multi base · 1 gerente + 3 agentes</span><i id="calc-base">179,00 €</i></li>
+            <li><span id="calc-extra-txt">Agentes adicionales</span><i id="calc-extra">0,00 €</i></li>
+            <li><span>Precio por licencia adicional</span><i id="calc-unit">—</i></li>
+          </ul>
+          <div class="calc__total"><span>Total al mes</span><b id="calc-total">179,00 €</b></div>
+          <div class="calc__ahorro">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
+            <span id="calc-ahorro">Ahorras 66,00 € al mes frente a licencias sueltas (−27 %)</span>
+          </div>
+          <p class="calc__pie" id="calc-porusuario">Sale a 44,75 € por persona y mes.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="precios__pie"><b>Los primeros 30 días, todo abierto.</b> Entras con la formación entera desbloqueada y sin tarjeta. A los 30 días eliges tu licencia — o te vas.</p>
   </div>
 </section>
 
@@ -1076,8 +1218,16 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <p>Un curso te cuenta qué hacer. Aquí lo haces: hablas, te equivocas, te corrigen y lo repites. Y además se mide — hay puntuación, niveles y ranking, así que el gerente sabe quién está entrenando de verdad.</p>
       </details>
       <details>
+        <summary>¿Qué incluye exactamente la licencia Multi? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>Una licencia de Gerente más tres de Agente por 179 € al mes. La de Gerente es la que permite agrupar: desde ella ves las estadísticas, el progreso y el ranking de todo tu equipo en un solo sitio. A partir del cuarto agente, cada licencia adicional cuesta un 5 % menos que la anterior, hasta un mínimo de 29 € por licencia — así que cada agente que sumas abarata a todos los demás.</p>
+      </details>
+      <details>
         <summary>¿Existe una licencia solo para el gerente? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>No. O licencia de agente, o licencia de agente + gerente. El gerente que no entrena no puede exigir a su equipo que entrene.</p>
+        <p>No. La de Gerente incluye todo lo de Agente más su parte de dirección: el gerente que no entrena no puede exigir a su equipo que entrene. Y para agrupar licencias de agente por debajo hace falta tener la de Gerente — la Multi ya la lleva dentro.</p>
+      </details>
+      <details>
+        <summary>¿Tendré que pagar más cuando salgan las demás plataformas? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>Solo si las quieres. Marketing, valoración, inversión, captación y expedientes se contratan aparte y se activan sobre la cuenta que ya tienes: un acceso, nada que migrar. El precio de lo que ya tengas contratado no sube por que salga una nueva. Todavía no hay fechas comprometidas; te avisamos antes de que salga cada una.</p>
       </details>
       <details>
         <summary>¿Está disponible fuera de España? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -1112,8 +1262,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   <div class="contenedor">
     <div class="footer__grid">
       <div class="footer__marca">
-        <img class="logo__claro" src="assets/logo-claro.png" alt="Inmoprop AI">
-        <img class="logo__oscuro" src="assets/logo-oscuro.png" alt="Inmoprop AI">
+        <img class="logo__claro" src="logo-claro.png" alt="Inmoprop AI">
+        <img class="logo__oscuro" src="logo-oscuro.png" alt="Inmoprop AI">
         <p>Inteligencia, formación, herramientas y resultados para agentes y gerentes inmobiliarios.</p>
       </div>
       <div>
@@ -1206,26 +1356,105 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   });
 })();
 
-/* ---------- Conmutador de precios ---------- */
+/* ---------- Precios y calculadora ---------- */
 (function(){
-  var mes = document.getElementById('btn-mes');
-  var anual = document.getElementById('btn-anual');
+  /* ===== CONFIG · cambia solo estos números ===== */
+  var CFG = {
+    multiBase: 179,      // Multi: 1 gerente + 3 agentes
+    agentesIncl: 3,      // agentes incluidos en la Multi
+    extraBase: 39,       // precio de la 1ª licencia de agente adicional
+    descuento: 0.05,     // 5 % menos por cada licencia adicional (acumulativo)
+    suelo: 29,           // precio mínimo por licencia
+    sueltaAgente: 49,    // licencia de agente por separado
+    sueltaGerente: 98,   // licencia de gerente por separado
+    factorAnual: 0.8     // −20 % con facturación anual
+  };
+  /* ============================================== */
+
+  var periodo = 'mes';
+  var btnMes = document.getElementById('btn-mes');
+  var btnAnual = document.getElementById('btn-anual');
   var precios = document.querySelectorAll('.plan__precio b[data-mes]');
   var etiquetas = document.querySelectorAll('.plan__precio small');
 
-  function set(periodo){
-    mes.setAttribute('aria-pressed', periodo === 'mes' ? 'true' : 'false');
-    anual.setAttribute('aria-pressed', periodo === 'anual' ? 'true' : 'false');
+  var eur = function(n){
+    return n.toLocaleString('es-ES', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' €';
+  };
+  var f = function(){ return periodo === 'anual' ? CFG.factorAnual : 1; };
+
+  /* precio unitario de cada licencia adicional según cuántas haya */
+  function unitario(n){
+    if (n <= 0) return CFG.extraBase;
+    var p = CFG.extraBase * Math.pow(1 - CFG.descuento, n - 1);
+    return Math.max(CFG.suelo, Math.round(p * 100) / 100);
+  }
+
+  /* ---- tarjetas ---- */
+  function pintarPlanes(){
     precios.forEach(function(b){
       b.textContent = periodo === 'anual' ? b.dataset.anual : b.dataset.mes;
     });
-    etiquetas.forEach(function(s){
-      if (!s.dataset.base) s.dataset.base = s.textContent;
-      s.textContent = periodo === 'anual' ? s.dataset.base + ' · facturado al año' : s.dataset.base;
+    etiquetas.forEach(function(sm){
+      if (!sm.dataset.base) sm.dataset.base = sm.textContent;
+      sm.textContent = periodo === 'anual' ? sm.dataset.base + ' · facturado al año' : sm.dataset.base;
+    });
+    document.querySelectorAll('[data-precio-extra]').forEach(function(el){
+      el.textContent = Math.round(CFG.extraBase * f());
+    });
+    document.querySelectorAll('[data-suelo]').forEach(function(el){
+      el.textContent = Math.round(CFG.suelo * f());
     });
   }
-  mes.addEventListener('click', function(){ set('mes'); });
-  anual.addEventListener('click', function(){ set('anual'); });
+
+  /* ---- calculadora ---- */
+  var slider = document.getElementById('calc-slider');
+
+  function pintarCalc(){
+    if (!slider) return;
+    var total   = parseInt(slider.value, 10);
+    var extras  = Math.max(0, total - CFG.agentesIncl);
+    var unit    = unitario(extras) * f();
+    var base    = periodo === 'anual' ? Math.round(CFG.multiBase * CFG.factorAnual) : CFG.multiBase;
+    var costeEx = extras * unit;
+    var mensual = base + costeEx;
+    var personas = total + 1;                                    // los agentes + el gerente
+    var suelto  = (CFG.sueltaGerente + CFG.sueltaAgente * total) * f();
+    var ahorro  = suelto - mensual;
+    var pct     = suelto > 0 ? Math.round(ahorro / suelto * 100) : 0;
+
+    document.getElementById('calc-n').textContent = total;
+    document.getElementById('calc-n-txt').textContent = total === 1 ? 'agente en el equipo' : 'agentes en el equipo';
+    document.getElementById('calc-base').textContent = eur(base);
+    document.getElementById('calc-extra-txt').textContent = extras === 0
+      ? 'Agentes adicionales'
+      : extras + (extras === 1 ? ' agente adicional' : ' agentes adicionales');
+    document.getElementById('calc-extra').textContent = eur(costeEx);
+    document.getElementById('calc-unit').textContent = extras === 0 ? '—' : eur(unit) + ' / mes';
+    document.getElementById('calc-total').textContent = eur(mensual);
+    document.getElementById('calc-ahorro').textContent = ahorro > 0
+      ? 'Ahorras ' + eur(ahorro) + ' al mes frente a licencias sueltas (−' + pct + ' %)'
+      : 'Mismo precio que las licencias sueltas';
+    document.getElementById('calc-porusuario').textContent =
+      'Sale a ' + eur(mensual / personas) + ' por persona y mes, gerente incluido.';
+
+    var recorrido = (total - slider.min) / (slider.max - slider.min) * 100;
+    slider.style.background = 'linear-gradient(90deg, var(--acento) ' + recorrido + '%, var(--surface-2) ' + recorrido + '%)';
+  }
+
+  function set(nuevoPeriodo){
+    periodo = nuevoPeriodo;
+    btnMes.setAttribute('aria-pressed', periodo === 'mes' ? 'true' : 'false');
+    btnAnual.setAttribute('aria-pressed', periodo === 'anual' ? 'true' : 'false');
+    pintarPlanes();
+    pintarCalc();
+  }
+
+  btnMes.addEventListener('click', function(){ set('mes'); });
+  btnAnual.addEventListener('click', function(){ set('anual'); });
+  if (slider) slider.addEventListener('input', pintarCalc);
+
+  pintarPlanes();
+  pintarCalc();
 })();
 
 /* ---------- Animación de entrada ---------- */
