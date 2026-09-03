@@ -893,6 +893,21 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 .suite h2{color:var(--text)}
 .suite .subtitulo{color:var(--dim)}
 
+.suite__intro{max-width:66ch;margin-inline:auto}
+.suite__intro .subtitulo{margin-inline:auto}
+.suite__intro .subtitulo + .subtitulo{margin-top:var(--sp-3)}
+.suite__claims{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:var(--sp-2) var(--sp-4);
+  margin-top:var(--sp-5)
+}
+.suite__claims span{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:7px 14px;border-radius:var(--r-full);
+  border:1px solid var(--card-borde);background:#ffffff0f;
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--text)
+}
+.suite__claims svg{width:14px;height:14px;stroke-width:2.5;color:var(--secundario)}
+
 /* medidor de módulos */
 .medidor{max-width:560px;margin:var(--sp-5) auto var(--sp-6)}
 .medidor__fila{
@@ -1165,7 +1180,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y el role play; después irás sumando módulos aparte — marketing, valoración, inversión, captación y expedientes — sobre la misma cuenta. Sin entrada, sin permanencia y sin cambiar de marca.</p>
       <div class="hero__ctas">
         <a href="#precios" class="btn">Empezar gratis</a>
-        <a href="#demo" class="btn btn--sec">Ver la demo</a>
       </div>
       <div class="hero__micro">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> 7 días de prueba</span>
@@ -1533,10 +1547,16 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <section class="rev" id="modulos">
   <div class="contenedor">
     <div class="suite">
-      <div class="centrado">
+      <div class="centrado suite__intro">
         <span class="etiqueta">La suite Inmoprop</span>
         <h2>Un módulo ya está en marcha.<br>Faltan seis.</h2>
-        <p class="subtitulo" style="margin-inline:auto">Inmoprop no es una plataforma de formación: es la suite que va a cubrir tu negocio entero. La formación es el primer módulo que se enciende — y los demás ya están dibujados, en cola y esperando su turno.</p>
+        <p class="subtitulo">Inmoprop no es una plataforma de formación: es la suite que va a cubrir tu negocio entero. Siete módulos que recorren la operación completa — entrenar al agente, conseguir el contacto, poner precio, comercializar, cerrar y hacer la postventa — más el copiloto de IA que los atraviesa todos.</p>
+        <p class="subtitulo">Y una suite no es un paquete de productos sueltos con el mismo logo. Es <b style="color:var(--text)">una sola cuenta y un solo censo de personas</b>: el agente que hoy entrena una objeción es el mismo que mañana abre un expediente, con su historial detrás. Hoy está encendido el primero. Los seis restantes ya están dibujados y en cola — cada uno se enciende sobre esta misma cuenta, sin migrar nada y sin tocar el precio de lo que ya tengas.</p>
+        <div class="suite__claims">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Un solo acceso</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Un solo censo de personas</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Nada que migrar</span>
+        </div>
       </div>
 
       <div class="medidor">
@@ -1846,6 +1866,11 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <details open>
         <summary>¿Sirve para mi inmobiliaria si no soy de una red? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
         <p>Sí, y es precisamente para eso. No hay canon de entrada, no hay permanencia y no tienes que cambiar de marca. Entras con tu propia inmobiliaria, tu logo y tu forma de trabajar.</p>
+      </details>
+      <details>
+        <summary>¿Qué es la «suite Inmoprop» y qué incluye? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>Es el plan completo de la plataforma: siete módulos que recorren la operación inmobiliaria de principio a fin, sobre una sola cuenta y un solo censo de personas. <b>01 · Formación</b> (role play por voz, cursos en cuatro formatos, progreso y directo semanal) es el único encendido hoy, y es el que cubre tu licencia. Los otros seis están dibujados y en cola: <b>02 · Marketing</b>, creatividades adaptadas a tu marca; <b>03 · Valoración</b>, para poner precio con criterio y entregar el informe en la misma visita; <b>04 · Inversión</b>, oportunidades, NPL y REO con su análisis dentro; <b>05 · Captación</b>, prospección, recomendación y seguimiento de cada contacto; <b>06 · Expedientes</b>, la ficha del cliente con la operación entera, de la firma a la postventa; y <b>07 · Copiloto</b>, transversal a todos: sabe en qué pantalla estás y actúa por ti.</p>
+        <p>La gracia de que sea una suite y no siete productos sueltos es que comparten la cuenta y los datos: el agente que hoy entrena una objeción es el mismo que mañana abre un expediente, sin dar de alta a nadie otra vez ni migrar nada. Cada módulo nuevo se contrata aparte, con su propio precio, y solo si lo quieres — el precio de lo que ya tengas no sube porque salga uno nuevo. Todavía no hay fechas comprometidas; te avisamos antes de encender cada uno.</p>
       </details>
       <details>
         <summary>¿Qué escenarios puedo entrenar? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
