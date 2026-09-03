@@ -296,6 +296,46 @@ section{padding-block:clamp(56px,8vw,110px)}
 .movil__pie[hidden]{display:none}
 
 /* ============================================================
+   VITRINA · LA PLATAFORMA POR DENTRO
+   ============================================================ */
+.vitrina{display:grid;gap:clamp(30px,3.5vw,44px);grid-template-columns:1fr;justify-items:center;max-width:1140px;margin-inline:auto}
+@media(min-width:640px){.vitrina{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.vitrina{grid-template-columns:repeat(3,1fr)}}
+.vitrina__item{display:flex;flex-direction:column;align-items:center;width:100%;max-width:400px}
+.vitrina .movil{width:min(268px,74vw);transition:transform .55s var(--curva),box-shadow .55s var(--curva)}
+.vitrina__item:hover .movil{transform:translateY(-8px);box-shadow:var(--glow-acento),var(--sombra-l)}
+.movil--alto .movil__pantalla{aspect-ratio:83/180}
+.vitrina__son{
+  position:absolute;right:12px;top:12px;z-index:4;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:7px 12px;border-radius:var(--r-full);
+  border:1px solid #ffffff33;background:#0a0c1eb8;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  color:#fff;font-family:inherit;font-size:var(--txt-mini);font-weight:var(--peso-medio);
+  cursor:pointer;transition:background var(--trans),border-color var(--trans)
+}
+.vitrina__son:hover{background:#0a0c1eeb;border-color:#ffffff66}
+.vitrina__son svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.vitrina__son[hidden]{display:none}
+.vitrina__pie{margin-top:var(--sp-5);text-align:center}
+.vitrina__pie .etiqueta{margin-bottom:var(--sp-2);display:inline-flex;align-items:center;gap:8px}
+.vitrina__pie .etiqueta i{
+  font-style:normal;display:inline-grid;place-items:center;
+  width:20px;height:20px;border-radius:var(--r-full);
+  background:var(--acento-soft);color:var(--acento);
+  font-size:.66rem;font-weight:var(--peso-negro);letter-spacing:0
+}
+.vitrina__pie b{
+  display:block;font-family:var(--fuente-titulo);font-weight:var(--peso-negro);
+  font-size:1.08rem;line-height:1.25;margin-bottom:6px
+}
+.vitrina__pie span{display:block;font-size:var(--txt-small);color:var(--dim);max-width:36ch;margin-inline:auto}
+.vitrina__nota{
+  margin:var(--sp-6) auto 0;max-width:60ch;text-align:center;
+  font-size:var(--txt-mini);color:var(--faint)
+}
+
+/* ============================================================
    BANDAS
    ============================================================ */
 .banda{border-block:1px solid var(--border);background:var(--surface)}
@@ -1081,7 +1121,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     </a>
     <nav class="nav" aria-label="Navegación principal">
       <a href="#plataforma">Plataforma</a>
-      <a href="#modulos">Módulos</a>
+      <a href="#por-dentro">Por dentro</a>
+    <a href="#modulos">Módulos</a>
       <a href="#como-funciona">Cómo funciona</a>
       <a href="#precios">Precios</a>
       <a href="#faq">FAQ</a>
@@ -1103,6 +1144,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <div class="menu-movil" id="menu-movil">
   <div class="menu-movil__panel">
     <a href="#plataforma">Plataforma</a>
+    <a href="#por-dentro">Por dentro</a>
     <a href="#modulos">Módulos</a>
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#precios">Precios</a>
@@ -1371,6 +1413,82 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ SECCIÓN 8C · LOS TRES MODOS DE APRENDER ============ -->
+<section class="rev" id="por-dentro">
+  <div class="contenedor">
+    <div class="centrado" style="margin-bottom:var(--sp-6)">
+      <span class="etiqueta">Por dentro</span>
+      <h2>El mismo bloque, <span class="grad-marca-txt">tres formas</span> de aprenderlo.</h2>
+      <p class="subtitulo" style="max-width:64ch;margin-inline:auto">V&iacute;deo, audiolibro y tutor de IA sobre el mismo temario. El agente elige seg&uacute;n el momento del d&iacute;a y sigue por donde lo dej&oacute;. Grabado tal cual lo ve en el m&oacute;vil: sin montaje, sin pantallas de mentira.</p>
+    </div>
+
+    <div class="vitrina esc">
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-indicadores.jpg" aria-label="Lecci&oacute;n en v&iacute;deo dentro de Mi plan de carrera">
+              <source src="demo-indicadores.webm" type="video/webm">
+              <source src="demo-indicadores.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>1</i> V&iacute;deo</span>
+          <b>La lecci&oacute;n, dentro de la propia ficha</b>
+          <span>Bloque a bloque, con su v&iacute;deo en la misma pantalla del curso. Nada de saltar a otra pesta&ntilde;a ni perder el hilo.</span>
+        </div>
+      </div>
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-metodo.jpg" aria-label="Curso en formato audiolibro dentro de Inmoprop">
+              <source src="demo-metodo.webm" type="video/webm">
+              <source src="demo-metodo.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>2</i> Audiolibro</span>
+          <b>El mismo temario, para el coche</b>
+          <span>Le da a escuchar y sigue formándose entre visita y visita. La hora muerta del d&iacute;a se convierte en entrenamiento.</span>
+        </div>
+      </div>
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-tutor.jpg" aria-label="Conversaci&oacute;n con el tutor de IA sobre el temario del curso">
+              <source src="demo-tutor.webm" type="video/webm">
+              <source src="demo-tutor.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>3</i> Con la IA</span>
+          <b>Un tutor que te lo explica a tu ritmo</b>
+          <span>Le pide que profundice en un punto, que le resuma los 36 apartados del temario o que le resuelva una duda concreta.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="vitrina__nota">Capturas reales del entorno de Inmoprop. Los contenidos se ampl&iacute;an cada semana.</p>
   </div>
 </section>
 
@@ -1777,6 +1895,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <h4>Producto</h4>
         <ul>
           <li><a href="#plataforma">Plataforma</a></li>
+          <li><a href="#por-dentro">Por dentro</a></li>
           <li><a href="#modulos">Módulos</a></li>
           <li><a href="#como-funciona">Cómo funciona</a></li>
           <li><a href="#precios">Precios</a></li>
@@ -1860,6 +1979,42 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     v.controls = false;
     play.hidden = false;
     pie.hidden = false;
+  });
+})();
+
+/* ---------- Vitrina: vídeos de la plataforma ---------- */
+(function(){
+  var vids = document.querySelectorAll('.vitrina__video');
+  if (!vids.length) return;
+  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  Array.prototype.forEach.call(vids, function(v){
+    var pantalla = v.parentNode;
+    var son = pantalla.querySelector('[data-son]');
+    var cargado = false;
+
+    function arranca(){
+      if (!cargado){ v.preload = 'auto'; v.load(); cargado = true; }
+      var p = v.play();
+      if (p && p.catch) p.catch(function(){});
+    }
+    if (son){
+      son.addEventListener('click', function(){
+        v.muted = false;
+        v.controls = true;
+        son.hidden = true;
+        arranca();
+      });
+    }
+    if (reducido || !('IntersectionObserver' in window)){ return; }
+
+    var io = new IntersectionObserver(function(entradas){
+      entradas.forEach(function(e){
+        if (e.isIntersecting){ arranca(); }
+        else if (!v.paused && v.muted){ v.pause(); }
+      });
+    }, { threshold: 0.35 });
+    io.observe(v);
   });
 })();
 
