@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Inmoprop AI · Tu plataforma inmobiliaria. Entrena. Conecta. Crece.</title>
-<meta name="description" content="Role play con IA por voz, formación viva y herramientas de marketing para agentes y gerentes inmobiliarios. Sin canon, sin permanencia, sin cambiar de marca. 30 días con todo abierto.">
+<meta name="description" content="Inmoprop AI: formación completa y entrenamiento en role play con IA por voz para agentes y gerentes inmobiliarios. 7 días de prueba, sin entrada y sin permanencia.">
 <link rel="icon" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <meta property="og:type" content="website">
@@ -306,8 +306,8 @@ section{padding-block:clamp(56px,8vw,110px)}
 .pilar b{display:block;font-family:var(--fuente-titulo);font-size:var(--txt-small);font-weight:var(--peso-negro);letter-spacing:.08em;text-transform:uppercase}
 .pilar em{display:block;font-style:normal;font-size:var(--txt-mini);color:var(--dim)}
 
-.cifras{display:grid;gap:var(--sp-5);grid-template-columns:repeat(2,1fr)}
-@media(min-width:880px){.cifras{grid-template-columns:repeat(4,1fr)}}
+.cifras{display:grid;gap:var(--sp-5);grid-template-columns:1fr}
+@media(min-width:640px){.cifras{grid-template-columns:repeat(3,1fr)}}
 .cifra{text-align:center;position:relative}
 @media(min-width:880px){
   .cifra+.cifra::before{content:"";position:absolute;left:calc(var(--sp-5) / -2);top:10%;bottom:10%;width:1px;background:var(--border)}
@@ -325,6 +325,7 @@ section{padding-block:clamp(56px,8vw,110px)}
 .compara__col h3{margin-bottom:var(--sp-4)}
 .compara ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-3)}
 .compara li{display:flex;gap:var(--sp-3);align-items:flex-start;font-size:var(--txt-small)}
+.compara li>span{flex:1}
 .compara li svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;stroke-width:2.5}
 .compara__col--otros li{color:var(--dim)}
 .compara__col--otros li svg{color:var(--nota-baja)}
@@ -435,6 +436,7 @@ section{padding-block:clamp(56px,8vw,110px)}
 @media(min-width:960px){.planes{grid-template-columns:repeat(3,1fr);gap:var(--sp-4)}}
 .plan{position:relative;padding:var(--sp-5)}
 .plan__perfil{font-size:var(--txt-mini);color:var(--dim);margin:0 0 var(--sp-4)}
+.plan__perfil b{color:var(--text)}
 .plan h3{font-size:1.3rem;margin-bottom:var(--sp-1)}
 .plan__precio{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap;margin-bottom:var(--sp-2)}
 .plan__precio b{font-family:var(--fuente-titulo);font-size:2.6rem;font-weight:var(--peso-black);line-height:1;letter-spacing:-.03em}
@@ -443,8 +445,12 @@ section{padding-block:clamp(56px,8vw,110px)}
 .plan__nota b{color:var(--text);font-weight:var(--peso-fuerte)}
 .plan__hereda{font-size:var(--txt-small);font-weight:var(--peso-fuerte);margin:0 0 var(--sp-2)}
 .plan ul{list-style:none;margin:0 0 var(--sp-5);padding:0;display:grid;gap:var(--sp-2)}
-.plan li{display:flex;gap:var(--sp-2);align-items:flex-start;font-size:var(--txt-small);color:var(--dim)}
-.plan li::before{content:"✓";color:var(--nota-alta);font-weight:var(--peso-fuerte);flex-shrink:0;line-height:1.5}
+.plan li{position:relative;display:block;padding-left:1.45em;font-size:var(--txt-small);color:var(--dim);line-height:1.5}
+.plan li::before{
+  content:"✓";position:absolute;left:0;top:0;
+  color:var(--nota-alta);font-weight:var(--peso-fuerte)
+}
+.plan li b{color:var(--text);font-weight:var(--peso-fuerte)}
 .plan .btn{margin-top:auto;width:100%}
 .plan--rec{border-color:var(--acento);box-shadow:var(--sombra-l)}
 @media(min-width:960px){.plan--rec{transform:scale(1.035);z-index:2}}
@@ -554,6 +560,27 @@ section{padding-block:clamp(56px,8vw,110px)}
 .calc__pie{margin:var(--sp-4) 0 0;font-size:var(--txt-mini);color:var(--faint)}
 
 /* ============================================================
+   AVISO DE ALCANCE DE LA LICENCIA
+   ============================================================ */
+.alcance{
+  display:flex;gap:var(--sp-4);align-items:flex-start;
+  max-width:900px;margin:0 auto var(--sp-6);
+  padding:var(--sp-4) var(--sp-5);
+  border:1px solid var(--acento);border-radius:var(--r-m);
+  background:var(--acento-soft);text-align:left
+}
+.alcance svg{width:22px;height:22px;flex-shrink:0;color:var(--acento);stroke-width:2;margin-top:3px}
+.alcance b{display:block;font-size:var(--txt-small);color:var(--text);margin-bottom:3px}
+.alcance span{display:block;font-size:var(--txt-mini);color:var(--dim);line-height:1.55}
+.plan__alcance{
+  align-self:flex-start;margin-bottom:var(--sp-2);
+  padding:3px 10px;border-radius:var(--r-full);
+  background:var(--surface-2);color:var(--dim);
+  font-size:.68rem;font-weight:var(--peso-fuerte);
+  letter-spacing:.09em;text-transform:uppercase
+}
+
+/* ============================================================
    SEGURIDAD
    ============================================================ */
 .seguridad{background:var(--surface-2);border-block:1px solid var(--border)}
@@ -609,19 +636,299 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   font-size:var(--txt-mini);color:var(--faint)
 }
 
+
+
+/* ============================================================
+   BENTO DE PLATAFORMAS
+   ============================================================ */
+.bento{display:grid;gap:var(--sp-3);grid-template-columns:1fr;grid-auto-rows:auto}
+@media(min-width:700px){
+  .bento{grid-template-columns:repeat(2,1fr);gap:var(--sp-4)}
+  .bento__hero,.bento__ancho{grid-column:span 2}
+}
+@media(min-width:1020px){
+  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(158px,auto)}
+  .bento__hero{grid-column:span 2;grid-row:span 2}
+  .bento__ancho{grid-column:span 2}
+}
+.bento__item{
+  position:relative;display:flex;flex-direction:column;
+  padding:var(--sp-5) var(--sp-4);
+  border:1px solid var(--card-borde);border-radius:var(--r-m);
+  background:var(--surface);box-shadow:var(--sombra-s);overflow:hidden;
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans)
+}
+.bento__item:hover{transform:translateY(-3px);box-shadow:var(--sombra-m);border-color:var(--tono,var(--acento))}
+.bento__item .ico{
+  width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;
+  border-radius:var(--r-s);background:var(--tono-soft,var(--acento-soft));color:var(--tono,var(--acento));
+  margin-bottom:var(--sp-4);transition:transform var(--trans)
+}
+.bento__item:hover .ico{transform:scale(1.1) rotate(-5deg)}
+.bento__item .ico svg{width:21px;height:21px;stroke-width:2}
+.bento__item h4{font-family:var(--fuente-titulo);font-size:1.05rem;font-weight:var(--peso-negro);margin-bottom:5px}
+.bento__item p{font-size:var(--txt-mini);color:var(--dim);margin:0}
+.bento__item .marca-estado{
+  margin-top:auto;padding-top:var(--sp-4);
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--faint);
+  display:flex;align-items:center;gap:6px
+}
+.bento__item .marca-estado::before{
+  content:"";width:6px;height:6px;border-radius:var(--r-full);background:var(--faint);flex-shrink:0
+}
+.bento__item--vivo{border-color:var(--secundario)}
+.bento__item--vivo .marca-estado{color:var(--secundario);font-weight:var(--peso-fuerte)}
+.bento__item--vivo .marca-estado::before{
+  background:var(--secundario);box-shadow:0 0 0 0 var(--secundario);animation:latir 2.4s ease-out infinite
+}
+@keyframes latir{
+  0%{box-shadow:0 0 0 0 var(--secundario-soft)}
+  70%{box-shadow:0 0 0 7px transparent}
+  100%{box-shadow:0 0 0 0 transparent}
+}
+.bento__hero h4{font-size:1.5rem}
+.bento__hero p{font-size:var(--txt-small)}
+.bento__hero .ico{width:52px;height:52px;flex-basis:52px}
+.bento__hero .ico svg{width:26px;height:26px}
+
+/* mini-etiquetas de formatos */
+.formatitos{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--sp-4)}
+.formatitos span{
+  padding:4px 11px;border-radius:var(--r-full);
+  background:var(--surface-2);color:var(--dim);
+  font-size:var(--txt-mini);font-weight:var(--peso-medio)
+}
+
+/* áreas del catálogo */
+.areas{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3)}
+.areas span{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border:1px solid var(--card-borde);border-radius:var(--r-full);
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--dim)
+}
+.areas span::before{content:"";width:5px;height:5px;border-radius:var(--r-full);background:var(--tono,var(--acento))}
+
+/* la cita del directo */
+.directo{
+  margin-top:var(--sp-4);padding:var(--sp-3) var(--sp-4);
+  border-radius:var(--r-m);background:var(--acento-soft);
+  border-left:3px solid var(--acento)
+}
+.directo b{display:block;font-size:var(--txt-small);font-weight:var(--peso-fuerte);color:var(--text)}
+.directo span{font-size:var(--txt-mini);color:var(--dim)}
+
+/* onda de voz del role play */
+.onda{display:flex;align-items:flex-end;gap:5px;height:40px;margin-top:var(--sp-5)}
+.onda i{
+  display:block;width:5px;border-radius:var(--r-full);
+  background:var(--grad-acento);height:22%;transform-origin:bottom;
+  animation:ondear 1.15s var(--curva) infinite alternate
+}
+.onda i:nth-child(2){animation-delay:.1s}
+.onda i:nth-child(3){animation-delay:.2s}
+.onda i:nth-child(4){animation-delay:.3s}
+.onda i:nth-child(5){animation-delay:.15s}
+.onda i:nth-child(6){animation-delay:.25s}
+.onda i:nth-child(7){animation-delay:.05s}
+.onda i:nth-child(8){animation-delay:.35s}
+.onda i:nth-child(9){animation-delay:.2s}
+.onda i:nth-child(10){animation-delay:.1s}
+.onda i:nth-child(11){animation-delay:.3s}
+.onda i:nth-child(12){animation-delay:.18s}
+.onda i:nth-child(13){animation-delay:.11s}
+.onda i:nth-child(14){animation-delay:.18s}
+.onda i:nth-child(15){animation-delay:.25s}
+.onda i:nth-child(16){animation-delay:.32s}
+.onda i:nth-child(17){animation-delay:.39s}
+.onda i:nth-child(18){animation-delay:.06s}
+.onda i:nth-child(19){animation-delay:.13s}
+.onda i:nth-child(20){animation-delay:.20s}
+.onda i:nth-child(21){animation-delay:.27s}
+.onda i:nth-child(22){animation-delay:.34s}
+.onda i:nth-child(23){animation-delay:.01s}
+.onda i:nth-child(24){animation-delay:.08s}
+@keyframes ondear{to{height:100%}}
+.onda__pie{font-size:var(--txt-mini);color:var(--faint);margin-top:var(--sp-2)}
+
+/* gráfico de evolución */
+.grafico{display:flex;align-items:flex-end;gap:8px;height:66px;margin-top:var(--sp-4)}
+.grafico i{
+  display:block;flex:1;border-radius:var(--r-s) var(--r-s) 2px 2px;
+  background:var(--secundario-soft);height:0;
+  transition:height 1s var(--curva)
+}
+.grafico i:last-child{background:var(--grad-secundario)}
+.visible .grafico i{height:var(--h,50%)}
+.grafico i:nth-child(2){transition-delay:.08s}
+.grafico i:nth-child(3){transition-delay:.16s}
+.grafico i:nth-child(4){transition-delay:.24s}
+.grafico i:nth-child(5){transition-delay:.32s}
+.grafico i:nth-child(6){transition-delay:.4s}
+.grafico__eje{display:flex;gap:8px;margin-top:6px}
+.grafico__eje span{flex:1;text-align:center;font-size:.66rem;color:var(--faint)}
+
+/* tonos por plataforma */
+.t-violeta{--tono:var(--acento);--tono-soft:var(--acento-soft)}
+.t-teal{--tono:var(--secundario);--tono-soft:var(--secundario-soft)}
+.t-oro{--tono:var(--dorado);--tono-soft:var(--dorado-soft)}
+.t-lima{--tono:var(--lima);--tono-soft:var(--lima-soft)}
+
+/* ============================================================
+   EFECTOS GLOBALES
+   ============================================================ */
+@property --ang{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+/* --- barra de progreso de lectura --- */
+.progreso-scroll{
+  position:fixed;top:0;left:0;height:2px;width:0;z-index:100;
+  background:var(--grad-marca);pointer-events:none;
+  transition:width .1s linear
+}
+
+/* --- aurora que respira detrás de todo --- */
+.aurora{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.aurora i{
+  position:absolute;display:block;border-radius:50%;
+  filter:blur(70px);opacity:.42;will-change:transform;
+  transform:translate3d(0,0,0)
+}
+.aurora i:nth-child(1){width:46vw;height:46vw;top:-14vw;left:-8vw;background:radial-gradient(circle at 50% 50%,var(--acento),transparent 68%);animation:deriva-a 30s var(--curva) infinite alternate}
+.aurora i:nth-child(2){width:40vw;height:40vw;top:-6vw;right:-10vw;background:radial-gradient(circle at 50% 50%,var(--secundario),transparent 68%);animation:deriva-b 38s var(--curva) infinite alternate}
+.aurora i:nth-child(3){width:34vw;height:34vw;top:52%;left:38%;background:radial-gradient(circle at 50% 50%,var(--lima),transparent 70%);opacity:.16;animation:deriva-c 44s var(--curva) infinite alternate}
+@keyframes deriva-a{to{transform:translate3d(12vw,8vh,0) scale(1.15)}}
+@keyframes deriva-b{to{transform:translate3d(-10vw,12vh,0) scale(1.2)}}
+@keyframes deriva-c{to{transform:translate3d(-14vw,-10vh,0) scale(1.1)}}
+[data-tema="oscuro"] .aurora i{opacity:.3}
+[data-tema="oscuro"] .aurora i:nth-child(3){opacity:.12}
+@media(max-width:760px){.aurora i:nth-child(3){display:none}.aurora i{filter:blur(50px);opacity:.3}}
+
+/* --- grano de película sobre todo --- */
+.grano{
+  position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.032;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay
+}
+[data-tema="oscuro"] .grano{opacity:.05}
+
+/* --- foco que sigue al ratón dentro de las tarjetas --- */
+.foco{position:relative;isolation:isolate}
+.foco::before{
+  content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;
+  opacity:0;transition:opacity .25s var(--curva);pointer-events:none;
+  background:radial-gradient(340px circle at var(--mx,50%) var(--my,50%),var(--acento-soft),transparent 72%)
+}
+.foco:hover::before{opacity:1}
+
+/* --- borde de luz giratorio (solo en lo destacado) --- */
+.aro{position:relative}
+.aro::after{
+  content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;
+  background:conic-gradient(from var(--ang),transparent 0deg,var(--acento) 40deg,var(--secundario) 80deg,transparent 130deg,transparent 360deg);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;
+  animation:girar-aro 7s linear infinite;pointer-events:none;opacity:.9
+}
+@keyframes girar-aro{to{--ang:360deg}}
+
+/* --- titular con brillo que recorre el degradado --- */
+.grad-marca-txt{background-size:230% 100%;animation:recorrer 8s var(--curva) infinite}
+@keyframes recorrer{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* --- botones con destello al pasar --- */
+.btn{position:relative;overflow:hidden}
+.btn::after{
+  content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;
+  background:linear-gradient(100deg,transparent,#ffffff5c,transparent);
+  transform:skewX(-18deg);transition:left .55s var(--curva);pointer-events:none
+}
+.btn:hover::after{left:150%}
+.btn--sec::after,.btn--fantasma::after{background:linear-gradient(100deg,transparent,var(--acento-soft),transparent)}
+
+/* --- header que se encoge al bajar --- */
+.header{transition:box-shadow var(--trans),background var(--trans)}
+.header__in{transition:height var(--trans)}
+.header--peq .header__in{height:56px}
+.header--peq{box-shadow:var(--sombra-m)}
+.header--peq .logo img{height:24px;transition:height var(--trans)}
+
+/* --- móvil del hero con inclinación 3D --- */
+.movil-3d{perspective:1100px}
+.movil{
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateZ(0);
+  transform-style:preserve-3d;transition:transform .35s var(--curva);will-change:transform
+}
+.movil-3d:hover .movil{transition:transform .1s linear}
+
+/* --- las objeciones se escriben solas --- */
+.objecion span{
+  display:inline-block;overflow:hidden;white-space:nowrap;vertical-align:bottom;
+  border-right:2px solid transparent;max-width:0
+}
+.visible .objecion span{animation:escribir 1s steps(24,end) forwards,caret .7s step-end 6}
+.visible .objecion:nth-child(2) span{animation-delay:.15s,.15s}
+.visible .objecion:nth-child(3) span{animation-delay:1.15s,1.15s}
+.visible .objecion:nth-child(4) span{animation-delay:2.15s,2.15s}
+.visible .objecion:nth-child(5) span{animation-delay:3.15s,3.15s}
+@keyframes escribir{to{max-width:100%}}
+@keyframes caret{0%,100%{border-right-color:var(--acento)}50%{border-right-color:transparent}}
+
+/* --- eje de producción: línea que se llena --- */
+.eje-wrap{position:relative}
+.eje-linea{height:2px;margin:0 0 var(--sp-4);border-radius:var(--r-full);background:var(--border);overflow:hidden}
+.eje-linea i{display:block;height:100%;width:0;background:var(--grad-secundario);transition:width 1.4s var(--curva)}
+.visible .eje-linea i{width:100%}
+.paso{transition:border-color var(--trans),transform var(--trans),box-shadow var(--trans)}
+.paso:hover{transform:translateY(-3px);box-shadow:var(--sombra-m)}
+.paso b{transition:background var(--trans),color var(--trans),transform var(--trans)}
+.paso:hover b{background:var(--grad-acento);color:#fff;transform:scale(1.1)}
+
+/* --- ciclo: hilo que une los pasos --- */
+.ciclo{position:relative}
+@media(min-width:820px){
+  .ciclo::before{
+    content:"";position:absolute;top:42px;left:12%;right:12%;height:2px;z-index:0;
+    background:var(--grad-secundario);opacity:.35;
+    transform:scaleX(0);transform-origin:left;transition:transform 1.6s var(--curva)
+  }
+  .visible .ciclo::before{transform:scaleX(1)}
+}
+.ciclo__paso{position:relative;z-index:1}
+.ciclo__paso b{transition:transform var(--trans),box-shadow var(--trans)}
+.ciclo__paso:hover b{transform:scale(1.1) rotate(-6deg);box-shadow:var(--sombra-l)}
+
+/* --- pilares: el icono reacciona --- */
+.pilar{transition:transform var(--trans)}
+.pilar:hover{transform:translateY(-4px)}
+.pilar svg{transition:transform var(--trans),filter var(--trans)}
+.pilar:hover svg{transform:scale(1.18)}
+
+/* --- cifras: números en tabular para que no bailen al contar --- */
+.cifra b{font-variant-numeric:tabular-nums}
+
 /* ============================================================
    ANIMACIÓN DE ENTRADA
    ============================================================ */
-.rev{opacity:0;transform:translateY(14px);transition:opacity .5s var(--curva),transform .5s var(--curva)}
+.rev{opacity:0;transform:translateY(18px);transition:opacity .6s var(--curva),transform .6s var(--curva)}
 .rev.visible{opacity:1;transform:none}
+.esc>*{opacity:0;transform:translateY(16px);transition:opacity .55s var(--curva),transform .55s var(--curva)}
+.esc.visible>*{opacity:1;transform:none}
+
 @media(prefers-reduced-motion:reduce){
-  *{animation:none!important;transition:none!important}
-  .rev{opacity:1;transform:none}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .rev,.esc>*{opacity:1;transform:none}
   html{scroll-behavior:auto}
+  .aurora,.grano,.progreso-scroll{display:none}
+  .objecion span{max-width:100%;border-right-color:transparent}
+  .eje-linea i{width:100%}
+  .movil{transform:none}
 }
 </style>
 </head>
 <body>
+<div class="progreso-scroll" id="progreso" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grano" aria-hidden="true"></div>
+
 
 <!-- ============ SECCIÓN 1 · HEADER ============ -->
 <header class="header">
@@ -642,7 +949,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></svg>
         <svg class="luna" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M20 14.2A8.2 8.2 0 1 1 9.8 4a6.6 6.6 0 0 0 10.2 10.2Z"/></svg>
       </button>
-      <a href="#" class="btn btn--fantasma entrar">Entrar</a>
+      <a href="https://metododev.rkpanel.com/" target="_blank" rel="noopener" class="btn btn--fantasma entrar">Entrar</a>
       <a href="#precios" class="btn header__cta">Empezar gratis</a>
       <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -658,7 +965,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <a href="#como-funciona">Cómo funciona</a>
     <a href="#precios">Precios</a>
     <a href="#faq">FAQ</a>
-    <a href="#">Entrar</a>
+    <a href="https://metododev.rkpanel.com/" target="_blank" rel="noopener">Entrar</a>
     <a href="#precios" class="btn">Empezar gratis</a>
   </div>
 </div>
@@ -671,18 +978,18 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="hero__txt">
       <span class="chip" style="margin-bottom:var(--sp-4)">Role play con IA por voz · en español</span>
       <h1>Tu equipo inmobiliario, <span class="grad-marca-txt">entrenado por IA</span>.</h1>
-      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y la plataforma crece contigo: marketing, valoración, inversión, captación y expedientes llegan a la misma cuenta. Sin canon, sin permanencia y sin cambiar de marca.</p>
+      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y el role play; después irás sumando módulos aparte — marketing, valoración, inversión, captación y expedientes — sobre la misma cuenta. Sin entrada, sin permanencia y sin cambiar de marca.</p>
       <div class="hero__ctas">
         <a href="#precios" class="btn">Empezar gratis</a>
         <a href="#demo" class="btn btn--sec">Ver la demo</a>
       </div>
       <div class="hero__micro">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> 30 días con todo abierto</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Sin tarjeta para probar</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Alta en minutos</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> 7 días de prueba</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Sin entrada</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Sin permanencia</span>
       </div>
     </div>
-    <div id="demo">
+    <div id="demo" class="movil-3d">
       <div class="movil">
         <div class="movil__pantalla">
           <video id="video-demo" playsinline preload="metadata" poster="demo-poster.jpg" src="demo.mp4"></video>
@@ -728,10 +1035,9 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <section class="rev">
   <div class="contenedor">
     <div class="cifras">
-      <div class="cifra"><b class="grad-txt">30</b><span>días con todo abierto, sin tarjeta</span></div>
-      <div class="cifra"><b class="grad-txt">0 €</b><span>de canon de entrada</span></div>
-      <div class="cifra"><b class="grad-txt">0</b><span>años de permanencia</span></div>
-      <div class="cifra"><b class="grad-txt">Tu</b><span>marca sigue siendo tu marca</span></div>
+      <div class="cifra"><b class="grad-txt" data-contar="7">0</b><span>días de prueba, sin tarjeta</span></div>
+      <div class="cifra"><b class="grad-txt" data-contar="0" data-sufijo=" €">0 €</b><span>de entrada</span></div>
+      <div class="cifra"><b class="grad-txt" data-contar="0">0</b><span>meses de permanencia</span></div>
     </div>
   </div>
 </section>
@@ -744,17 +1050,17 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <p class="subtitulo" style="margin-bottom:var(--sp-6)">Tu potencial no es accesible a un clic. La formación vive en un sitio, el marketing en otro, y el agente improvisa justo en el momento que decide la operación.</p>
 
     <div class="rejilla-3" style="margin-bottom:var(--sp-6)">
-      <article class="tarjeta tarjeta--foco">
+      <article class="tarjeta tarjeta--foco foco">
         <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 5.5h16v12H4z"/><path d="M8 21h8M12 17.5V21"/><path d="M9 11.5l2.5 2.5L15.5 9"/></svg></div>
         <h3>Cursos que nadie termina</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Teoría genérica, cero práctica y cero medición. Se ve una vez y no vuelve a la cabeza del agente cuando el cliente objeta.</p>
       </article>
-      <article class="tarjeta tarjeta--foco">
+      <article class="tarjeta tarjeta--foco foco">
         <div class="icono icono--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h6"/><path d="M17.5 14.5l3 3M20.5 14.5l-3 3"/></svg></div>
         <h3>Cada agente improvisa</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">El guion existe, pero no se usa. Las objeciones se resuelven sobre la marcha y el resultado depende de quién esté delante.</p>
       </article>
-      <article class="tarjeta tarjeta--foco">
+      <article class="tarjeta tarjeta--foco foco">
         <div class="icono icono--oro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6Z"/><path d="M4 4l16 16"/></svg></div>
         <h3>El gerente va a ciegas</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Sabes el resultado del mes, no el motivo. Sin puntuación objetiva no puedes corregir a tiempo ni saber quién necesita ayuda.</p>
@@ -765,19 +1071,19 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div class="compara__col compara__col--otros">
         <h3 style="color:var(--dim)">Lo que te piden otros</h3>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Un canon de entrada de cinco cifras</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Un contrato de varios años</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Dejar tu marca a un lado</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg> Semanas de negociación antes de ver el producto</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Una entrada de cinco cifras antes de empezar</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Un contrato de varios años</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Dejar tu marca a un lado</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Semanas de negociación antes de ver el producto</span></li>
         </ul>
       </div>
       <div class="compara__col compara__col--nos">
         <h3>Lo que te pedimos nosotros</h3>
         <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> <b>Cero canon.</b> Entras y ya está</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> <b>Cero permanencia.</b> Te vas cuando quieras</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> <b>Tu marca intacta.</b> El marketing sale con tu logo</li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> <b>Autoservicio.</b> Entra, prueba 30 días y decide</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Cero entrada.</b> Entras y ya está</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Cero permanencia.</b> Te vas cuando quieras</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Tu marca intacta.</b> El marketing sale con tu logo</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Autoservicio.</b> Entra, prueba 7 días y decide</span></li>
         </ul>
       </div>
     </div>
@@ -790,29 +1096,29 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="centrado" style="margin-bottom:var(--sp-6)">
       <span class="etiqueta">Por qué Inmoprop AI</span>
       <h2>Inteligencia, formación, herramientas y resultados.</h2>
-      <p class="subtitulo">Cuatro piezas de una misma plataforma, con un solo acceso y un solo censo de personas. Hoy entras por la formación; el resto se va activando sobre tu cuenta.</p>
+      <p class="subtitulo">Cuatro piezas de una misma plataforma, con un solo acceso y un solo censo de personas. Hoy tu licencia cubre la formación y el role play; el resto son módulos que se contratan aparte cuando salen.</p>
     </div>
     <div class="rejilla">
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
         <h3>Role play con IA por voz</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">El agente habla, el cliente simulado objeta y el formador corrige al instante. Cuando llega la visita real, ya la ha hecho veinte veces.</p>
       </article>
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono icono--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 5.5h16v13H4z"/><path d="M4 9.5h16M8 13h8M8 16h5"/></svg></div>
         <h3>Formación viva, no un curso muerto</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Vídeos, audiolibros, lecciones y role plays con niveles, insignias y ranking. Con una cita periódica en directo que mantiene el ritmo.</p>
       </article>
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono icono--oro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7.5h11l5 4.5-5 4.5H4z"/><path d="M7.5 12h5"/></svg></div>
         <h3>Marketing con tu marca, a un clic</h3>
-        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino</span>
+        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino · módulo aparte</span>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Dejas de pedir la pieza y esperar. La eliges, se adapta a tu marca y la tienes en un momento — redactor e imagen incluidos.</p>
       </article>
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono icono--lima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v5A3.5 3.5 0 0 1 16 16.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 13V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg></div>
         <h3>Un copiloto en cualquier pantalla</h3>
-        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino</span>
+        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino · módulo aparte</span>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Sabe en qué pantalla estás y qué puede hacer por ti: busca un contacto, lee un expediente, lanza una valoración. Sin salir de donde trabajas.</p>
       </article>
     </div>
@@ -836,10 +1142,10 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     </div>
     <div class="objeciones">
       <b>Las cuatro que oyes cada semana</b>
-      <div class="objecion"><i>01</i> —Puedo venderlo yo.</div>
-      <div class="objecion"><i>02</i> —Tengo que consultarlo.</div>
-      <div class="objecion"><i>03</i> —Déjame pensarlo.</div>
-      <div class="objecion"><i>04</i> —Voy a mirar otras opciones.</div>
+      <div class="objecion"><i>01</i> <span>—Puedo venderlo yo.</span></div>
+      <div class="objecion"><i>02</i> <span>—Tengo que consultarlo.</span></div>
+      <div class="objecion"><i>03</i> <span>—Déjame pensarlo.</span></div>
+      <div class="objecion"><i>04</i> <span>—Voy a mirar otras opciones.</span></div>
       <p class="objeciones__pie">La objeción de la exclusividad no es desconfianza en tu profesionalidad: es miedo a perder oportunidades. Inmoprop entrena a tu agente para demostrar lo contrario.</p>
     </div>
   </div>
@@ -899,68 +1205,96 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="centrado" style="margin-bottom:var(--sp-6)">
       <span class="etiqueta">La plataforma completa</span>
       <h2>Empiezas por la formación. No te quedas ahí.</h2>
-      <p class="subtitulo">Inmoprop AI no es una plataforma de formación: la formación es la puerta de entrada. Detrás vienen las herramientas que cubren todo tu negocio, y se activan sobre la misma cuenta que ya tienes.</p>
+      <p class="subtitulo">Inmoprop AI no es una plataforma de formación: la formación es la puerta de entrada. Detrás vienen las herramientas que cubren todo tu negocio, y se activan sobre la misma cuenta que ya tienes — y se contratan aparte, cuando tú quieras.</p>
     </div>
 
-    <div class="roadmap">
-      <div class="roadmap__bloque">
-        <h3>Disponible hoy · incluido en tu licencia</h3>
-        <div class="roadmap__hoy">
-          <article class="tarjeta tarjeta--elev plat plat--hoy">
-            <h4>Formación</h4>
-            <p>Role plays con IA por voz, cursos en cuatro formatos, niveles, insignias, ranking y directo periódico.</p>
-            <span class="chip chip--teal">Funcionando</span>
-          </article>
-          <article class="tarjeta tarjeta--elev plat plat--hoy">
-            <h4>Progreso y estadísticas</h4>
-            <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente.</p>
-            <span class="chip chip--teal">Funcionando</span>
-          </article>
-        </div>
-      </div>
+    <div class="bento rev esc">
 
-      <div class="roadmap__bloque">
-        <h3>En camino · se añaden a tu misma cuenta</h3>
-        <div class="roadmap__futuro">
-          <article class="tarjeta plat plat--futuro">
-            <h4>Marketing</h4>
-            <p>Creatividades específicas para agentes inmobiliarios, adaptadas a tu marca en un momento. Dejas de pedir la pieza y esperar.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
-          <article class="tarjeta plat plat--futuro">
-            <h4>Valoración de propiedades</h4>
-            <p>Pones precio con criterio y sacas el informe que le entregas al propietario en la misma visita.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
-          <article class="tarjeta plat plat--futuro">
-            <h4>Inversión en inmuebles</h4>
-            <p>Oportunidades de inversión, NPL y REO, con el análisis y la conversación dentro de la plataforma.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
-          <article class="tarjeta plat plat--futuro">
-            <h4>Captación</h4>
-            <p>Prospección y recomendación con sus programas, sus entrevistas y el seguimiento de cada contacto.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
-          <article class="tarjeta plat plat--futuro">
-            <h4>Expedientes</h4>
-            <p>La ficha del cliente con todo dentro: el sistema completo de la operación, de la firma a la postventa.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
-          <article class="tarjeta plat plat--futuro">
-            <h4>Copiloto</h4>
-            <p>Transversal a todo: sabe en qué pantalla estás y actúa por ti sin que salgas de donde trabajas.</p>
-            <span class="chip">Próxima plataforma</span>
-          </article>
+      <!-- Formación · la pieza grande -->
+      <article class="bento__item bento__item--vivo bento__hero foco t-violeta aro">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
+        <h4>Formación</h4>
+        <p>Role plays con IA por voz contra un cliente simulado, con el formador corrigiéndote dentro. Cursos en cuatro formatos, niveles, insignias, ranking y directo periódico.</p>
+        <div class="formatitos"><span>Vídeos</span><span>Audiolibros</span><span>Lecciones</span><span>Roleplays</span></div>
+        <div class="areas">
+          <span>Captación</span><span>Skills</span><span>Mi plan de carrera</span>
         </div>
-      </div>
+        <div class="directo">
+          <b>1 sesión semanal en directo</b>
+          <span>Con instructor. Y una mensual específica de gerentes si tienes esa licencia.</span>
+        </div>
+        <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <p class="onda__pie">«Mantén para hablar» — el agente contesta en voz alta, como en la visita.</p>
+        <span class="marca-estado">Funcionando hoy</span>
+      </article>
+
+      <!-- Progreso · pieza ancha -->
+      <article class="bento__item bento__item--vivo bento__ancho foco t-teal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 19v-6M12 19v-10M17 19v-4"/><path d="M14.5 5.5L20 4l-1.2 5.4"/></svg></div>
+        <h4>Progreso y estadísticas</h4>
+        <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente.</p>
+        <div class="grafico" aria-hidden="true">
+          <i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:68%"></i><i style="--h:80%"></i><i style="--h:100%"></i>
+        </div>
+        <div class="grafico__eje" aria-hidden="true"><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span></div>
+        <span class="marca-estado">Funcionando hoy</span>
+      </article>
+
+      <!-- Marketing -->
+      <article class="bento__item foco t-oro">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5v3a1.5 1.5 0 0 0 1.5 1.5h2L14 19V5L7.5 9h-2A1.5 1.5 0 0 0 4 10.5Z"/><path d="M17.5 9.5a4 4 0 0 1 0 5M20 7.5a7 7 0 0 1 0 9"/></svg></div>
+        <h4>Marketing</h4>
+        <p>Creatividades para agentes, adaptadas a tu marca en un momento. Dejas de pedir la pieza y esperar.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
+      <!-- Valoración -->
+      <article class="bento__item foco t-violeta">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5L20 11v8.5H4z"/><path d="M14 10.5a2.8 2.8 0 1 0 0 5"/><path d="M9.8 12h4.4M9.8 14h4.4"/></svg></div>
+        <h4>Valoración</h4>
+        <p>Pones precio con criterio y sacas el informe que entregas al propietario en la misma visita.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
+      <!-- Inversión -->
+      <article class="bento__item foco t-lima">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.5" rx="6.5" ry="2.8"/><path d="M5.5 6.5v5c0 1.5 2.9 2.8 6.5 2.8s6.5-1.3 6.5-2.8v-5"/><path d="M5.5 11.5v5c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-5"/></svg></div>
+        <h4>Inversión</h4>
+        <p>Oportunidades de inversión, NPL y REO, con el análisis y la conversación dentro de la plataforma.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
+      <!-- Captación -->
+      <article class="bento__item foco t-teal">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5v7a6 6 0 0 0 12 0v-7"/><path d="M6 9.5h4.5M13.5 9.5H18"/><path d="M6 4.5h4.5M13.5 4.5H18"/></svg></div>
+        <h4>Captación</h4>
+        <p>Prospección y recomendación con sus programas, sus entrevistas y el seguimiento de cada contacto.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
+      <!-- Expedientes -->
+      <article class="bento__item foco t-oro">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 16h5"/></svg></div>
+        <h4>Expedientes</h4>
+        <p>La ficha del cliente con todo dentro: la operación completa, de la firma a la postventa.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
+      <!-- Copiloto -->
+      <article class="bento__item foco t-violeta">
+        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 15.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 12V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M12 7.8l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></div>
+        <h4>Copiloto</h4>
+        <p>Transversal a todo: sabe en qué pantalla estás y actúa por ti sin que salgas de donde trabajas.</p>
+        <span class="marca-estado">Próximamente · módulo aparte</span>
+      </article>
+
     </div>
 
     <div class="roadmap__nota">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
       <div>
-        <b>Contratas lo que necesitas, cuando lo necesitas.</b>
-        <span>Cada plataforma se activa sobre tu cuenta actual: un solo acceso, un solo censo de personas y nada que migrar. Sin fecha comprometida todavía — te avisamos antes de que salga cada una, y nunca sube el precio de lo que ya tienes contratado.</span>
+        <b>Cada módulo se contrata aparte, cuando lo necesitas.</b>
+        <span>Tu licencia de Inmoprop cubre la formación y el role play. Cada módulo nuevo tiene su propio precio y se activa sobre la cuenta que ya tienes: un solo acceso, un solo censo de personas y nada que migrar. Sin fecha comprometida todavía — te avisamos antes de que salga cada uno, y el precio de lo que ya tengas contratado no sube.</span>
       </div>
     </div>
   </div>
@@ -972,6 +1306,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <span class="etiqueta">El eje de producción</span>
     <h2>Del contacto a la firma, en este orden.</h2>
     <p class="subtitulo" style="margin-bottom:var(--sp-5)">No entras por módulos: entras por lo que quieres conseguir hoy. Cada paso te trae sus cursos, sus piezas de marketing y sus contactos del CRM.</p>
+    <div class="eje-wrap">
+      <div class="eje-linea" aria-hidden="true"><i></i></div>
     <div class="eje">
       <div class="paso"><b>1</b><span>Generación de contactos</span></div>
       <div class="paso"><b>2</b><span>Captación en exclusiva</span></div>
@@ -981,6 +1317,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div class="paso"><b>6</b><span>Compradores</span></div>
       <div class="paso"><b>7</b><span>Negociación de ofertas</span></div>
       <div class="paso"><b>8</b><span>Notaría y postventa</span></div>
+    </div>
     </div>
     <div class="orbitales">
       <div class="orbital"><b>Estrategia y coaching</b><span>Tu plan de negocio y tus indicadores, acompañando toda la cadena</span></div>
@@ -1015,22 +1352,22 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <h2>Tres formas de entrar.</h2>
     </div>
     <div class="rejilla-3">
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M5 20c0-3.6 3.1-6 7-6s7 2.4 7 6"/></svg></div>
         <h3>Agente</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 var(--sp-4)">«Quiero cerrar más y dejar de improvisar delante del propietario.»</p>
         <a href="#precios" class="btn btn--sec" style="margin-top:auto">Licencia Agente</a>
       </article>
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono icono--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="9" cy="8" r="3.2"/><circle cx="17" cy="9.5" r="2.4"/><path d="M3 19c0-3.3 2.7-5.5 6-5.5s6 2.2 6 5.5M16 19c0-2.3 1.5-3.8 4-3.8"/></svg></div>
-        <h3>Gerente de oficina</h3>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 var(--sp-4)">«Quiero ver de verdad cómo vende mi equipo y corregir a tiempo.»</p>
+        <h3>Gerente</h3>
+        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 var(--sp-4)">«Quiero entrenarme como agente y como gerente, no solo dirigir.»</p>
         <a href="#precios" class="btn btn--sec" style="margin-top:auto">Licencia Gerente</a>
       </article>
-      <article class="tarjeta tarjeta--elev">
+      <article class="tarjeta tarjeta--elev foco">
         <div class="icono icono--oro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 20V9l5-3.5V20M14 20V5.5L19.5 9v11M4 20h16"/><path d="M7 12h.01M7 15.5h.01M17 13h.01M17 16.5h.01"/></svg></div>
-        <h3>Red o franquicia</h3>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 var(--sp-4)">«Quiero el mismo método, medido igual, en todas mis oficinas.»</p>
+        <h3>Gerente con equipo</h3>
+        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 var(--sp-4)">«Quiero montar mi oficina virtual y sumar a mis agentes debajo de mi licencia.»</p>
         <a href="#precios" class="btn btn--sec" style="margin-top:auto">Licencia Multi</a>
       </article>
     </div>
@@ -1040,14 +1377,22 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <!-- ============ SECCIÓN 13 · PRECIOS ============
      PRECIOS EDITABLES — todo se cambia en dos sitios:
        1) Los atributos data-mes / data-anual de cada .plan__precio b
-       2) El bloque CONFIG del <script> al final (base Multi, extra, descuento, suelo)
+       2) El bloque CONFIG del script final (base Multi, extra, descuento, suelo)
 ================================================== -->
 <section class="rev" id="precios">
   <div class="contenedor">
     <div class="centrado" style="margin-bottom:var(--sp-5)">
       <span class="etiqueta">Precios</span>
       <h2>Una licencia para cada forma de vender.</h2>
-      <p class="subtitulo">Sin canon. Sin permanencia. Sin cambiar de marca. Cancela cuando quieras.</p>
+      <p class="subtitulo">Sin entrada. Sin permanencia. Sin cambiar de marca.</p>
+    </div>
+
+    <div class="alcance rev">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
+      <div>
+        <b>Las tres licencias son de Inmoprop, la plataforma formativa.</b>
+        <span>Incluyen la formación completa y el entrenamiento en role play con IA — toda, en cualquier licencia: aquí no se paga por desbloquear contenido. Los módulos que se vayan estrenando — marketing, valoración, inversión, captación y expedientes — se contratan aparte, cada uno con su propio precio, y nunca cambian el de lo que ya tengas.</span>
+      </div>
     </div>
 
     <div class="centrado">
@@ -1059,16 +1404,17 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 
     <div class="planes">
       <!-- ---- LICENCIA AGENTE ---- -->
-      <article class="tarjeta plan">
+      <article class="tarjeta plan foco">
+        <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Agente</h3>
         <p class="plan__perfil">Para el agente que quiere cerrar más.</p>
         <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / mes</small></div>
         <p class="plan__nota">Un usuario. Facturación mensual, cancelable en cualquier momento.</p>
         <ul>
-          <li>Catálogo de formación de agente completo</li>
+          <li><b>Acceso completo a toda la formación</b>, también a lo que se vaya estrenando</li>
+          <li><b>1 sesión semanal en directo</b> con instructor</li>
           <li>Role plays con IA por voz, ilimitados</li>
           <li>Niveles, insignias y ranking</li>
-          <li>Directo periódico con el formador</li>
           <li>Tu progreso y tus estadísticas</li>
           <li>Soporte por email</li>
         </ul>
@@ -1076,16 +1422,18 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </article>
 
       <!-- ---- LICENCIA GERENTE ---- -->
-      <article class="tarjeta plan">
+      <article class="tarjeta plan foco">
+        <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Gerente</h3>
-        <p class="plan__perfil">Para quien dirige, y también vende.</p>
+        <p class="plan__perfil">Para el gerente que se entrena como agente <b>y</b> como gerente.</p>
         <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes</small></div>
         <p class="plan__nota">Un usuario con los dos roles. No existe licencia de solo gerente.</p>
         <p class="plan__hereda">Todo lo de Agente, más:</p>
         <ul>
+          <li><b>1 sesión mensual</b> específica de gerentes, además de la semanal</li>
+          <li><b>Tu propia oficina virtual:</b> agrupa licencias de agente bajo la tuya</li>
           <li>Formación específica de gerente</li>
-          <li>Panel del gerente y estadísticas de equipo</li>
-          <li>Puede agrupar licencias de agente por debajo</li>
+          <li>Panel del gerente con el progreso de todo tu equipo</li>
           <li>Evolución semanal y comparativa</li>
           <li>Alertas de agentes que necesitan apoyo</li>
           <li>Sistema retributivo con valores recomendados</li>
@@ -1095,16 +1443,17 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </article>
 
       <!-- ---- LICENCIA MULTI (recomendada) ---- -->
-      <article class="tarjeta plan plan--rec">
+      <article class="tarjeta plan plan--rec aro">
         <span class="plan__badge">Mejor para una oficina</span>
+        <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Multi</h3>
-        <p class="plan__perfil">Para el gerente con equipo. Y para el equipo que crece.</p>
+        <p class="plan__perfil">Para el gerente que monta su oficina virtual y suma a sus agentes.</p>
         <div class="plan__precio"><b data-mes="179" data-anual="143">179</b><small>€ / mes</small></div>
-        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Agentes adicionales desde <span data-precio-extra>39</span> € y bajando.</p>
+        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Una oficina virtual agrupa siempre al menos una de Gerente más las de Agente que necesites. Adicionales desde <span data-precio-extra>39</span> € y bajando.</p>
         <p class="plan__hereda">Todo lo de Gerente, para los 4, más:</p>
         <ul>
-          <li>Equipo agrupado bajo una sola cuenta</li>
-          <li>Estadísticas y progresos de todo el equipo</li>
+          <li><b>Tu oficina virtual montada</b> desde el primer día: tú como gerente y tus agentes debajo</li>
+          <li>Estadísticas y progresos de todo el equipo en un sitio</li>
           <li>Añades y quitas agentes cuando quieras</li>
           <li>Cada agente que sumas abarata a todos los demás</li>
           <li>Una sola factura para toda la oficina</li>
@@ -1140,7 +1489,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </div>
     </div>
 
-    <p class="precios__pie"><b>Los primeros 30 días, todo abierto.</b> Entras con la formación entera desbloqueada y sin tarjeta. A los 30 días eliges tu licencia — o te vas.</p>
+    <p class="precios__pie"><b>7 días de prueba, sin entrada y sin permanencia.</b> Entras con la formación entera desbloqueada y sin tarjeta. Al terminar la semana eliges tu licencia — o te vas.</p>
   </div>
 </section>
 
@@ -1207,7 +1556,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </details>
       <details>
         <summary>¿Puedo probarlo antes de pagar? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Sí. Los primeros 30 días entras con la formación entera desbloqueada y sin tarjeta. Pasado ese mes eliges tu licencia — o te vas sin haber pagado nada.</p>
+        <p>Sí. Tienes 7 días de prueba con la formación entera desbloqueada y sin tarjeta. Al terminar la semana eliges tu licencia — o te vas sin haber pagado nada.</p>
       </details>
       <details>
         <summary>¿En cuánto tiempo veo resultados? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -1218,16 +1567,24 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <p>Un curso te cuenta qué hacer. Aquí lo haces: hablas, te equivocas, te corrigen y lo repites. Y además se mide — hay puntuación, niveles y ranking, así que el gerente sabe quién está entrenando de verdad.</p>
       </details>
       <details>
+        <summary>¿Hay contenido bloqueado según la licencia? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>No. Todas las licencias tienen acceso completo a toda la formación, y a lo que se vaya estrenando, sin pagar más por desbloquear nada. Lo que cambia entre licencias no es el contenido: es el directo mensual de gerentes, el panel de equipo y la posibilidad de montar tu propia oficina agrupando licencias.</p>
+      </details>
+      <details>
+        <summary>¿Qué es la «oficina virtual»? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>Es tu oficina dentro de Inmoprop: una licencia de Gerente con licencias de Agente agrupadas por debajo. Tu equipo, con su progreso, su ranking y sus estadísticas en un solo sitio, y una sola factura. Toda oficina virtual necesita al menos una licencia de Gerente más las de Agente que quieras sumar — la Multi ya te la trae montada con tres agentes.</p>
+      </details>
+      <details>
         <summary>¿Qué incluye exactamente la licencia Multi? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Una licencia de Gerente más tres de Agente por 179 € al mes. La de Gerente es la que permite agrupar: desde ella ves las estadísticas, el progreso y el ranking de todo tu equipo en un solo sitio. A partir del cuarto agente, cada licencia adicional cuesta un 5 % menos que la anterior, hasta un mínimo de 29 € por licencia — así que cada agente que sumas abarata a todos los demás.</p>
+        <p>Una licencia de Gerente más tres de Agente por 179 € al mes, para montar tu oficina virtual. La de Gerente es la que permite agrupar: desde ella ves las estadísticas, el progreso y el ranking de todo tu equipo en un solo sitio. A partir del cuarto agente, cada licencia adicional cuesta un 5 % menos que la anterior, hasta un mínimo de 29 € por licencia — así que cada agente que sumas abarata a todos los demás. Los cuatro tienen acceso completo a toda la formación y al directo semanal.</p>
       </details>
       <details>
         <summary>¿Existe una licencia solo para el gerente? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
         <p>No. La de Gerente incluye todo lo de Agente más su parte de dirección: el gerente que no entrena no puede exigir a su equipo que entrene. Y para agrupar licencias de agente por debajo hace falta tener la de Gerente — la Multi ya la lleva dentro.</p>
       </details>
       <details>
-        <summary>¿Tendré que pagar más cuando salgan las demás plataformas? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Solo si las quieres. Marketing, valoración, inversión, captación y expedientes se contratan aparte y se activan sobre la cuenta que ya tienes: un acceso, nada que migrar. El precio de lo que ya tengas contratado no sube por que salga una nueva. Todavía no hay fechas comprometidas; te avisamos antes de que salga cada una.</p>
+        <summary>¿Los módulos que vengan están incluidos en mi licencia? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>Sí, si los quieres: cada módulo tiene su propio precio y se contrata aparte. Tu licencia de Agente, Gerente o Multi cubre Inmoprop como plataforma formativa — la formación completa y el entrenamiento en role play — y eso no cambia. Marketing, valoración, inversión, captación y expedientes se activan sobre la cuenta que ya tienes cuando decidas sumarlos, sin migrar nada. Y el precio de lo que ya tengas contratado no sube porque salga un módulo nuevo.</p>
       </details>
       <details>
         <summary>¿Está disponible fuera de España? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -1246,7 +1603,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   <div class="contenedor">
     <div class="cta-final">
       <h2>Tu mejor agente ya está en tu oficina. Haz que todos se le parezcan.</h2>
-      <p>La formación inmobiliaria está a punto de cambiar para siempre. Empieza con 30 días abiertos, sin tarjeta y sin permanencia.</p>
+      <p>La formación inmobiliaria está a punto de cambiar para siempre. 7 días de prueba, sin entrada y sin permanencia.</p>
       <div class="cta-final__btns">
         <a href="#precios" class="btn btn--blanco">Empezar gratis</a>
         <a href="#" class="btn btn--borde-blanco">Solicitar demo</a>
@@ -1279,7 +1636,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <h4>Empresa</h4>
         <ul>
           <li><a href="#">Solicitar demo</a></li>
-          <li><a href="#">Entrar</a></li>
+          <li><a href="https://metododev.rkpanel.com/" target="_blank" rel="noopener">Entrar</a></li>
           <li><a href="#">Contacto</a></li>
           <li><a href="#faq">FAQ</a></li>
         </ul>
@@ -1457,18 +1814,111 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   pintarCalc();
 })();
 
-/* ---------- Animación de entrada ---------- */
+/* ---------- Reveals, escalonado y contadores ---------- */
 (function(){
-  if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.rev').forEach(function(el){ el.classList.add('visible'); });
-    return;
-  }
-  var io = new IntersectionObserver(function(entradas){
-    entradas.forEach(function(e){
-      if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var todos = document.querySelectorAll('.rev, .esc');
+
+  function contar(raiz){
+    raiz.querySelectorAll('[data-contar]').forEach(function(el){
+      if (el.dataset.hecho) return;
+      var fin = parseFloat(el.dataset.contar);
+      var suf = el.dataset.sufijo || '';
+      el.dataset.hecho = '1';
+      if (!fin || reducido) { el.textContent = fin + suf; return; }
+      var dur = 900, t0 = null;
+      requestAnimationFrame(function bucle(t){
+        if (t0 === null) t0 = t;
+        var k = Math.min(1, (t - t0) / dur);
+        el.textContent = Math.round(fin * (1 - Math.pow(1 - k, 3))) + suf;
+        if (k < 1) requestAnimationFrame(bucle);
+      });
     });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-  document.querySelectorAll('.rev').forEach(function(el){ io.observe(el); });
+  }
+
+  function mostrar(el){
+    el.classList.add('visible');
+    if (el.classList.contains('esc')) {
+      [].forEach.call(el.children, function(h, i){
+        h.style.transitionDelay = Math.min(i * 70, 560) + 'ms';
+      });
+    }
+    contar(el);
+  }
+
+  if (!('IntersectionObserver' in window)) {
+    todos.forEach(mostrar);
+  } else {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (e.isIntersecting) { mostrar(e.target); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    todos.forEach(function(el){ io.observe(el); });
+  }
+})();
+
+/* ---------- Barra de progreso y header que se encoge ---------- */
+(function(){
+  var barra = document.getElementById('progreso');
+  var header = document.querySelector('.header');
+  var pendiente = false;
+
+  function pintar(){
+    var y = window.scrollY || document.documentElement.scrollTop;
+    var alto = document.documentElement.scrollHeight - window.innerHeight;
+    if (barra) barra.style.width = (alto > 0 ? (y / alto) * 100 : 0) + '%';
+    if (header) header.classList.toggle('header--peq', y > 40);
+    pendiente = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!pendiente) { pendiente = true; requestAnimationFrame(pintar); }
+  }, { passive: true });
+  pintar();
+})();
+
+/* ---------- Foco que sigue al ratón e inclinación 3D ---------- */
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
+
+  var ultimo = null, pendiente = false;
+
+  document.addEventListener('mousemove', function(e){
+    ultimo = e;
+    if (pendiente) return;
+    pendiente = true;
+    requestAnimationFrame(function(){
+      pendiente = false;
+      if (!ultimo) return;
+
+      /* foco de las tarjetas */
+      var t = ultimo.target.closest && ultimo.target.closest('.foco');
+      if (t) {
+        var r = t.getBoundingClientRect();
+        t.style.setProperty('--mx', (ultimo.clientX - r.left) + 'px');
+        t.style.setProperty('--my', (ultimo.clientY - r.top) + 'px');
+      }
+
+      /* inclinación del móvil */
+      var zona = document.querySelector('.movil-3d');
+      var movil = zona && zona.querySelector('.movil');
+      if (zona && movil) {
+        var z = zona.getBoundingClientRect();
+        var dentro = ultimo.clientX >= z.left - 60 && ultimo.clientX <= z.right + 60 &&
+                     ultimo.clientY >= z.top - 60 && ultimo.clientY <= z.bottom + 60;
+        if (dentro) {
+          var cx = (ultimo.clientX - (z.left + z.width / 2)) / (z.width / 2);
+          var cy = (ultimo.clientY - (z.top + z.height / 2)) / (z.height / 2);
+          movil.style.setProperty('--ry', (cx * 7).toFixed(2) + 'deg');
+          movil.style.setProperty('--rx', (-cy * 5).toFixed(2) + 'deg');
+        } else {
+          movil.style.setProperty('--ry', '0deg');
+          movil.style.setProperty('--rx', '0deg');
+        }
+      }
+    });
+  }, { passive: true });
 })();
 </script>
 </body>
