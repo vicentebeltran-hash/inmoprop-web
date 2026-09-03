@@ -1242,8 +1242,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <section class="rev" id="plataforma">
   <div class="contenedor">
     <span class="etiqueta">El problema</span>
-    <h2>La formación que ya has pagado no cambia lo que pasa en la visita.</h2>
-    <p class="subtitulo" style="margin-bottom:var(--sp-6)">Tu potencial no es accesible a un clic. La formación vive en un sitio, el marketing en otro, y el agente improvisa justo en el momento que decide la operación.</p>
+    <h2>Entre lo que tu equipo sabe y lo que hace en la visita hay un <span class="grad-marca-txt">abismo</span>.</h2>
+    <p class="subtitulo" style="margin-bottom:var(--sp-6)">Nadie termina el curso, nadie practica la objeción en voz alta y nadie mide lo que pasa delante del propietario. Al final, el resultado depende de quién esté delante ese día.</p>
 
     <div class="rejilla-3 esc">
       <article class="tarjeta tarjeta--foco foco">
@@ -1265,38 +1265,79 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   </div>
 </section>
 
-<!-- ============ SECCIÓN 6 · POR QUÉ INMOPROP ============ -->
-<section class="rev">
+<!-- ============ SECCIÓN 6 · LOS TRES MODOS DE APRENDER ============ -->
+<section class="rev" id="por-dentro">
   <div class="contenedor">
     <div class="centrado" style="margin-bottom:var(--sp-6)">
-      <span class="etiqueta">Por qué Inmoprop AI</span>
-      <h2>Inteligencia, formación, herramientas y resultados.</h2>
-      <p class="subtitulo">Cuatro piezas de una misma plataforma, con un solo acceso y un solo censo de personas. Hoy tu licencia cubre la formación y el role play; el resto son módulos que se contratan aparte cuando salen.</p>
+      <span class="etiqueta">Por dentro</span>
+      <h2>El mismo bloque, <span class="grad-marca-txt">tres formas</span> de aprenderlo.</h2>
+      <p class="subtitulo" style="max-width:64ch;margin-inline:auto">V&iacute;deo, audiolibro y tutor de IA sobre el mismo temario. El agente elige seg&uacute;n el momento del d&iacute;a y sigue por donde lo dej&oacute;. Grabado tal cual lo ve en el m&oacute;vil: sin montaje, sin pantallas de mentira.</p>
     </div>
-    <div class="rejilla">
-      <article class="tarjeta tarjeta--elev foco">
-        <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
-        <h3>Role play con IA por voz</h3>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">El agente habla, el cliente simulado objeta y el formador corrige al instante. Cuando llega la visita real, ya la ha hecho veinte veces.</p>
-      </article>
-      <article class="tarjeta tarjeta--elev foco">
-        <div class="icono icono--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 5.5h16v13H4z"/><path d="M4 9.5h16M8 13h8M8 16h5"/></svg></div>
-        <h3>Formación viva, no un curso muerto</h3>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Vídeos, audiolibros, lecciones y role plays con niveles, insignias y ranking. Con una cita periódica en directo que mantiene el ritmo.</p>
-      </article>
-      <article class="tarjeta tarjeta--elev foco">
-        <div class="icono icono--oro"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 7.5h11l5 4.5-5 4.5H4z"/><path d="M7.5 12h5"/></svg></div>
-        <h3>Marketing con tu marca, a un clic</h3>
-        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino · módulo aparte</span>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Dejas de pedir la pieza y esperar. La eliges, se adapta a tu marca y la tienes en un momento — redactor e imagen incluidos.</p>
-      </article>
-      <article class="tarjeta tarjeta--elev foco">
-        <div class="icono icono--lima"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v5A3.5 3.5 0 0 1 16 16.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 13V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M9 10.5h.01M12 10.5h.01M15 10.5h.01"/></svg></div>
-        <h3>Un copiloto en cualquier pantalla</h3>
-        <span class="chip chip--neutro" style="align-self:flex-start;margin:var(--sp-2) 0 0">En camino · módulo aparte</span>
-        <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Sabe en qué pantalla estás y qué puede hacer por ti: busca un contacto, lee un expediente, lanza una valoración. Sin salir de donde trabajas.</p>
-      </article>
+
+    <div class="vitrina esc">
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-indicadores.jpg" aria-label="Lecci&oacute;n en v&iacute;deo dentro de Mi plan de carrera">
+              <source src="demo-indicadores.webm" type="video/webm">
+              <source src="demo-indicadores.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>1</i> V&iacute;deo</span>
+          <b>La lecci&oacute;n, dentro de la propia ficha</b>
+          <span>Bloque a bloque, con su v&iacute;deo en la misma pantalla del curso. Nada de saltar a otra pesta&ntilde;a ni perder el hilo.</span>
+        </div>
+      </div>
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-metodo.jpg" aria-label="Curso en formato audiolibro dentro de Inmoprop">
+              <source src="demo-metodo.webm" type="video/webm">
+              <source src="demo-metodo.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>2</i> Audiolibro</span>
+          <b>El mismo temario, para el coche</b>
+          <span>Le da a escuchar y sigue formándose entre visita y visita. La hora muerta del d&iacute;a se convierte en entrenamiento.</span>
+        </div>
+      </div>
+      <div class="vitrina__item">
+        <div class="movil movil--alto">
+          <div class="movil__pantalla">
+            <video class="vitrina__video" playsinline muted loop preload="none"
+                   poster="demo-tutor.jpg" aria-label="Conversaci&oacute;n con el tutor de IA sobre el temario del curso">
+              <source src="demo-tutor.webm" type="video/webm">
+              <source src="demo-tutor.mp4" type="video/mp4">
+            </video>
+            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
+              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
+              <em style="font-style:normal">Sonido</em>
+            </button>
+          </div>
+        </div>
+        <div class="vitrina__pie">
+          <span class="etiqueta"><i>3</i> Con la IA</span>
+          <b>Un tutor que te lo explica a tu ritmo</b>
+          <span>Le pide que profundice en un punto, que le resuma los 36 apartados del temario o que le resuelva una duda concreta.</span>
+        </div>
+      </div>
     </div>
+
+    <p class="vitrina__nota">Capturas reales del entorno de Inmoprop. Los contenidos se ampl&iacute;an cada semana.</p>
   </div>
 </section>
 
@@ -1485,82 +1526,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         </div>
       </div>
     </div>
-  </div>
-</section>
-
-<!-- ============ SECCIÓN 8C · LOS TRES MODOS DE APRENDER ============ -->
-<section class="rev" id="por-dentro">
-  <div class="contenedor">
-    <div class="centrado" style="margin-bottom:var(--sp-6)">
-      <span class="etiqueta">Por dentro</span>
-      <h2>El mismo bloque, <span class="grad-marca-txt">tres formas</span> de aprenderlo.</h2>
-      <p class="subtitulo" style="max-width:64ch;margin-inline:auto">V&iacute;deo, audiolibro y tutor de IA sobre el mismo temario. El agente elige seg&uacute;n el momento del d&iacute;a y sigue por donde lo dej&oacute;. Grabado tal cual lo ve en el m&oacute;vil: sin montaje, sin pantallas de mentira.</p>
-    </div>
-
-    <div class="vitrina esc">
-      <div class="vitrina__item">
-        <div class="movil movil--alto">
-          <div class="movil__pantalla">
-            <video class="vitrina__video" playsinline muted loop preload="none"
-                   poster="demo-indicadores.jpg" aria-label="Lecci&oacute;n en v&iacute;deo dentro de Mi plan de carrera">
-              <source src="demo-indicadores.webm" type="video/webm">
-              <source src="demo-indicadores.mp4" type="video/mp4">
-            </video>
-            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
-              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
-              <em style="font-style:normal">Sonido</em>
-            </button>
-          </div>
-        </div>
-        <div class="vitrina__pie">
-          <span class="etiqueta"><i>1</i> V&iacute;deo</span>
-          <b>La lecci&oacute;n, dentro de la propia ficha</b>
-          <span>Bloque a bloque, con su v&iacute;deo en la misma pantalla del curso. Nada de saltar a otra pesta&ntilde;a ni perder el hilo.</span>
-        </div>
-      </div>
-      <div class="vitrina__item">
-        <div class="movil movil--alto">
-          <div class="movil__pantalla">
-            <video class="vitrina__video" playsinline muted loop preload="none"
-                   poster="demo-metodo.jpg" aria-label="Curso en formato audiolibro dentro de Inmoprop">
-              <source src="demo-metodo.webm" type="video/webm">
-              <source src="demo-metodo.mp4" type="video/mp4">
-            </video>
-            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
-              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
-              <em style="font-style:normal">Sonido</em>
-            </button>
-          </div>
-        </div>
-        <div class="vitrina__pie">
-          <span class="etiqueta"><i>2</i> Audiolibro</span>
-          <b>El mismo temario, para el coche</b>
-          <span>Le da a escuchar y sigue formándose entre visita y visita. La hora muerta del d&iacute;a se convierte en entrenamiento.</span>
-        </div>
-      </div>
-      <div class="vitrina__item">
-        <div class="movil movil--alto">
-          <div class="movil__pantalla">
-            <video class="vitrina__video" playsinline muted loop preload="none"
-                   poster="demo-tutor.jpg" aria-label="Conversaci&oacute;n con el tutor de IA sobre el temario del curso">
-              <source src="demo-tutor.webm" type="video/webm">
-              <source src="demo-tutor.mp4" type="video/mp4">
-            </video>
-            <button class="vitrina__son" type="button" data-son aria-label="Activar el sonido">
-              <svg viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 6v12l-4.5-3.5H4z"/><path d="M16 9.5a3.5 3.5 0 0 1 0 5"/><path d="M18.5 7a7 7 0 0 1 0 10"/></svg>
-              <em style="font-style:normal">Sonido</em>
-            </button>
-          </div>
-        </div>
-        <div class="vitrina__pie">
-          <span class="etiqueta"><i>3</i> Con la IA</span>
-          <b>Un tutor que te lo explica a tu ritmo</b>
-          <span>Le pide que profundice en un punto, que le resuma los 36 apartados del temario o que le resuelva una duda concreta.</span>
-        </div>
-      </div>
-    </div>
-
-    <p class="vitrina__nota">Capturas reales del entorno de Inmoprop. Los contenidos se ampl&iacute;an cada semana.</p>
   </div>
 </section>
 
