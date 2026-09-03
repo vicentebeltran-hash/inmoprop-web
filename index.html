@@ -780,6 +780,176 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 .t-oro{--tono:var(--dorado);--tono-soft:var(--dorado-soft)}
 .t-lima{--tono:var(--lima);--tono-soft:var(--lima-soft)}
 
+
+/* ============================================================
+   BANDA "EN DIRECTO"
+   ============================================================ */
+.vivo-band{
+  position:relative;overflow:hidden;
+  padding:clamp(34px,5vw,60px) clamp(20px,4vw,52px);
+  border:1px solid var(--acento);border-radius:var(--r-l);
+  background:var(--grad-superficie);box-shadow:var(--sombra-l)
+}
+.vivo-band::before{
+  content:"";position:absolute;top:-40%;right:-10%;width:52%;height:180%;
+  background:radial-gradient(circle at 50% 50%,var(--acento-soft),transparent 65%);
+  pointer-events:none
+}
+.vivo-band__grid{position:relative;display:grid;gap:clamp(24px,3vw,44px);grid-template-columns:1fr}
+@media(min-width:900px){.vivo-band__grid{grid-template-columns:1.1fr .9fr;align-items:center}}
+.insignia-vivo{
+  display:inline-flex;align-items:center;gap:8px;margin-bottom:var(--sp-4);
+  padding:6px 15px;border-radius:var(--r-full);
+  background:var(--acento-soft);color:var(--acento);
+  font-size:var(--txt-mini);font-weight:var(--peso-fuerte);
+  letter-spacing:.12em;text-transform:uppercase
+}
+.insignia-vivo i{
+  width:8px;height:8px;border-radius:var(--r-full);background:var(--acento);flex-shrink:0;
+  animation:pulso-vivo 1.7s ease-out infinite
+}
+@keyframes pulso-vivo{
+  0%{box-shadow:0 0 0 0 var(--acento);opacity:1}
+  70%{box-shadow:0 0 0 9px transparent;opacity:.75}
+  100%{box-shadow:0 0 0 0 transparent;opacity:1}
+}
+.semanas{display:flex;align-items:center;gap:var(--sp-2);flex-wrap:wrap;margin-top:var(--sp-5)}
+.semanas span{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 14px;border-radius:var(--r-full);
+  border:1px solid var(--card-borde);background:var(--surface);
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--dim)
+}
+.semanas span::before{content:"";width:6px;height:6px;border-radius:var(--r-full);background:var(--acento)}
+.semanas b{flex-basis:100%;margin-top:var(--sp-1);font-size:var(--txt-mini);color:var(--faint);font-weight:var(--peso-medio)}
+.vivo-datos{display:grid;gap:var(--sp-3)}
+.vivo-dato{
+  display:flex;gap:var(--sp-4);align-items:flex-start;
+  padding:var(--sp-4);border-radius:var(--r-m);
+  border:1px solid var(--card-borde);background:var(--surface);box-shadow:var(--sombra-s);
+  transition:border-color var(--trans),transform var(--trans)
+}
+.vivo-dato:hover{border-color:var(--acento);transform:translateX(3px)}
+.vivo-dato em{
+  font-style:normal;flex-shrink:0;min-width:74px;
+  font-family:var(--fuente-titulo);font-size:1.35rem;font-weight:var(--peso-black);
+  line-height:1.05;letter-spacing:-.03em;
+  background:var(--grad-acento);-webkit-background-clip:text;background-clip:text;color:transparent
+}
+.vivo-dato b{display:block;font-size:var(--txt-small);font-weight:var(--peso-fuerte)}
+.vivo-dato span{font-size:var(--txt-mini);color:var(--dim)}
+
+/* ============================================================
+   LA SUITE · panel oscuro siempre
+   ============================================================ */
+.suite{
+  position:relative;overflow:hidden;
+  padding:clamp(40px,6vw,78px) clamp(18px,3.5vw,52px);
+  border-radius:var(--r-l);
+  box-shadow:0 30px 70px -20px #0a0c1e73;
+  background:
+    radial-gradient(900px 500px at 14% -6%,#6c5ce75c,transparent 62%),
+    radial-gradient(820px 460px at 92% 8%,#00b8a03d,transparent 58%),
+    radial-gradient(700px 400px at 50% 108%,#b4e01f1f,transparent 60%),
+    linear-gradient(165deg,#161a3c 0%,#0b0d20 55%,#101334 100%);
+  /* el sistema de diseño en oscuro, solo aquí dentro */
+  --surface:#1b1f3e; --surface-2:#262b52; --cristal:#1b1f3ecc;
+  --card-borde:#353b70; --border:#2f3563;
+  --text:#f0f1ff; --dim:#adb2d8; --faint:#767ca6;
+  --acento:#9b8dff; --acento-fuerte:#b3a7ff; --acento-soft:#9b8dff2e; --acento-contraste:#12142a;
+  --secundario:#2ad3bb; --secundario-soft:#2ad3bb2e;
+  --dorado:#f0c95f; --dorado-soft:#f0c95f2e;
+  --lima:#c4ea34; --lima-soft:#c4ea342e;
+  --grad-superficie:linear-gradient(160deg,#232853,#171b3a);
+  --sombra-s:0 1px 3px #00000059; --sombra-m:0 10px 28px #00000073; --sombra-l:0 22px 54px #00000099;
+  color:var(--text)
+}
+/* retícula tenue de fondo */
+.suite::before{
+  content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background-image:linear-gradient(#ffffff08 1px,transparent 1px),linear-gradient(90deg,#ffffff08 1px,transparent 1px);
+  background-size:52px 52px;
+  mask-image:radial-gradient(circle at 50% 30%,#000 20%,transparent 78%);
+  -webkit-mask-image:radial-gradient(circle at 50% 30%,#000 20%,transparent 78%)
+}
+.suite>*{position:relative;z-index:1}
+.suite .etiqueta{color:var(--acento)}
+.suite h2{color:var(--text)}
+.suite .subtitulo{color:var(--dim)}
+
+/* medidor de módulos */
+.medidor{max-width:560px;margin:var(--sp-5) auto var(--sp-6)}
+.medidor__fila{
+  display:flex;justify-content:space-between;align-items:baseline;
+  font-size:var(--txt-mini);color:var(--dim);margin-bottom:var(--sp-2)
+}
+.medidor__fila b{font-family:var(--fuente-titulo);font-size:var(--txt-small);font-weight:var(--peso-negro);color:var(--text)}
+.medidor__barra{height:6px;border-radius:var(--r-full);background:#ffffff14;overflow:hidden}
+.medidor__pie{
+  margin:var(--sp-3) 0 0;text-align:center;
+  font-size:var(--txt-mini);color:var(--faint);line-height:1.5
+}
+.medidor__barra i{
+  display:block;height:100%;width:0;border-radius:var(--r-full);
+  background:var(--grad-marca);box-shadow:0 0 16px var(--acento);
+  transition:width 1.6s var(--curva) .2s
+}
+.visible .medidor__barra i{width:14.3%}
+
+/* módulos aún cerrados */
+.bloq{opacity:.5;filter:saturate(.12);transition:opacity .35s var(--curva),filter .35s var(--curva),border-color var(--trans),box-shadow .35s var(--curva),transform var(--trans)}
+.bloq:hover{
+  opacity:1;filter:none;transform:translateY(-4px);
+  border-color:var(--tono);
+  box-shadow:0 18px 44px -12px var(--tono)
+}
+.bloq .marca-estado::before{background:currentColor}
+.bloq__cab{
+  position:absolute;top:var(--sp-4);right:var(--sp-4);z-index:2;
+  display:flex;align-items:center;gap:9px;pointer-events:none
+}
+.bloq__cab .bloq__num{position:static;top:auto;right:auto}
+.bloq__candado{
+  width:26px;height:26px;display:grid;place-items:center;
+  border-radius:var(--r-full);background:#ffffff0f;color:var(--faint);
+  transition:background var(--trans),color var(--trans)
+}
+.bloq__candado svg{width:13px;height:13px;stroke-width:2.2}
+.bloq:hover .bloq__candado{background:var(--tono-soft);color:var(--tono)}
+.bloq .ico{margin-top:var(--sp-5)}
+.bloq h4,.bloq p{padding-right:0}
+.bloq__num{
+  position:absolute;top:var(--sp-4);right:var(--sp-4);z-index:2;
+  font-family:var(--fuente-titulo);font-size:1.5rem;font-weight:var(--peso-black);
+  color:var(--faint);opacity:.55;letter-spacing:-.04em;pointer-events:none
+}
+.bloq .marca-estado{color:var(--faint)}
+.bloq:hover .marca-estado{color:var(--tono)}
+/* barrido de "encendiéndose" */
+.bloq::after{
+  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:linear-gradient(112deg,transparent 42%,#ffffff1a 50%,transparent 58%);
+  transform:translateX(-110%);
+  animation:barrido 6.5s var(--curva) infinite
+}
+.bloq:nth-of-type(4)::after{animation-delay:.5s}
+.bloq:nth-of-type(5)::after{animation-delay:1s}
+.bloq:nth-of-type(6)::after{animation-delay:1.5s}
+.bloq:nth-of-type(7)::after{animation-delay:2s}
+.bloq:nth-of-type(8)::after{animation-delay:2.5s}
+@keyframes barrido{0%{transform:translateX(-110%)}45%,100%{transform:translateX(110%)}}
+.bento__item--vivo .bloq__num{color:var(--secundario);opacity:.7}
+
+.suite__nota{
+  display:flex;gap:var(--sp-3);align-items:flex-start;
+  margin-top:var(--sp-5);padding:var(--sp-4) var(--sp-5);
+  border:1px solid var(--card-borde);border-radius:var(--r-m);
+  background:#ffffff0a
+}
+.suite__nota svg{width:20px;height:20px;flex-shrink:0;color:var(--acento);stroke-width:2;margin-top:2px}
+.suite__nota b{display:block;font-size:var(--txt-small);color:var(--text)}
+.suite__nota span{font-size:var(--txt-mini);color:var(--dim)}
+
 /* ============================================================
    EFECTOS GLOBALES
    ============================================================ */
@@ -1197,102 +1367,146 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   </div>
 </section>
 
-<!-- ============ SECCIÓN 9 · LA PLATAFORMA COMPLETA (ROADMAP) ============ -->
+<!-- ============ SECCIÓN 8B · EL DIRECTO SEMANAL ============ -->
+<section class="rev">
+  <div class="contenedor">
+    <div class="vivo-band">
+      <div class="vivo-band__grid">
+        <div>
+          <span class="insignia-vivo"><i></i> En directo · cada semana</span>
+          <h2>Todas las semanas, en directo con un instructor.</h2>
+          <p class="subtitulo">Aquí está la diferencia entre una plataforma y un curso. No es un vídeo grabado que nadie termina: es una cita fija en el calendario de tu equipo, con una persona delante que responde a lo que os pasó esta semana en la calle.</p>
+          <p class="subtitulo" style="margin-top:var(--sp-3)"><b style="color:var(--text)">Y no se acaba nunca.</b> La cita periódica es el corazón del producto — no un extra de bienvenida que desaparece al mes.</p>
+          <div class="semanas" aria-hidden="true">
+            <span>Semana 1</span><span>Semana 2</span><span>Semana 3</span><span>Semana 4</span><b>…y así todas las semanas, mes tras mes. La cita no se acaba.</b>
+          </div>
+        </div>
+        <div class="vivo-datos">
+          <div class="vivo-dato">
+            <em>1&nbsp;/ sem</em>
+            <div>
+              <b>Sesión de agente</b>
+              <span>Con instructor en vivo. Incluida ya en la licencia de Agente de 49 €.</span>
+            </div>
+          </div>
+          <div class="vivo-dato">
+            <em>1&nbsp;/ mes</em>
+            <div>
+              <b>Sesión solo de gerentes</b>
+              <span>Además de la semanal. Con la licencia de Gerente y con la Multi.</span>
+            </div>
+          </div>
+          <div class="vivo-dato">
+            <em>0&nbsp;€</em>
+            <div>
+              <b>De coste añadido</b>
+              <span>No es un curso que se compra aparte: va dentro de cualquier licencia.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECCIÓN 9 · LA SUITE INMOPROP ============ -->
 <section class="rev" id="modulos">
   <div class="contenedor">
-    <div class="centrado" style="margin-bottom:var(--sp-6)">
-      <span class="etiqueta">La plataforma completa</span>
-      <h2>Empiezas por la formación. No te quedas ahí.</h2>
-      <p class="subtitulo">Inmoprop AI no es una plataforma de formación: la formación es la puerta de entrada. Detrás vienen las herramientas que cubren todo tu negocio, y se activan sobre la misma cuenta que ya tienes — y se contratan aparte, cuando tú quieras.</p>
-    </div>
+    <div class="suite">
+      <div class="centrado">
+        <span class="etiqueta">La suite Inmoprop</span>
+        <h2>Un módulo ya está en marcha.<br>Faltan seis.</h2>
+        <p class="subtitulo" style="margin-inline:auto">Inmoprop no es una plataforma de formación: es la suite que va a cubrir tu negocio entero. La formación es el primer módulo que se enciende — y los demás ya están dibujados, en cola y esperando su turno.</p>
+      </div>
 
-    <div class="bento rev esc">
+      <div class="medidor">
+        <div class="medidor__fila"><span>Módulos en marcha</span><b>1 de 7</b></div>
+        <div class="medidor__barra" aria-hidden="true"><i></i></div>
+        <p class="medidor__pie">El orden ya está decidido. Las fechas se anuncian módulo a módulo — pasa el ratón por encima para ver lo que viene.</p>
+      </div>
 
-      <!-- Formación · la pieza grande -->
-      <article class="bento__item bento__item--vivo bento__hero foco t-violeta aro">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
-        <h4>Formación</h4>
-        <p>Role plays con IA por voz contra un cliente simulado, con el formador corrigiéndote dentro. Cursos en cuatro formatos, niveles, insignias, ranking y directo periódico.</p>
-        <div class="formatitos"><span>Vídeos</span><span>Audiolibros</span><span>Lecciones</span><span>Roleplays</span></div>
-        <div class="areas">
-          <span>Captación</span><span>Skills</span><span>Mi plan de carrera</span>
-        </div>
-        <div class="directo">
-          <b>1 sesión semanal en directo</b>
-          <span>Con instructor. Y una mensual específica de gerentes si tienes esa licencia.</span>
-        </div>
-        <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <p class="onda__pie">«Mantén para hablar» — el agente contesta en voz alta, como en la visita.</p>
-        <span class="marca-estado">Funcionando hoy</span>
-      </article>
+      <div class="bento esc">
 
-      <!-- Progreso · pieza ancha -->
-      <article class="bento__item bento__item--vivo bento__ancho foco t-teal">
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 19v-6M12 19v-10M17 19v-4"/><path d="M14.5 5.5L20 4l-1.2 5.4"/></svg></div>
-        <h4>Progreso y estadísticas</h4>
-        <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente.</p>
-        <div class="grafico" aria-hidden="true">
-          <i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:68%"></i><i style="--h:80%"></i><i style="--h:100%"></i>
-        </div>
-        <div class="grafico__eje" aria-hidden="true"><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span></div>
-        <span class="marca-estado">Funcionando hoy</span>
-      </article>
+        <!-- 01 · Formación -->
+        <article class="bento__item bento__item--vivo bento__hero foco t-violeta aro">
+          <span class="bloq__num">01</span>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
+          <h4>Formación</h4>
+          <p>Role plays con IA por voz contra un cliente simulado, con el formador corrigiéndote dentro. Cursos en cuatro formatos, niveles, insignias, ranking y el directo semanal con instructor.</p>
+          <div class="formatitos"><span>Vídeos</span><span>Audiolibros</span><span>Lecciones</span><span>Roleplays</span></div>
+          <div class="areas"><span>Captación</span><span>Skills</span><span>Mi plan de carrera</span></div>
+          <div class="directo">
+            <b>1 sesión semanal en directo</b>
+            <span>Con instructor. Y una mensual específica de gerentes si tienes esa licencia.</span>
+          </div>
+          <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p class="onda__pie">«Mantén para hablar» — el agente contesta en voz alta, como en la visita.</p>
+          <span class="marca-estado">Encendido · disponible hoy</span>
+        </article>
 
-      <!-- Marketing -->
-      <article class="bento__item foco t-oro">
+        <!-- Progreso · parte del módulo 01 -->
+        <article class="bento__item bento__item--vivo bento__ancho foco t-teal">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 19v-6M12 19v-10M17 19v-4"/><path d="M14.5 5.5L20 4l-1.2 5.4"/></svg></div>
+          <h4>Progreso y estadísticas</h4>
+          <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente. Va dentro del módulo de Formación.</p>
+          <div class="grafico" aria-hidden="true">
+            <i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:68%"></i><i style="--h:80%"></i><i style="--h:100%"></i>
+          </div>
+          <div class="grafico__eje" aria-hidden="true"><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span></div>
+          <span class="marca-estado">Encendido · disponible hoy</span>
+        </article>
+
+      <article class="bento__item foco bloq t-oro">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">02</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5v3a1.5 1.5 0 0 0 1.5 1.5h2L14 19V5L7.5 9h-2A1.5 1.5 0 0 0 4 10.5Z"/><path d="M17.5 9.5a4 4 0 0 1 0 5M20 7.5a7 7 0 0 1 0 9"/></svg></div>
         <h4>Marketing</h4>
         <p>Creatividades para agentes, adaptadas a tu marca en un momento. Dejas de pedir la pieza y esperar.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
-
-      <!-- Valoración -->
-      <article class="bento__item foco t-violeta">
+      <article class="bento__item foco bloq t-violeta">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">03</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5L20 11v8.5H4z"/><path d="M14 10.5a2.8 2.8 0 1 0 0 5"/><path d="M9.8 12h4.4M9.8 14h4.4"/></svg></div>
         <h4>Valoración</h4>
         <p>Pones precio con criterio y sacas el informe que entregas al propietario en la misma visita.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
-
-      <!-- Inversión -->
-      <article class="bento__item foco t-lima">
+      <article class="bento__item foco bloq t-lima">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">04</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.5" rx="6.5" ry="2.8"/><path d="M5.5 6.5v5c0 1.5 2.9 2.8 6.5 2.8s6.5-1.3 6.5-2.8v-5"/><path d="M5.5 11.5v5c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-5"/></svg></div>
         <h4>Inversión</h4>
         <p>Oportunidades de inversión, NPL y REO, con el análisis y la conversación dentro de la plataforma.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
-
-      <!-- Captación -->
-      <article class="bento__item foco t-teal">
+      <article class="bento__item foco bloq t-teal">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">05</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5v7a6 6 0 0 0 12 0v-7"/><path d="M6 9.5h4.5M13.5 9.5H18"/><path d="M6 4.5h4.5M13.5 4.5H18"/></svg></div>
         <h4>Captación</h4>
         <p>Prospección y recomendación con sus programas, sus entrevistas y el seguimiento de cada contacto.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
-
-      <!-- Expedientes -->
-      <article class="bento__item foco t-oro">
+      <article class="bento__item foco bloq t-oro">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">06</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 16h5"/></svg></div>
         <h4>Expedientes</h4>
         <p>La ficha del cliente con todo dentro: la operación completa, de la firma a la postventa.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
-
-      <!-- Copiloto -->
-      <article class="bento__item foco t-violeta">
+      <article class="bento__item foco bloq t-violeta">
+        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">07</span></span>
         <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 15.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 12V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M12 7.8l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></div>
         <h4>Copiloto</h4>
         <p>Transversal a todo: sabe en qué pantalla estás y actúa por ti sin que salgas de donde trabajas.</p>
         <span class="marca-estado">Próximamente · módulo aparte</span>
       </article>
 
-    </div>
+      </div>
 
-    <div class="roadmap__nota">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
-      <div>
-        <b>Cada módulo se contrata aparte, cuando lo necesitas.</b>
-        <span>Tu licencia de Inmoprop cubre la formación y el role play. Cada módulo nuevo tiene su propio precio y se activa sobre la cuenta que ya tienes: un solo acceso, un solo censo de personas y nada que migrar. Sin fecha comprometida todavía — te avisamos antes de que salga cada uno, y el precio de lo que ya tengas contratado no sube.</span>
+      <div class="suite__nota">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
+        <div>
+          <b>Cada módulo se enciende y se contrata aparte, cuando lo necesitas.</b>
+          <span>Tu licencia de Inmoprop cubre la formación y el role play. Cada módulo nuevo tiene su propio precio y se activa sobre la cuenta que ya tienes: un solo acceso, un solo censo de personas y nada que migrar. Sin fecha comprometida todavía — te avisamos antes de que salga cada uno, y el precio de lo que ya tengas contratado no sube.</span>
+        </div>
       </div>
     </div>
   </div>
