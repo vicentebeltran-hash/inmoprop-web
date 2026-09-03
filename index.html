@@ -306,31 +306,38 @@ section{padding-block:clamp(56px,8vw,110px)}
 .pilar b{display:block;font-family:var(--fuente-titulo);font-size:var(--txt-small);font-weight:var(--peso-negro);letter-spacing:.08em;text-transform:uppercase}
 .pilar em{display:block;font-style:normal;font-size:var(--txt-mini);color:var(--dim)}
 
-.cifras{display:grid;gap:var(--sp-5);grid-template-columns:1fr}
-@media(min-width:640px){.cifras{grid-template-columns:repeat(3,1fr)}}
-.cifra{text-align:center;position:relative}
-@media(min-width:880px){
-  .cifra+.cifra::before{content:"";position:absolute;left:calc(var(--sp-5) / -2);top:10%;bottom:10%;width:1px;background:var(--border)}
+.cifras{
+  display:grid;gap:var(--sp-4);grid-template-columns:1fr;
+  max-width:960px;margin-inline:auto
 }
-.cifra b{display:block;font-family:var(--fuente-titulo);font-size:clamp(2rem,1.4rem + 2vw,2.8rem);font-weight:var(--peso-black);line-height:1;letter-spacing:-.03em}
-.cifra span{display:block;font-size:var(--txt-mini);color:var(--dim);margin-top:var(--sp-2)}
+@media(min-width:700px){.cifras{grid-template-columns:repeat(3,1fr)}}
+.cifra{
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+  padding:var(--sp-6) var(--sp-4);
+  border:1px solid var(--card-borde);border-radius:var(--r-m);
+  background:var(--surface);box-shadow:var(--sombra-s);
+  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans)
+}
+.cifra:hover{transform:translateY(-3px);box-shadow:var(--sombra-m);border-color:var(--acento)}
+.cifra__num{
+  display:flex;align-items:baseline;justify-content:center;gap:5px;
+  margin-bottom:var(--sp-3)
+}
+.cifra__num b{
+  font-family:var(--fuente-titulo);font-weight:var(--peso-black);
+  font-size:clamp(3rem,2.2rem + 2.4vw,4rem);line-height:.9;
+  letter-spacing:-.045em;font-variant-numeric:tabular-nums
+}
+.cifra__num i{
+  font-style:normal;font-family:var(--fuente-titulo);
+  font-size:1.3rem;font-weight:var(--peso-negro);color:var(--dim)
+}
+.cifra strong{
+  font-family:var(--fuente-titulo);font-size:1.05rem;font-weight:var(--peso-negro);
+  margin-bottom:5px;letter-spacing:-.01em
+}
+.cifra em{font-style:normal;font-size:var(--txt-mini);color:var(--dim);max-width:24ch}
 
-/* ============================================================
-   COMPARATIVA (problema)
-   ============================================================ */
-.compara{display:grid;gap:var(--sp-4);grid-template-columns:1fr}
-@media(min-width:800px){.compara{grid-template-columns:1fr 1fr}}
-.compara__col{padding:var(--sp-5);border-radius:var(--r-m);border:1px solid var(--card-borde);background:var(--surface)}
-.compara__col--nos{border-color:var(--acento);box-shadow:var(--sombra-l)}
-.compara__col h3{margin-bottom:var(--sp-4)}
-.compara ul{list-style:none;margin:0;padding:0;display:grid;gap:var(--sp-3)}
-.compara li{display:flex;gap:var(--sp-3);align-items:flex-start;font-size:var(--txt-small)}
-.compara li>span{flex:1}
-.compara li svg{width:18px;height:18px;flex-shrink:0;margin-top:3px;stroke-width:2.5}
-.compara__col--otros li{color:var(--dim)}
-.compara__col--otros li svg{color:var(--nota-baja)}
-.compara__col--nos li svg{color:var(--nota-alta)}
-.compara__col--nos li b{font-weight:var(--peso-fuerte)}
 
 /* ============================================================
    MÓDULO (secciones alternas)
@@ -1034,10 +1041,22 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 <!-- ============ SECCIÓN 4 · CIFRAS / DIFERENCIALES ============ -->
 <section class="rev">
   <div class="contenedor">
-    <div class="cifras">
-      <div class="cifra"><b class="grad-txt" data-contar="7">0</b><span>días de prueba, sin tarjeta</span></div>
-      <div class="cifra"><b class="grad-txt" data-contar="0" data-sufijo=" €">0 €</b><span>de entrada</span></div>
-      <div class="cifra"><b class="grad-txt" data-contar="0">0</b><span>meses de permanencia</span></div>
+    <div class="cifras esc">
+      <div class="cifra foco">
+        <div class="cifra__num"><b class="grad-txt" data-contar="7">0</b><i>días</i></div>
+        <strong>de prueba</strong>
+        <em>Con la formación entera desbloqueada y sin tarjeta.</em>
+      </div>
+      <div class="cifra foco">
+        <div class="cifra__num"><b class="grad-txt">0</b><i>€</i></div>
+        <strong>de entrada</strong>
+        <em>Ni canon, ni cuota de alta, ni coste de arranque.</em>
+      </div>
+      <div class="cifra foco">
+        <div class="cifra__num"><b class="grad-txt">0</b><i>meses</i></div>
+        <strong>de permanencia</strong>
+        <em>Cancelas desde tu cuenta cuando quieras.</em>
+      </div>
     </div>
   </div>
 </section>
@@ -1049,7 +1068,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <h2>La formación que ya has pagado no cambia lo que pasa en la visita.</h2>
     <p class="subtitulo" style="margin-bottom:var(--sp-6)">Tu potencial no es accesible a un clic. La formación vive en un sitio, el marketing en otro, y el agente improvisa justo en el momento que decide la operación.</p>
 
-    <div class="rejilla-3" style="margin-bottom:var(--sp-6)">
+    <div class="rejilla-3 esc">
       <article class="tarjeta tarjeta--foco foco">
         <div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 5.5h16v12H4z"/><path d="M8 21h8M12 17.5V21"/><path d="M9 11.5l2.5 2.5L15.5 9"/></svg></div>
         <h3>Cursos que nadie termina</h3>
@@ -1065,27 +1084,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <h3>El gerente va a ciegas</h3>
         <p style="font-size:var(--txt-small);color:var(--dim);margin:var(--sp-2) 0 0">Sabes el resultado del mes, no el motivo. Sin puntuación objetiva no puedes corregir a tiempo ni saber quién necesita ayuda.</p>
       </article>
-    </div>
-
-    <div class="compara">
-      <div class="compara__col compara__col--otros">
-        <h3 style="color:var(--dim)">Lo que te piden otros</h3>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Una entrada de cinco cifras antes de empezar</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Un contrato de varios años</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Dejar tu marca a un lado</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Semanas de negociación antes de ver el producto</span></li>
-        </ul>
-      </div>
-      <div class="compara__col compara__col--nos">
-        <h3>Lo que te pedimos nosotros</h3>
-        <ul>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Cero entrada.</b> Entras y ya está</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Cero permanencia.</b> Te vas cuando quieras</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Tu marca intacta.</b> El marketing sale con tu logo</span></li>
-          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Autoservicio.</b> Entra, prueba 7 días y decide</span></li>
-        </ul>
-      </div>
     </div>
   </div>
 </section>
