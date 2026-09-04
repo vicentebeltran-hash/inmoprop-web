@@ -36,11 +36,18 @@ const CFG = {
   pruebaDias: 7        // días de prueba gratis (con tarjeta)
 };
 
-/* Si tus precios son SIN IVA y quieres que Stripe lo calcule y lo
-   sume aparte, pon esto a true DESPUÉS de activar Stripe Tax en el
-   panel (Más > Impuestos). Si tus precios ya llevan el IVA dentro,
-   déjalo en false. */
-const IVA_AUTOMATICO = false;
+/* IVA · los precios de la web son SIN IVA, así que Stripe lo calcula
+   y lo suma aparte según el país del cliente y su NIF-IVA.
+   Requiere tener Stripe Tax dado de alta en el panel (Más > Impuestos:
+   dirección de origen + registro fiscal en España).
+   Si aún no lo está, la función lo detecta y cobra sin impuestos en
+   lugar de dejar de vender — mira `intentaConImpuestos` más abajo.   */
+const IVA_AUTOMATICO = true;
+
+/* Cómo hay que entender los importes de arriba:
+     'exclusive' -> son netos, el IVA se suma encima. (Es tu caso.)
+     'inclusive' -> ya llevan el IVA dentro.                          */
+const COMPORTAMIENTO_IVA = 'exclusive';
 
 /* MANAGED PAYMENTS · Stripe lo activa por defecto en las cuentas
    nuevas. Con él, quien vende de cara al cliente es Stripe: se
@@ -145,6 +152,12 @@ async function stripePost(ruta, params, clave) {
   return datos;
 }
 
+/* ¿El error de Stripe se debe a que Stripe Tax no está configurado? */
+function esErrorDeImpuestos(e) {
+  const m = String((e && e.message) || '').toLowerCase();
+  return m.indexOf('tax') !== -1 || m.indexOf('impuesto') !== -1;
+}
+
 async function handler(req, res) {
   const clave = process.env.STRIPE_SECRET_KEY;
 
@@ -213,7 +226,6 @@ async function handler(req, res) {
       'subscription_data[metadata][agentes]': String(plan === 'multi' ? agentes : 1)
     };
 
-    if (IVA_AUTOMATICO) p['automatic_tax[enabled]'] = 'true';
     if (!MANAGED_PAYMENTS) p['managed_payments[enabled]'] = 'false';
 
     lineas(plan, periodo, agentes).forEach(function (item, i) {
@@ -225,13 +237,28 @@ async function handler(req, res) {
       p[k + '[price_data][product_data][name]'] = item.nombre;
       p[k + '[price_data][product_data][description]'] = item.desc;
       p[k + '[price_data][product_data][tax_code]'] = CODIGO_FISCAL;
-      if (IVA_AUTOMATICO) {
-        // 'exclusive' = el IVA se suma al precio; 'inclusive' = ya va dentro
-        p[k + '[price_data][tax_behavior]'] = 'exclusive';
-      }
+      p[k + '[price_data][tax_behavior]'] = COMPORTAMIENTO_IVA;
     });
 
-    const sesion = await stripePost('checkout/sessions', p, clave);
+    /* Intentamos cobrar con el IVA calculado por Stripe. Si Stripe Tax
+       todavía no está configurado en el panel, Stripe devuelve un error
+       de impuestos: en ese caso reintentamos sin impuestos para no dejar
+       la web sin poder vender, y lo dejamos anotado en los registros.   */
+    let sesion;
+    if (IVA_AUTOMATICO) {
+      try {
+        sesion = await stripePost('checkout/sessions',
+          Object.assign({ 'automatic_tax[enabled]': 'true' }, p), clave);
+      } catch (e) {
+        if (!esErrorDeImpuestos(e)) throw e;
+        console.warn('checkout: Stripe Tax no está configurado todavía; ' +
+                     'se cobra sin impuestos. Detalle:', e.message);
+        sesion = await stripePost('checkout/sessions', p, clave);
+      }
+    } else {
+      sesion = await stripePost('checkout/sessions', p, clave);
+    }
+
     return res.status(200).json({ url: sesion.url });
 
   } catch (e) {
