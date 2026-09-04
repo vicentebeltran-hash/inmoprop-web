@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bienvenido a Inmoprop AI</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<meta name="theme-color" content="#f5f6fc">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fuente:"Space Grotesk",system-ui,sans-serif;
+  --fuente-titulo:"Montserrat","Space Grotesk",system-ui,sans-serif;
+  --bg:#f5f6fc; --surface:#fff; --border:#e2e4f0;
+  --text:#1d1f33; --dim:#5b5f74; --faint:#9498a9;
+  --acento:#6c5ce7; --verde:#12a87a;
+  --grad-acento:linear-gradient(135deg,#6c5ce7 0%,#9b57ff 55%,#ff6ba6 120%);
+  --grad-marca:linear-gradient(90deg,#1aa3e8 0%,#4f5bff 30%,#9b4bff 60%,#d0459f 100%);
+}
+@media(prefers-color-scheme:dark){
+  :root{
+    --bg:#12142a; --surface:#1c1f3d; --border:#2f3563;
+    --text:#edeeff; --dim:#a7abd2; --faint:#71769c;
+    --acento:#8b7cff; --verde:#3ad39f;
+    --grad-acento:linear-gradient(135deg,#8b7cff 0%,#b06cff 55%,#ff7ab0 120%);
+    --grad-marca:linear-gradient(90deg,#29b6f6 0%,#7c7cff 32%,#b06cff 58%,#e86ad9 78%,#b4e01f 100%);
+  }
+}
+*{box-sizing:border-box}
+body{
+  margin:0;min-height:100dvh;display:grid;place-items:center;padding:32px 20px;
+  font-family:var(--fuente);font-size:1.05rem;line-height:1.6;
+  color:var(--text);background:var(--bg);
+  background-image:
+    radial-gradient(760px 420px at 12% -8%,#6c5ce71f,transparent 60%),
+    radial-gradient(700px 400px at 90% 0%,#00b8a01a,transparent 58%);
+  background-repeat:no-repeat
+}
+.caja{
+  width:100%;max-width:560px;text-align:center;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:26px;padding:clamp(28px,5vw,48px);
+  box-shadow:0 22px 54px #0a0c1e14
+}
+.logo{height:34px;width:auto;margin-bottom:28px}
+.logo--oscuro{display:none}
+@media(prefers-color-scheme:dark){
+  .logo--claro{display:none}
+  .logo--oscuro{display:inline-block}
+}
+.tic{
+  width:64px;height:64px;margin:0 auto 22px;display:grid;place-items:center;
+  border-radius:999px;background:var(--grad-acento);
+  box-shadow:0 12px 30px -8px #6c5ce780
+}
+.tic svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+h1{
+  font-family:var(--fuente-titulo);font-weight:800;line-height:1.15;
+  font-size:clamp(1.5rem,1.1rem + 1.6vw,2.1rem);margin:0 0 14px
+}
+h1 span{background:var(--grad-marca);-webkit-background-clip:text;background-clip:text;color:transparent}
+p{margin:0 0 16px;color:var(--dim)}
+.pasos{
+  text-align:left;margin:26px 0 0;padding:20px 22px;
+  border:1px solid var(--border);border-radius:18px;background:var(--bg)
+}
+.pasos b{display:block;font-family:var(--fuente-titulo);font-size:.9rem;font-weight:800;margin-bottom:12px}
+.pasos ol{margin:0;padding-left:1.2em;display:grid;gap:8px}
+.pasos li{font-size:.9rem;color:var(--dim)}
+.pasos li b{display:inline;font-family:var(--fuente);font-size:inherit;font-weight:700;color:var(--text)}
+.btns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:28px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:13px 24px;border-radius:999px;text-decoration:none;
+  font-weight:600;font-size:.95rem;
+  background:var(--grad-acento);color:#fff;
+  box-shadow:0 10px 26px -10px #6c5ce7a6;transition:transform .2s,box-shadow .2s
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 14px 32px -10px #6c5ce7c4}
+.btn--sec{background:none;color:var(--text);border:1px solid var(--border);box-shadow:none}
+.pie{margin:24px 0 0;font-size:.78rem;color:var(--faint)}
+.ref{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.72rem;color:var(--faint);word-break:break-all}
+</style>
+</head>
+<body>
+  <main class="caja">
+    <img class="logo logo--claro" src="logo-claro.png" alt="Inmoprop AI">
+    <img class="logo logo--oscuro" src="logo-oscuro.png" alt="Inmoprop AI">
+
+    <div class="tic" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5"/></svg>
+    </div>
+
+    <h1>Ya eres de <span>Inmoprop</span>.</h1>
+    <p>Tus 7 días de prueba empiezan ahora. No te hemos cobrado nada todavía: el primer recibo sale el octavo día, y hasta entonces puedes cancelar desde tu cuenta sin pagar un euro.</p>
+
+    <div class="pasos">
+      <b>Qué pasa a partir de aquí</b>
+      <ol>
+        <li>Te llega un <b>correo con tus claves de acceso</b> en unos minutos. Si no aparece, mira en spam.</li>
+        <li>Entras en la plataforma y <b>empiezas por el role play</b>: es lo que se nota desde el primer día.</li>
+        <li>Te avisamos <b>antes de que termine la prueba</b>, para que decidas con tiempo.</li>
+      </ol>
+    </div>
+
+    <div class="btns">
+      <a class="btn" href="https://metododev.rkpanel.com/" target="_blank" rel="noopener">Entrar en la plataforma</a>
+      <a class="btn btn--sec" href="/">Volver a la web</a>
+    </div>
+
+    <p class="pie">¿Algo no cuadra? Escríbenos y lo miramos.<br><span class="ref" id="ref"></span></p>
+  </main>
+
+<script>
+/* Guardamos la referencia del pago por si el usuario necesita citarla */
+(function(){
+  var id = new URLSearchParams(location.search).get('session_id');
+  if (id) document.getElementById('ref').textContent = 'Referencia: ' + id;
+})();
+</script>
+</body>
+</html>

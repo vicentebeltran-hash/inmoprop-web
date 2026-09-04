@@ -475,6 +475,12 @@ section{padding-block:clamp(56px,8vw,110px)}
 }
 .plan li b{color:var(--text);font-weight:var(--peso-fuerte)}
 .plan .btn{margin-top:auto;width:100%}
+.plan__link{
+  display:block;margin-top:var(--sp-2);text-align:center;
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--acento)
+}
+.plan__link:hover{text-decoration:underline}
+.calc__cta{display:block;width:100%;margin-top:var(--sp-4);text-align:center}
 .plan--rec{border-color:var(--acento);box-shadow:var(--sombra-l)}
 @media(min-width:960px){.plan--rec{transform:scale(1.035);z-index:2}}
 .plan__badge{
@@ -602,15 +608,6 @@ section{padding-block:clamp(56px,8vw,110px)}
   font-size:.68rem;font-weight:var(--peso-fuerte);
   letter-spacing:.09em;text-transform:uppercase
 }
-
-/* ============================================================
-   SEGURIDAD
-   ============================================================ */
-.seguridad{background:var(--surface-2);border-block:1px solid var(--border)}
-.seg-item{display:flex;gap:var(--sp-3);align-items:flex-start}
-.seg-item svg{width:22px;height:22px;flex-shrink:0;color:var(--secundario);stroke-width:2;margin-top:2px}
-.seg-item b{display:block;font-size:var(--txt-small);font-weight:var(--peso-fuerte);margin-bottom:2px}
-.seg-item span{font-size:var(--txt-mini);color:var(--dim)}
 
 /* ============================================================
    FAQ
@@ -1236,7 +1233,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div class="cifra foco">
         <div class="cifra__num"><b class="grad-txt" data-contar="7">0</b><i>días</i></div>
         <strong>de prueba</strong>
-        <em>Con la formación entera desbloqueada y sin tarjeta.</em>
+        <em>Con la formación entera desbloqueada. No se cobra nada hasta el octavo día.</em>
       </div>
       <div class="cifra foco">
         <div class="cifra__num"><b class="grad-txt">0</b><i>€</i></div>
@@ -1551,11 +1548,12 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <span class="etiqueta">La suite Inmoprop</span>
         <h2>Un módulo ya está en marcha.<br>Faltan seis.</h2>
         <p class="subtitulo">Inmoprop no es una plataforma de formación: es la suite que va a cubrir tu negocio entero. Siete módulos que recorren la operación completa — entrenar al agente, conseguir el contacto, poner precio, comercializar, cerrar y hacer la postventa — más el copiloto de IA que los atraviesa todos.</p>
-        <p class="subtitulo">Y una suite no es un paquete de productos sueltos con el mismo logo. Es <b style="color:var(--text)">una sola cuenta y un solo censo de personas</b>: el agente que hoy entrena una objeción es el mismo que mañana abre un expediente, con su historial detrás. Hoy está encendido el primero. Los seis restantes ya están dibujados y en cola — cada uno se enciende sobre esta misma cuenta, sin migrar nada y sin tocar el precio de lo que ya tengas.</p>
+        <p class="subtitulo">Y una suite no es un paquete de productos sueltos con el mismo logo. Es <b style="color:var(--text)">una sola cuenta de usuarios</b>. El agente que hoy entrena una objeción es el mismo que mañana abre un expediente, genera una creatividad de marketing para captar o publica un inmueble en los portales. Hoy está encendido el primero. Los seis restantes ya están dibujados y en cola — cada uno se enciende sobre esta misma cuenta, sin migrar nada y solo si lo activas. Amplías la suite a tu ritmo, según lo que necesites y lo que uses.</p>
         <div class="suite__claims">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Un solo acceso</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Un solo censo de personas</span>
-          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Nada que migrar</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Una plataforma</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Todo integrado</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> All-in-One</span>
         </div>
       </div>
 
@@ -1743,7 +1741,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
           <li>Tu progreso y tus estadísticas</li>
           <li>Soporte por email</li>
         </ul>
-        <a href="#" class="btn btn--sec">Empezar gratis</a>
+        <a href="#" class="btn btn--sec" data-plan="agente">Comenzar ya</a>
       </article>
 
       <!-- ---- LICENCIA GERENTE ---- -->
@@ -1764,7 +1762,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
           <li>Sistema retributivo con valores recomendados</li>
           <li>Soporte prioritario</li>
         </ul>
-        <a href="#" class="btn btn--sec">Empezar gratis</a>
+        <a href="#" class="btn btn--sec" data-plan="gerente">Comenzar ya</a>
       </article>
 
       <!-- ---- LICENCIA MULTI (recomendada) ---- -->
@@ -1783,7 +1781,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
           <li>Cada agente que sumas abarata a todos los demás</li>
           <li>Una sola factura para toda la oficina</li>
         </ul>
-        <a href="#calc" class="btn">Calcular mi equipo</a>
+        <a href="#" class="btn" data-plan="multi">Comenzar ya</a>
+        <a href="#calc" class="plan__link">¿Más de 3 agentes? Calcula tu equipo &rarr;</a>
       </article>
     </div>
 
@@ -1810,50 +1809,14 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
             <span id="calc-ahorro">Ahorras 66,00 € al mes frente a licencias sueltas (−27 %)</span>
           </div>
           <p class="calc__pie" id="calc-porusuario">Sale a 44,75 € por persona y mes.</p>
+          <a href="#" class="btn calc__cta" data-plan="multi">Comenzar ya</a>
         </div>
       </div>
     </div>
 
-    <p class="precios__pie"><b>7 días de prueba, sin entrada y sin permanencia.</b> Entras con la formación entera desbloqueada y sin tarjeta. Al terminar la semana eliges tu licencia — o te vas.</p>
+    <p class="precios__pie"><b>7 días de prueba, sin entrada y sin permanencia.</b> Entras con la formación entera desbloqueada y no se te cobra nada durante la primera semana. Si te vas antes del octavo día, no pagas.</p>
   </div>
 </section>
-
-<!-- ============ SECCIÓN 14 · IA Y SEGURIDAD ============ -->
-<div class="seguridad">
-  <section class="rev" style="padding-block:clamp(48px,6vw,80px)">
-    <div class="contenedor">
-      <div class="rejilla-2" style="gap:clamp(32px,4vw,56px);align-items:start">
-        <div>
-          <span class="etiqueta">Debajo del capó</span>
-          <h2>IA potente donde se nota. Coste controlado siempre.</h2>
-          <p class="subtitulo">Detrás de cada módulo hay IA — pero no una sola: para cada tarea se elige el modelo más eficiente. Toda la IA de la plataforma pasa por una puerta única con su medidor de gasto por petición, así que la factura se ve venir y no llega por sorpresa.</p>
-          <ul class="lista-check">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Sistema híbrido IA + humano.</b> La IA resuelve la mayoría y escala a la persona con el contexto ya resumido.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg><span><b>Las acciones con consecuencias, siempre con validación humana.</b></span></li>
-          </ul>
-        </div>
-        <div class="rejilla" style="grid-template-columns:1fr;gap:var(--sp-4)">
-          <div class="seg-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3l7 3v6c0 4-3 7.5-7 9-4-1.5-7-5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>
-            <div><b>Cumplimiento RGPD</b><span>Tratamiento de datos conforme al reglamento europeo. <em>‹detalle por confirmar con legal›</em></span></div>
-          </div>
-          <div class="seg-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="4.5" y="10.5" width="15" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
-            <div><b>Datos cifrados</b><span>En tránsito y en reposo, en infraestructura europea. <em>‹región por confirmar›</em></span></div>
-          </div>
-          <div class="seg-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8v4l3 2"/></svg>
-            <div><b>Un solo acceso, un solo censo</b><span>Identidad única para toda la plataforma. Nadie existe dos veces.</span></div>
-          </div>
-          <div class="seg-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 6h16v12H4z"/><path d="M9 10h6M9 14h4"/></svg>
-            <div><b>Roles y alcances</b><span>Cada persona ve lo que le corresponde según su licencia y su rol.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
 
 <!-- ============ SECCIÓN 15 · FAQ ============ -->
 <section class="rev" id="faq">
@@ -1886,7 +1849,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </details>
       <details>
         <summary>¿Puedo probarlo antes de pagar? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Sí. Tienes 7 días de prueba con la formación entera desbloqueada y sin tarjeta. Al terminar la semana eliges tu licencia — o te vas sin haber pagado nada.</p>
+        <p>Sí. Tienes 7 días de prueba con la formación entera desbloqueada. Al elegir licencia te pedimos la tarjeta para dejar la cuenta lista, pero <b>no se cobra nada hasta el octavo día</b>: si cancelas antes, te vas sin haber pagado un euro. Y te avisamos por correo antes de que termine la prueba, para que decidas con tiempo.</p>
       </details>
       <details>
         <summary>¿En cuánto tiempo veo resultados? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -1936,7 +1899,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <p>La formación inmobiliaria está a punto de cambiar para siempre. 7 días de prueba, sin entrada y sin permanencia.</p>
       <div class="cta-final__btns">
         <a href="#precios" class="btn btn--blanco">Empezar gratis</a>
-        <a href="#" class="btn btn--borde-blanco">Solicitar demo</a>
       </div>
     </div>
   </div>
@@ -1966,7 +1928,6 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div>
         <h4>Empresa</h4>
         <ul>
-          <li><a href="#">Solicitar demo</a></li>
           <li><a href="https://metododev.rkpanel.com/" target="_blank" rel="noopener">Entrar</a></li>
           <li><a href="#">Contacto</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -2113,6 +2074,49 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     return Math.max(CFG.suelo, Math.round(p * 100) / 100);
   }
 
+  /* ---- botones de pago · llaman a /api/checkout ---- */
+  function pintarEnlaces(){
+    /* href de reserva por si el JS falla o la API no responde */
+    document.querySelectorAll('[data-plan]').forEach(function(a){ a.href = '#precios'; });
+  }
+
+  function agentesElegidos(){
+    return slider ? parseInt(slider.value, 10) : CFG.agentesIncl;
+  }
+
+  document.querySelectorAll('[data-plan]').forEach(function(boton){
+    boton.addEventListener('click', function(ev){
+      ev.preventDefault();
+      if (boton.dataset.cargando) return;
+
+      var textoOriginal = boton.textContent;
+      boton.dataset.cargando = '1';
+      boton.textContent = 'Abriendo el pago…';
+
+      function fallo(msg){
+        delete boton.dataset.cargando;
+        boton.textContent = textoOriginal;
+        alert(msg || 'No hemos podido abrir la pasarela de pago. Vuelve a intentarlo en un momento.');
+      }
+
+      fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          plan: boton.dataset.plan,
+          periodo: periodo,
+          agentes: boton.dataset.plan === 'multi' ? agentesElegidos() : 1
+        })
+      })
+      .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
+      .then(function(res){
+        if (res.ok && res.d && res.d.url) { window.location.href = res.d.url; }
+        else { fallo(res.d && res.d.error); }
+      })
+      .catch(function(){ fallo(); });
+    });
+  });
+
   /* ---- tarjetas ---- */
   function pintarPlanes(){
     precios.forEach(function(b){
@@ -2171,6 +2175,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     btnAnual.setAttribute('aria-pressed', periodo === 'anual' ? 'true' : 'false');
     pintarPlanes();
     pintarCalc();
+    pintarEnlaces();
   }
 
   btnMes.addEventListener('click', function(){ set('mes'); });
@@ -2179,6 +2184,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 
   pintarPlanes();
   pintarCalc();
+  pintarEnlaces();
 })();
 
 /* ---------- Reveals, escalonado y contadores ---------- */
