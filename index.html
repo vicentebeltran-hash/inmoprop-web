@@ -500,6 +500,11 @@ section{padding-block:clamp(56px,8vw,110px)}
   letter-spacing:.06em;text-transform:uppercase;white-space:nowrap
 }
 .plan--multi h3{background:var(--grad-oro);-webkit-background-clip:text;background-clip:text;color:transparent}
+.precios__iva{
+  max-width:62ch;margin:var(--sp-4) auto 0;
+  font-size:var(--txt-mini);color:var(--dim);line-height:1.55
+}
+.precios__iva b{color:var(--text);font-weight:var(--peso-fuerte)}
 .precios__pie{margin-top:var(--sp-6);text-align:center;font-size:var(--txt-small);color:var(--dim)}
 .precios__pie b{color:var(--text)}
 
@@ -1723,6 +1728,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <button id="btn-mes" aria-pressed="true">Mensual</button>
         <button id="btn-anual" aria-pressed="false">Anual <span class="chip chip--teal">−20 %</span></button>
       </div>
+      <p class="precios__iva">Todos los precios son <b>sin IVA</b>. En España se a&ntilde;ade el 21&nbsp;% al pagar. Si eres una empresa de otro pa&iacute;s de la UE con NIF-IVA intracomunitario, lo introduces al contratar y no se te a&ntilde;ade IVA.</p>
     </div>
 
     <div class="planes">
@@ -1731,7 +1737,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Agente</h3>
         <p class="plan__perfil">Para el agente que quiere cerrar más.</p>
-        <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / mes</small></div>
+        <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / mes + IVA</small></div>
         <p class="plan__nota">Un usuario. Facturación mensual, cancelable en cualquier momento.</p>
         <ul>
           <li><b>Acceso completo a toda la formación</b>, también a lo que se vaya estrenando</li>
@@ -1749,7 +1755,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Gerente</h3>
         <p class="plan__perfil">Para el gerente que se entrena como agente <b>y</b> como gerente.</p>
-        <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes</small></div>
+        <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes + IVA</small></div>
         <p class="plan__nota">Un usuario con los dos roles. No existe licencia de solo gerente.</p>
         <p class="plan__hereda">Todo lo de Agente, más:</p>
         <ul>
@@ -1771,8 +1777,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <span class="plan__alcance">Plataforma formativa</span>
         <h3>Licencia Multi</h3>
         <p class="plan__perfil">Para el gerente que monta su oficina virtual y suma a sus agentes.</p>
-        <div class="plan__precio"><b data-mes="179" data-anual="143">179</b><small>€ / mes</small></div>
-        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Una oficina virtual agrupa siempre al menos una de Gerente más las de Agente que necesites. Adicionales desde <span data-precio-extra>39</span> € y bajando.</p>
+        <div class="plan__precio"><b data-mes="179" data-anual="143">179</b><small>€ / mes + IVA</small></div>
+        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Una oficina virtual agrupa siempre al menos una de Gerente más las de Agente que necesites. Adicionales desde <span data-precio-extra>39</span> € y bajando, sin IVA.</p>
         <p class="plan__hereda">Todo lo de Gerente, para los 4, más:</p>
         <ul>
           <li><b>Tu oficina virtual montada</b> desde el primer día: tú como gerente y tus agentes debajo</li>
@@ -1803,7 +1809,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
             <li><span id="calc-extra-txt">Agentes adicionales</span><i id="calc-extra">0,00 €</i></li>
             <li><span>Precio por licencia adicional</span><i id="calc-unit">—</i></li>
           </ul>
-          <div class="calc__total"><span>Total al mes</span><b id="calc-total">179,00 €</b></div>
+          <div class="calc__total"><span>Total al mes <em style="font-style:normal;font-weight:var(--peso-normal);color:var(--faint)">(sin IVA)</em></span><b id="calc-total">179,00 €</b></div>
           <div class="calc__ahorro">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg>
             <span id="calc-ahorro">Ahorras 66,00 € al mes frente a licencias sueltas (−27 %)</span>
@@ -1814,7 +1820,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </div>
     </div>
 
-    <p class="precios__pie"><b>7 días de prueba, sin entrada y sin permanencia.</b> Entras con la formación entera desbloqueada y no se te cobra nada durante la primera semana. Si te vas antes del octavo día, no pagas.</p>
+    <p class="precios__pie"><b>7 días de prueba, sin entrada y sin permanencia.</b> Entras con la formación entera desbloqueada y no se te cobra nada durante la primera semana. Si te vas antes del octavo día, no pagas. Antes de confirmar verás el importe exacto con los impuestos que te correspondan.</p>
   </div>
 </section>
 
@@ -1880,8 +1886,12 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <p>Sí, si los quieres: cada módulo tiene su propio precio y se contrata aparte. Tu licencia de Agente, Gerente o Multi cubre Inmoprop como plataforma formativa — la formación completa y el entrenamiento en role play — y eso no cambia. Marketing, valoración, inversión, captación y expedientes se activan sobre la cuenta que ya tienes cuando decidas sumarlos, sin migrar nada. Y el precio de lo que ya tengas contratado no sube porque salga un módulo nuevo.</p>
       </details>
       <details>
+        <summary>¿Los precios llevan IVA? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
+        <p>No: todos los precios que ves en la web son <b>sin IVA</b>. Si contratas desde España se añade el 21 % en el momento de pagar. Si eres una empresa de otro país de la Unión Europea, introduces tu NIF-IVA intracomunitario al contratar y no se te añade IVA español: la operación va por inversión del sujeto pasivo y el impuesto lo declaras tú en tu país. En todos los casos, el importe final con impuestos aparece en pantalla antes de que confirmes el pago.</p>
+      </details>
+      <details>
         <summary>¿Está disponible fuera de España? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Sí. El cobro internacional funciona desde el primer día, con precio local por país mostrado en su moneda. El curso troncal es común y cada país tiene su capítulo propio.</p>
+        <p>Sí. Se paga con tarjeta desde cualquier país y los precios están en euros. Si eres una empresa de la Unión Europea con NIF-IVA intracomunitario, lo introduces al contratar y la factura sale sin IVA. El curso troncal es común y cada país tiene su capítulo propio. Si escribes desde fuera de la Unión Europea, contacta con nosotros antes de contratar: te confirmamos cómo queda la facturación en tu país.</p>
       </details>
       <details>
         <summary>¿Puedo cancelar cuando quiera? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
