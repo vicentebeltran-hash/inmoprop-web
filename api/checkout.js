@@ -152,6 +152,64 @@ async function stripePost(ruta, params, clave) {
   return datos;
 }
 
+/* --- lectura de datos en Stripe --- */
+async function stripeGet(ruta, clave) {
+  const r = await fetch('https://api.stripe.com/v1/' + ruta, {
+    headers: { 'Authorization': 'Bearer ' + clave }
+  });
+  const datos = await r.json();
+  if (!r.ok) {
+    const msg = (datos && datos.error && datos.error.message) || 'Error de Stripe';
+    throw new Error(msg);
+  }
+  return datos;
+}
+
+/* --- diagnóstico del IVA: ¿está Stripe Tax listo para cobrarlo? --- */
+async function diagnosticoIva(clave) {
+  const d = { stripeTax: 'desconocido', origen: null, registros: [], veredicto: '' };
+
+  try {
+    const ajustes = await stripeGet('tax/settings', clave);
+    d.stripeTax = ajustes.status === 'active' ? 'activo' : 'pendiente';
+    if (ajustes.head_office && ajustes.head_office.address) {
+      d.origen = ajustes.head_office.address.country || null;
+    }
+    if (ajustes.status !== 'active') {
+      d.detalle = ajustes.status_details || null;
+    }
+  } catch (e) {
+    d.stripeTax = 'no disponible';
+    d.detalle = e.message;
+  }
+
+  try {
+    const regs = await stripeGet('tax/registrations?status=active&limit=100', clave);
+    d.registros = (regs.data || []).map(function (r) { return r.country; });
+  } catch (e) {
+    d.registros = null;
+  }
+
+  const tieneEspana = Array.isArray(d.registros) && d.registros.indexOf('ES') !== -1;
+
+  if (d.stripeTax !== 'activo') {
+    d.veredicto = 'Stripe Tax NO está listo. Ve al panel de Stripe > Impuestos y ' +
+                  'completa la dirección de origen del negocio. Mientras tanto se ' +
+                  'cobra sin IVA.';
+  } else if (!tieneEspana) {
+    d.veredicto = 'Stripe Tax está activo pero NO hay registro fiscal en España, así ' +
+                  'que calcula 0 € de IVA. Añádelo en Impuestos > Registros (país ' +
+                  'España) y el 21 % empezará a aplicarse.';
+  } else {
+    d.veredicto = 'Todo listo: se aplica el 21 % a los clientes españoles. Recuerda que ' +
+                  'durante los ' + CFG.pruebaDias + ' días de prueba el importe a pagar ' +
+                  'hoy es 0 €, así que en la pantalla de pago el IVA sale 0 €: aparecerá ' +
+                  'en la primera factura real.';
+  }
+
+  return d;
+}
+
 /* ¿El error de Stripe se debe a que Stripe Tax no está configurado? */
 function esErrorDeImpuestos(e) {
   const m = String((e && e.message) || '').toLowerCase();
@@ -169,10 +227,15 @@ async function handler(req, res) {
         error: 'Falta la variable STRIPE_SECRET_KEY en Vercel.'
       });
     }
-    return res.status(200).json({
+    const salida = {
       ok: true,
       modo: clave.startsWith('sk_live') ? 'real' : 'test'
-    });
+    };
+    /* /api/checkout?iva=1 -> además comprueba si el IVA está listo */
+    if (req.query && (req.query.iva || req.query.diagnostico)) {
+      salida.iva = await diagnosticoIva(clave);
+    }
+    return res.status(200).json(salida);
   }
 
   if (req.method !== 'POST') {
@@ -221,6 +284,10 @@ async function handler(req, res) {
       billing_address_collection: 'required',
       'tax_id_collection[enabled]': 'true',
       'subscription_data[trial_period_days]': String(CFG.pruebaDias),
+      'custom_text[submit][message]':
+        'Hoy no se te cobra nada. Empiezan ' + CFG.pruebaDias + ' días de prueba y ' +
+        'el primer recibo, con el IVA que corresponda, sale el día ' +
+        (CFG.pruebaDias + 1) + '. Puedes cancelar antes sin pagar nada.',
       'subscription_data[metadata][plan]': plan,
       'subscription_data[metadata][periodo]': periodo,
       'subscription_data[metadata][agentes]': String(plan === 'multi' ? agentes : 1)
