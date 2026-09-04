@@ -42,6 +42,21 @@ const CFG = {
    déjalo en false. */
 const IVA_AUTOMATICO = false;
 
+/* MANAGED PAYMENTS · Stripe lo activa por defecto en las cuentas
+   nuevas. Con él, quien vende de cara al cliente es Stripe: se
+   encarga del IVA de cada país y te paga a ti el neto.
+     false  ->  vende RK. Tú emites las facturas y liquidas el IVA,
+                como haces ahora. (Opción por defecto aquí.)
+     true   ->  vende Stripe como intermediario. Cómodo para vender
+                fuera de España, pero cambia quién factura y las
+                comisiones. Consúltalo con tu gestoría antes.       */
+const MANAGED_PAYMENTS = false;
+
+/* Código fiscal del producto. Inmoprop es software en la nube, sin
+   descarga, vendido a empresas -> SaaS business use.
+   Stripe lo exige con Managed Payments y lo usa Stripe Tax.        */
+const CODIGO_FISCAL = 'txcd_10103001';
+
 /* --- precio de cada licencia adicional según cuántas haya --- */
 function unitario(n) {
   if (n <= 0) return CFG.extraBase;
@@ -199,6 +214,7 @@ async function handler(req, res) {
     };
 
     if (IVA_AUTOMATICO) p['automatic_tax[enabled]'] = 'true';
+    if (!MANAGED_PAYMENTS) p['managed_payments[enabled]'] = 'false';
 
     lineas(plan, periodo, agentes).forEach(function (item, i) {
       const k = 'line_items[' + i + ']';
@@ -208,6 +224,7 @@ async function handler(req, res) {
       p[k + '[price_data][recurring][interval]'] = item.intervalo;
       p[k + '[price_data][product_data][name]'] = item.nombre;
       p[k + '[price_data][product_data][description]'] = item.desc;
+      p[k + '[price_data][product_data][tax_code]'] = CODIGO_FISCAL;
       if (IVA_AUTOMATICO) {
         // 'exclusive' = el IVA se suma al precio; 'inclusive' = ya va dentro
         p[k + '[price_data][tax_behavior]'] = 'exclusive';
