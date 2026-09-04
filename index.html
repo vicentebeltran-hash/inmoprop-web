@@ -615,6 +615,223 @@ section{padding-block:clamp(56px,8vw,110px)}
 }
 
 /* ============================================================
+   ESCAPARATE DE MÓDULOS · fila deslizable + panel a pantalla
+   ============================================================ */
+.mods{
+  display:grid;grid-auto-flow:column;
+  grid-auto-columns:clamp(240px,78vw,320px);
+  gap:var(--sp-4);
+  overflow-x:auto;overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;scroll-behavior:smooth;
+  padding:4px clamp(18px,3.5vw,52px) var(--sp-5);
+  margin-inline:calc(clamp(18px,3.5vw,52px) * -1);
+  scrollbar-width:none;-ms-overflow-style:none
+}
+.mods::-webkit-scrollbar{display:none}
+
+.mod{
+  position:relative;scroll-snap-align:center;
+  aspect-ratio:4/5;border-radius:var(--r-l);overflow:hidden;
+  border:1px solid #ffffff1c;background:#0e1130;
+  transition:transform .4s var(--curva),box-shadow .4s var(--curva),border-color .4s var(--curva)
+}
+@media(hover:hover){
+  .mod:hover{transform:translateY(-6px);border-color:var(--tono,var(--acento));box-shadow:0 26px 60px -22px #000000a6}
+}
+.mod__fondo{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(115% 85% at 18% -5%,var(--tono-soft),transparent 62%),
+    linear-gradient(158deg,#1e2350 0%,#131734 55%,#1a1e42 100%)
+}
+.mod__img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center 12%
+}
+.mod__velo{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(0deg,#05060ff5 30%,#05060fb3 58%,#05060f4d 100%),
+    linear-gradient(0deg,#0b0e2673,#0b0e2673)
+}
+.mod__marca{
+  position:absolute;right:-16%;bottom:-4%;width:70%;
+  color:var(--tono,var(--acento));opacity:.16;pointer-events:none
+}
+.mod__marca svg{width:100%;height:auto;stroke-width:1}
+
+.mod__estado{
+  position:absolute;top:var(--sp-4);left:var(--sp-4);z-index:3;
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 12px;border-radius:var(--r-full);
+  border:1px solid #ffffff2b;background:#05060f8c;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  font-size:.68rem;font-weight:var(--peso-fuerte);letter-spacing:.06em;
+  text-transform:uppercase;color:#e7e9ff
+}
+.mod__estado::before{content:"";width:6px;height:6px;border-radius:var(--r-full);background:#8f94bd}
+.mod__estado--vivo{border-color:var(--secundario);color:var(--secundario)}
+.mod__estado--vivo::before{background:var(--secundario);animation:latir 2.4s ease-out infinite}
+
+.mod__mas{
+  position:absolute;top:var(--sp-4);right:var(--sp-4);z-index:3;
+  width:40px;height:40px;border-radius:var(--r-full);border:none;
+  display:grid;place-items:center;cursor:pointer;
+  background:#ffffffee;color:#12142a;
+  box-shadow:0 6px 20px #00000047;
+  transition:transform var(--trans),background var(--trans)
+}
+.mod__mas svg{width:19px;height:19px}
+.mod__mas:hover{background:#fff;transform:scale(1.08)}
+.mod__mas:focus-visible{outline:2px solid #fff;outline-offset:3px}
+
+.mod__pie{
+  position:absolute;left:0;right:0;bottom:0;z-index:2;
+  padding:var(--sp-6) var(--sp-5) var(--sp-5);
+  background:linear-gradient(0deg,#05060feb 14%,#05060f00);
+  color:#fff;pointer-events:none
+}
+.mod__cifra{
+  display:block;font-family:var(--fuente-titulo);
+  font-size:.72rem;font-weight:var(--peso-black);letter-spacing:.14em;
+  color:var(--tono,var(--acento));margin-bottom:4px
+}
+.mod__pie h4{
+  font-family:var(--fuente-titulo);font-size:1.45rem;
+  font-weight:var(--peso-black);letter-spacing:-.02em;margin:0 0 5px;color:#fff
+}
+.mod__gancho{display:block;font-size:var(--txt-mini);color:#c9cced;line-height:1.45}
+
+/* mando: flechas y puntos */
+.mods__mando{display:flex;align-items:center;justify-content:center;gap:var(--sp-4);margin-top:var(--sp-2)}
+.mods__flecha{
+  width:38px;height:38px;flex:0 0 38px;border-radius:var(--r-full);
+  display:grid;place-items:center;cursor:pointer;
+  border:1px solid var(--card-borde);background:#ffffff0f;color:var(--text);
+  transition:background var(--trans),border-color var(--trans),opacity var(--trans)
+}
+.mods__flecha:hover{background:#ffffff1f;border-color:var(--acento)}
+.mods__flecha svg{width:17px;height:17px}
+.mods__flecha[disabled]{opacity:.3;cursor:default}
+.mods__puntos{display:flex;align-items:center;gap:7px}
+.mods__puntos button{
+  width:7px;height:7px;padding:0;border:none;border-radius:var(--r-full);
+  background:#ffffff33;cursor:pointer;transition:background var(--trans),width var(--trans)
+}
+.mods__puntos button[aria-current="true"]{background:var(--acento-fuerte);width:22px}
+
+/* ---------- el panel que se abre ---------- */
+.mod-panel{position:fixed;inset:0;z-index:95}
+.mod-panel[hidden]{display:none}
+.mod-panel__velo{
+  position:absolute;inset:0;background:#04050ecc;
+  -webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);
+  animation:mpVelo .28s var(--curva)
+}
+@keyframes mpVelo{from{opacity:0}to{opacity:1}}
+.mod-panel__caja{
+  --tono:#8b7cff; --tono-soft:#8b7cff2e;
+  position:absolute;left:0;right:0;bottom:0;top:clamp(0px,3vh,34px);
+  max-width:1180px;margin-inline:auto;
+  border-radius:var(--r-l) var(--r-l) 0 0;overflow:hidden;
+  background:linear-gradient(168deg,#171b3e 0%,#0c0e22 60%,#12142f 100%);
+  color:#f0f1ff;
+  box-shadow:0 -24px 70px #00000099;
+  animation:mpSube .34s var(--curva)
+}
+@keyframes mpSube{from{transform:translateY(28px);opacity:0}to{transform:none;opacity:1}}
+.mod-panel__scroll{
+  height:100%;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch
+}
+.mod-panel__x{
+  position:fixed;top:calc(clamp(0px,3vh,34px) + 16px);right:16px;z-index:4;
+  width:44px;height:44px;border-radius:var(--r-full);border:1px solid #ffffff26;
+  display:grid;place-items:center;cursor:pointer;
+  background:#0c0e22cc;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  color:#f0f1ff;transition:background var(--trans),transform var(--trans)
+}
+.mod-panel__x:hover{background:#1b1f45;transform:rotate(90deg)}
+.mod-panel__x svg{width:20px;height:20px}
+@media(min-width:1220px){.mod-panel__x{right:calc(50vw - 590px + 16px)}}
+
+.mp__cab{
+  position:relative;padding:clamp(38px,6vw,70px) clamp(20px,4vw,60px) clamp(26px,3vw,38px);
+  border-bottom:1px solid #ffffff14
+}
+.mp__cab::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(80% 120% at 12% 0%,var(--tono-soft),transparent 66%)
+}
+.mp__cab > *{position:relative}
+.mp__num{
+  display:block;font-family:var(--fuente-titulo);font-size:.75rem;
+  font-weight:var(--peso-black);letter-spacing:.16em;color:var(--tono);margin-bottom:var(--sp-3)
+}
+.mp__cab h3{
+  font-family:var(--fuente-titulo);font-weight:var(--peso-black);
+  font-size:clamp(1.9rem,1.3rem + 2.4vw,3.1rem);line-height:1.05;
+  letter-spacing:-.03em;margin:0 0 var(--sp-3);color:#fff;max-width:22ch
+}
+.mp__sub{margin:0;font-size:clamp(1rem,.95rem + .4vw,1.2rem);color:#b7bbe0;max-width:46ch}
+.mp__sello{
+  display:inline-flex;align-items:center;gap:7px;margin-top:var(--sp-5);
+  padding:7px 15px;border-radius:var(--r-full);
+  border:1px solid #ffffff26;background:#ffffff0d;
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:#d3d6f5
+}
+.mp__sello::before{content:"";width:7px;height:7px;border-radius:var(--r-full);background:#8f94bd}
+.mp__sello--vivo{border-color:var(--secundario);color:var(--secundario)}
+.mp__sello--vivo::before{background:var(--secundario);animation:latir 2.4s ease-out infinite}
+
+.mp__cuerpo{padding:clamp(26px,3.5vw,44px) clamp(20px,4vw,60px) clamp(48px,7vw,90px)}
+.mp__cuerpo > p{font-size:clamp(1rem,.96rem + .3vw,1.1rem);color:#c3c7e8;max-width:62ch;margin:0 0 var(--sp-6)}
+.mp__cols{display:grid;gap:var(--sp-5);grid-template-columns:1fr}
+@media(min-width:760px){.mp__cols{grid-template-columns:1fr 1fr;gap:var(--sp-6)}}
+.mp__col{padding-left:var(--sp-4);border-left:2px solid var(--tono)}
+.mp__col b{
+  display:block;font-family:var(--fuente-titulo);font-size:1.02rem;
+  font-weight:var(--peso-negro);color:#fff;margin-bottom:6px
+}
+.mp__col p{margin:0;font-size:var(--txt-small);color:#b0b4d8;line-height:1.6}
+.mp__capturas{
+  display:grid;grid-auto-flow:column;grid-auto-columns:min(146px,42vw);
+  gap:var(--sp-3);margin-top:var(--sp-6);
+  overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;
+  padding-bottom:var(--sp-3);scrollbar-width:none;-ms-overflow-style:none
+}
+.mp__capturas::-webkit-scrollbar{display:none}
+@media(min-width:900px){.mp__capturas{grid-auto-flow:row;grid-template-columns:repeat(4,1fr);grid-auto-columns:auto;overflow:visible}}
+.mp__capturas figure{margin:0;scroll-snap-align:center}
+.mp__capturas img{
+  width:100%;height:auto;display:block;
+  border-radius:16px;border:1px solid #ffffff1f;
+  background:#0b0e26;box-shadow:0 14px 34px -14px #000000a6
+}
+.mp__capturas figcaption{
+  margin-top:8px;text-align:center;
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:#9296bf
+}
+
+.mp__chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:var(--sp-6)}
+.mp__chips span{
+  padding:5px 13px;border-radius:var(--r-full);
+  border:1px solid #ffffff1f;background:#ffffff0a;
+  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:#c3c7e8
+}
+.mp__pie{
+  margin-top:var(--sp-6);padding-top:var(--sp-5);border-top:1px solid #ffffff14;
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--sp-4)
+}
+.mp__pie span{flex:1 1 260px;font-size:var(--txt-mini);color:#8f94bd;line-height:1.55}
+
+@media(prefers-reduced-motion:reduce){
+  .mods{scroll-behavior:auto}
+  .mod{transition:none}
+  .mod-panel__caja,.mod-panel__velo{animation:none}
+}
+
+/* ============================================================
    SIMPLIFICACIÓN EN MÓVIL
    Misma web, menos cosas a la vez en una pantalla pequeña.
    ============================================================ */
@@ -641,6 +858,13 @@ section{padding-block:clamp(56px,8vw,110px)}
   .solo-movil{display:inline}
   .solo-movil-flex{display:flex}
   .solo-escritorio{display:none}
+
+  /* el escaparate de módulos ocupa casi todo el ancho */
+  .mods{grid-auto-columns:82vw;gap:var(--sp-3)}
+  .mod{aspect-ratio:5/6}
+  .mods__flecha{display:none}
+  .mod-panel__caja{top:0;border-radius:0}
+  .mod-panel__x{top:12px;right:12px;width:40px;height:40px}
 
   /* las maquetas de móvil pasan a una fila que se desliza:
      ocupan lo que una en vez de apilarse                     */
@@ -789,131 +1013,12 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 /* ============================================================
    BENTO DE PLATAFORMAS
    ============================================================ */
-.bento{display:grid;gap:var(--sp-3);grid-template-columns:1fr;grid-auto-rows:auto}
-@media(min-width:700px){
-  .bento{grid-template-columns:repeat(2,1fr);gap:var(--sp-4)}
-  .bento__hero,.bento__ancho{grid-column:span 2}
-}
-@media(min-width:1020px){
-  .bento{grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(158px,auto)}
-  .bento__hero{grid-column:span 2;grid-row:span 2}
-  .bento__ancho{grid-column:span 2}
-}
-.bento__item{
-  position:relative;display:flex;flex-direction:column;
-  padding:var(--sp-5) var(--sp-4);
-  border:1px solid var(--card-borde);border-radius:var(--r-m);
-  background:var(--surface);box-shadow:var(--sombra-s);overflow:hidden;
-  transition:transform var(--trans),box-shadow var(--trans),border-color var(--trans)
-}
-.bento__item:hover{transform:translateY(-3px);box-shadow:var(--sombra-m);border-color:var(--tono,var(--acento))}
-.bento__item .ico{
-  width:42px;height:42px;flex:0 0 42px;display:grid;place-items:center;
-  border-radius:var(--r-s);background:var(--tono-soft,var(--acento-soft));color:var(--tono,var(--acento));
-  margin-bottom:var(--sp-4);transition:transform var(--trans)
-}
-.bento__item:hover .ico{transform:scale(1.1) rotate(-5deg)}
-.bento__item .ico svg{width:21px;height:21px;stroke-width:2}
-.bento__item h4{font-family:var(--fuente-titulo);font-size:1.05rem;font-weight:var(--peso-negro);margin-bottom:5px}
-.bento__item p{font-size:var(--txt-mini);color:var(--dim);margin:0}
-.bento__item .marca-estado{
-  margin-top:auto;padding-top:var(--sp-4);
-  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--faint);
-  display:flex;align-items:center;gap:6px
-}
-.bento__item .marca-estado::before{
-  content:"";width:6px;height:6px;border-radius:var(--r-full);background:var(--faint);flex-shrink:0
-}
-.bento__item--vivo{border-color:var(--secundario)}
-.bento__item--vivo .marca-estado{color:var(--secundario);font-weight:var(--peso-fuerte)}
-.bento__item--vivo .marca-estado::before{
-  background:var(--secundario);box-shadow:0 0 0 0 var(--secundario);animation:latir 2.4s ease-out infinite
-}
+/* la pulsación del punto verde de "encendido" — la usa el escaparate */
 @keyframes latir{
   0%{box-shadow:0 0 0 0 var(--secundario-soft)}
   70%{box-shadow:0 0 0 7px transparent}
   100%{box-shadow:0 0 0 0 transparent}
 }
-.bento__hero h4{font-size:1.5rem}
-.bento__hero p{font-size:var(--txt-small)}
-.bento__hero .ico{width:52px;height:52px;flex-basis:52px}
-.bento__hero .ico svg{width:26px;height:26px}
-
-/* mini-etiquetas de formatos */
-.formatitos{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--sp-4)}
-.formatitos span{
-  padding:4px 11px;border-radius:var(--r-full);
-  background:var(--surface-2);color:var(--dim);
-  font-size:var(--txt-mini);font-weight:var(--peso-medio)
-}
-
-/* áreas del catálogo */
-.areas{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-3)}
-.areas span{
-  display:inline-flex;align-items:center;gap:6px;
-  padding:5px 12px;border:1px solid var(--card-borde);border-radius:var(--r-full);
-  font-size:var(--txt-mini);font-weight:var(--peso-medio);color:var(--dim)
-}
-.areas span::before{content:"";width:5px;height:5px;border-radius:var(--r-full);background:var(--tono,var(--acento))}
-
-/* la cita del directo */
-.directo{
-  margin-top:var(--sp-4);padding:var(--sp-3) var(--sp-4);
-  border-radius:var(--r-m);background:var(--acento-soft);
-  border-left:3px solid var(--acento)
-}
-.directo b{display:block;font-size:var(--txt-small);font-weight:var(--peso-fuerte);color:var(--text)}
-.directo span{font-size:var(--txt-mini);color:var(--dim)}
-
-/* onda de voz del role play */
-.onda{display:flex;align-items:flex-end;gap:5px;height:40px;margin-top:var(--sp-5)}
-.onda i{
-  display:block;width:5px;border-radius:var(--r-full);
-  background:var(--grad-acento);height:22%;transform-origin:bottom;
-  animation:ondear 1.15s var(--curva) infinite alternate
-}
-.onda i:nth-child(2){animation-delay:.1s}
-.onda i:nth-child(3){animation-delay:.2s}
-.onda i:nth-child(4){animation-delay:.3s}
-.onda i:nth-child(5){animation-delay:.15s}
-.onda i:nth-child(6){animation-delay:.25s}
-.onda i:nth-child(7){animation-delay:.05s}
-.onda i:nth-child(8){animation-delay:.35s}
-.onda i:nth-child(9){animation-delay:.2s}
-.onda i:nth-child(10){animation-delay:.1s}
-.onda i:nth-child(11){animation-delay:.3s}
-.onda i:nth-child(12){animation-delay:.18s}
-.onda i:nth-child(13){animation-delay:.11s}
-.onda i:nth-child(14){animation-delay:.18s}
-.onda i:nth-child(15){animation-delay:.25s}
-.onda i:nth-child(16){animation-delay:.32s}
-.onda i:nth-child(17){animation-delay:.39s}
-.onda i:nth-child(18){animation-delay:.06s}
-.onda i:nth-child(19){animation-delay:.13s}
-.onda i:nth-child(20){animation-delay:.20s}
-.onda i:nth-child(21){animation-delay:.27s}
-.onda i:nth-child(22){animation-delay:.34s}
-.onda i:nth-child(23){animation-delay:.01s}
-.onda i:nth-child(24){animation-delay:.08s}
-@keyframes ondear{to{height:100%}}
-.onda__pie{font-size:var(--txt-mini);color:var(--faint);margin-top:var(--sp-2)}
-
-/* gráfico de evolución */
-.grafico{display:flex;align-items:flex-end;gap:8px;height:66px;margin-top:var(--sp-4)}
-.grafico i{
-  display:block;flex:1;border-radius:var(--r-s) var(--r-s) 2px 2px;
-  background:var(--secundario-soft);height:0;
-  transition:height 1s var(--curva)
-}
-.grafico i:last-child{background:var(--grad-secundario)}
-.visible .grafico i{height:var(--h,50%)}
-.grafico i:nth-child(2){transition-delay:.08s}
-.grafico i:nth-child(3){transition-delay:.16s}
-.grafico i:nth-child(4){transition-delay:.24s}
-.grafico i:nth-child(5){transition-delay:.32s}
-.grafico i:nth-child(6){transition-delay:.4s}
-.grafico__eje{display:flex;gap:8px;margin-top:6px}
-.grafico__eje span{flex:1;text-align:center;font-size:.66rem;color:var(--faint)}
 
 /* tonos por plataforma */
 .t-violeta{--tono:var(--acento);--tono-soft:var(--acento-soft)}
@@ -1052,49 +1157,20 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 }
 .visible .medidor__barra i{width:14.3%}
 
-/* módulos aún cerrados */
-.bloq{opacity:.5;filter:saturate(.12);transition:opacity .35s var(--curva),filter .35s var(--curva),border-color var(--trans),box-shadow .35s var(--curva),transform var(--trans)}
-.bloq:hover{
-  opacity:1;filter:none;transform:translateY(-4px);
-  border-color:var(--tono);
-  box-shadow:0 18px 44px -12px var(--tono)
-}
-.bloq .marca-estado::before{background:currentColor}
-.bloq__cab{
-  position:absolute;top:var(--sp-4);right:var(--sp-4);z-index:2;
-  display:flex;align-items:center;gap:9px;pointer-events:none
-}
-.bloq__cab .bloq__num{position:static;top:auto;right:auto}
-.bloq__candado{
-  width:26px;height:26px;display:grid;place-items:center;
-  border-radius:var(--r-full);background:#ffffff0f;color:var(--faint);
-  transition:background var(--trans),color var(--trans)
-}
-.bloq__candado svg{width:13px;height:13px;stroke-width:2.2}
-.bloq:hover .bloq__candado{background:var(--tono-soft);color:var(--tono)}
-.bloq .ico{margin-top:var(--sp-5)}
-.bloq h4,.bloq p{padding-right:0}
-.bloq__num{
-  position:absolute;top:var(--sp-4);right:var(--sp-4);z-index:2;
-  font-family:var(--fuente-titulo);font-size:1.5rem;font-weight:var(--peso-black);
-  color:var(--faint);opacity:.55;letter-spacing:-.04em;pointer-events:none
-}
-.bloq .marca-estado{color:var(--faint)}
-.bloq:hover .marca-estado{color:var(--tono)}
-/* barrido de "encendiéndose" */
-.bloq::after{
-  content:"";position:absolute;inset:0;z-index:3;pointer-events:none;
-  background:linear-gradient(112deg,transparent 42%,#ffffff1a 50%,transparent 58%);
+/* barrido de "aún por encender" sobre los módulos pendientes */
+.mod:not([data-vivo])::after{
+  content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(112deg,transparent 42%,#ffffff14 50%,transparent 58%);
   transform:translateX(-110%);
-  animation:barrido 6.5s var(--curva) infinite
+  animation:barrido 7s var(--curva) infinite
 }
-.bloq:nth-of-type(4)::after{animation-delay:.5s}
-.bloq:nth-of-type(5)::after{animation-delay:1s}
-.bloq:nth-of-type(6)::after{animation-delay:1.5s}
-.bloq:nth-of-type(7)::after{animation-delay:2s}
-.bloq:nth-of-type(8)::after{animation-delay:2.5s}
+.mod:nth-of-type(3)::after{animation-delay:.6s}
+.mod:nth-of-type(4)::after{animation-delay:1.2s}
+.mod:nth-of-type(5)::after{animation-delay:1.8s}
+.mod:nth-of-type(6)::after{animation-delay:2.4s}
+.mod:nth-of-type(7)::after{animation-delay:3s}
 @keyframes barrido{0%{transform:translateX(-110%)}45%,100%{transform:translateX(110%)}}
-.bento__item--vivo .bloq__num{color:var(--secundario);opacity:.7}
+@media(prefers-reduced-motion:reduce){.mod::after{animation:none;opacity:0}}
 
 .suite__nota{
   display:flex;gap:var(--sp-3);align-items:flex-start;
@@ -1688,90 +1764,178 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div class="medidor">
         <div class="medidor__fila"><span>Módulos en marcha</span><b>1 de 7</b></div>
         <div class="medidor__barra" aria-hidden="true"><i></i></div>
-        <p class="medidor__pie">El orden ya está decidido. Las fechas se anuncian módulo a módulo<span class="solo-escritorio"> — pasa el ratón por encima para ver lo que viene</span>.</p>
+        <p class="medidor__pie">El orden ya está decidido. Las fechas se anuncian módulo a módulo. Abre cualquiera para ver qué hará.</p>
       </div>
 
-      <div class="bento esc" id="suite-modulos" data-plegado>
-
-        <!-- 01 · Formación -->
-        <article class="bento__item bento__item--vivo bento__hero foco t-violeta aro">
-          <span class="bloq__num">01</span>
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></div>
+      <div class="mods esc" id="mods">
+      <article class="mod t-teal" data-modulo
+               data-num="01" data-nombre="Formación" data-sub="Entrenar al agente hasta que la objeción no le pille de nuevas."
+               data-tono="t-teal" data-vivo>
+        <span class="mod__fondo" aria-hidden="true"></span>
+        <span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a3.5 3.5 0 0 0-3.5 3.5v5a3.5 3.5 0 0 0 7 0V7A3.5 3.5 0 0 0 12 3.5Z"/><path d="M5.5 11v1a6.5 6.5 0 0 0 13 0v-1M12 18.5V21"/></svg></span>
+        <span class="mod__estado mod__estado--vivo">Encendido</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Formación">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">01</span>
           <h4>Formación</h4>
-          <p>Role plays con IA por voz contra un cliente simulado, con el formador corrigiéndote dentro. Cursos en cuatro formatos, niveles, insignias, ranking y el directo semanal con instructor.</p>
-          <div class="formatitos"><span>Vídeos</span><span>Audiolibros</span><span>Lecciones</span><span>Roleplays</span></div>
-          <div class="areas"><span>Captación</span><span>Skills</span><span>Mi plan de carrera</span></div>
-          <div class="directo">
-            <b>1 sesión semanal en directo</b>
-            <span>Con instructor. Y una mensual específica de gerentes si tienes esa licencia.</span>
+          <span class="mod__gancho">El único encendido. Es lo que cubre tu licencia.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>Es el módulo que está funcionando hoy, y el que cubre cualquiera de las tres licencias. No hay contenido bloqueado: todo el catálogo, desde el primer día.</p>
+          <div class="mp__cols">
+            <div class="mp__col">
+              <b>Role play con IA por voz</b>
+              <p>El agente mantiene pulsado para hablar y un cliente simulado le objeta con su perfil, su edad y su motivo real para dudar. El formador entra en mitad de la conversación y le explica qué esconde esa frase.</p>
+            </div>
+            <div class="mp__col">
+              <b>El mismo temario, tres formas</b>
+              <p>Vídeo, audiolibro para el coche y un tutor de IA que se lo explica a su ritmo. El agente elige según el momento del día y sigue por donde lo dejó.</p>
+            </div>
+            <div class="mp__col">
+              <b>Progreso y estadísticas</b>
+              <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente. Sabes quién entrena de verdad y quién necesita apoyo esta semana.</p>
+            </div>
+            <div class="mp__col">
+              <b>Una sesión semanal en directo</b>
+              <p>Con instructor, todas las semanas, y una mensual específica de gerentes. No es un extra de bienvenida: es una cita fija que no se acaba.</p>
+            </div>
           </div>
-          <div class="onda" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <p class="onda__pie">«Mantén para hablar» — el agente contesta en voz alta, como en la visita.</p>
-          <span class="marca-estado">Encendido · disponible hoy</span>
-        </article>
-
-        <!-- Progreso · parte del módulo 01 -->
-        <article class="bento__item bento__item--vivo bento__ancho foco t-teal">
-          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19h16M7 19v-6M12 19v-10M17 19v-4"/><path d="M14.5 5.5L20 4l-1.2 5.4"/></svg></div>
-          <h4>Progreso y estadísticas</h4>
-          <p>Puntuación por agente, evolución semanal y comparativa de equipo desde el panel del gerente. Va dentro del módulo de Formación.</p>
-          <div class="grafico" aria-hidden="true">
-            <i style="--h:38%"></i><i style="--h:52%"></i><i style="--h:45%"></i><i style="--h:68%"></i><i style="--h:80%"></i><i style="--h:100%"></i>
+          <div class="mp__capturas">
+            <figure><img src="demo-indicadores.jpg" alt="Lecci&oacute;n en v&iacute;deo dentro de la ficha del curso" loading="lazy" width="332" height="720"><figcaption>V&iacute;deo</figcaption></figure>
+            <figure><img src="demo-metodo.jpg" alt="El mismo curso en formato audiolibro" loading="lazy" width="332" height="720"><figcaption>Audiolibro</figcaption></figure>
+            <figure><img src="demo-tutor.jpg" alt="Conversaci&oacute;n con el tutor de IA" loading="lazy" width="332" height="720"><figcaption>Tutor de IA</figcaption></figure>
+            <figure><img src="demo-rp-elena.jpg" alt="Partida de role play con un cliente simulado" loading="lazy" width="332" height="720"><figcaption>Role play</figcaption></figure>
           </div>
-          <div class="grafico__eje" aria-hidden="true"><span>S1</span><span>S2</span><span>S3</span><span>S4</span><span>S5</span><span>S6</span></div>
-          <span class="marca-estado">Encendido · disponible hoy</span>
-        </article>
-
-      <article class="bento__item foco bloq t-oro">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">02</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5v3a1.5 1.5 0 0 0 1.5 1.5h2L14 19V5L7.5 9h-2A1.5 1.5 0 0 0 4 10.5Z"/><path d="M17.5 9.5a4 4 0 0 1 0 5M20 7.5a7 7 0 0 1 0 9"/></svg></div>
-        <h4>Marketing</h4>
-        <p>Creatividades para agentes, adaptadas a tu marca en un momento. Dejas de pedir la pieza y esperar.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+          <div class="mp__chips">
+            <span>Captación</span><span>Skills</span><span>Mi plan de carrera</span>
+          </div></div>
       </article>
-      <article data-extra class="bento__item foco bloq t-violeta">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">03</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5L20 11v8.5H4z"/><path d="M14 10.5a2.8 2.8 0 1 0 0 5"/><path d="M9.8 12h4.4M9.8 14h4.4"/></svg></div>
-        <h4>Valoración</h4>
-        <p>Pones precio con criterio y sacas el informe que entregas al propietario en la misma visita.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+      <article class="mod t-oro" data-modulo
+               data-num="02" data-nombre="Marketing" data-sub="Dejas de pedir la pieza y esperar dos días a que te la manden."
+               data-tono="t-oro">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5v3a1.5 1.5 0 0 0 1.5 1.5h2L14 19V5L7.5 9h-2A1.5 1.5 0 0 0 4 10.5Z"/><path d="M17.5 9.5a4 4 0 0 1 0 5M20 7.5a7 7 0 0 1 0 9"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Marketing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">02</span>
+          <h4>Marketing</h4>
+          <span class="mod__gancho">Creatividades con tu marca, sin esperar a nadie.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>El agente elige la pieza que necesita, se adapta a tu marca y la tiene en un momento — redactor e imagen incluidos. Sin diseñador de por medio y sin que cada oficina invente su propio estilo.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>Con tu identidad</b><p>Tu logo, tus colores y tus datos de contacto ya puestos. Lo que sale se parece a tu inmobiliaria, no a una plantilla genérica.</p></div>
+            <div class="mp__col"><b>Para cada momento</b><p>Captación, lanzamiento de un inmueble, bajada de precio, vendido, felicitaciones. El agente no empieza de cero cada vez.</p></div>
+          </div></div>
       </article>
-      <article data-extra class="bento__item foco bloq t-lima">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">04</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.5" rx="6.5" ry="2.8"/><path d="M5.5 6.5v5c0 1.5 2.9 2.8 6.5 2.8s6.5-1.3 6.5-2.8v-5"/><path d="M5.5 11.5v5c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-5"/></svg></div>
-        <h4>Inversión</h4>
-        <p>Oportunidades de inversión, NPL y REO, con el análisis y la conversación dentro de la plataforma.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+      <article class="mod t-violeta" data-modulo
+               data-num="03" data-nombre="Valoración" data-sub="El informe que convierte una opinión en un argumento."
+               data-tono="t-violeta">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-6.5L20 11v8.5H4z"/><path d="M14 10.5a2.8 2.8 0 1 0 0 5"/><path d="M9.8 12h4.4M9.8 14h4.4"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Valoración">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">03</span>
+          <h4>Valoración</h4>
+          <span class="mod__gancho">Pones precio con criterio y lo entregas en la misma visita.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>Poner precio es donde se gana o se pierde la captación. El módulo te da el criterio y, sobre todo, el documento: sales de la visita habiendo entregado un informe, no habiendo prometido enviarlo.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>Con datos, no con intuición</b><p>Referencias de la zona y del producto para sostener el precio delante del propietario.</p></div>
+            <div class="mp__col"><b>Informe en la visita</b><p>Se genera y se entrega en el momento. La conversación del precio se tiene con un papel encima de la mesa.</p></div>
+          </div></div>
       </article>
-      <article data-extra class="bento__item foco bloq t-teal">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">05</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5v7a6 6 0 0 0 12 0v-7"/><path d="M6 9.5h4.5M13.5 9.5H18"/><path d="M6 4.5h4.5M13.5 4.5H18"/></svg></div>
-        <h4>Captación</h4>
-        <p>Prospección y recomendación con sus programas, sus entrevistas y el seguimiento de cada contacto.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+      <article class="mod t-lima" data-modulo
+               data-num="04" data-nombre="Inversión" data-sub="Otra línea de negocio, con la misma cuenta."
+               data-tono="t-lima">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="6.5" rx="6.5" ry="2.8"/><path d="M5.5 6.5v5c0 1.5 2.9 2.8 6.5 2.8s6.5-1.3 6.5-2.8v-5"/><path d="M5.5 11.5v5c0 1.6 2.9 2.8 6.5 2.8s6.5-1.2 6.5-2.8v-5"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Inversión">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">04</span>
+          <h4>Inversión</h4>
+          <span class="mod__gancho">Oportunidades, NPL y REO con el análisis dentro.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>Operaciones de inversión con su análisis y su conversación dentro de la plataforma, en vez de en una cadena de correos y un Excel que solo entiende quien lo hizo.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>El análisis, delante</b><p>Los números de la operación donde se toma la decisión, no en un adjunto perdido.</p></div>
+            <div class="mp__col"><b>NPL y REO</b><p>Carteras y activos de banca, con el circuito que ese tipo de operación necesita.</p></div>
+          </div></div>
       </article>
-      <article data-extra class="bento__item foco bloq t-oro">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">06</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 16h5"/></svg></div>
-        <h4>Expedientes</h4>
-        <p>La ficha del cliente con todo dentro: la operación completa, de la firma a la postventa.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+      <article class="mod t-teal" data-modulo
+               data-num="05" data-nombre="Captación" data-sub="Que ningún contacto se quede sin la segunda llamada."
+               data-tono="t-teal">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5v7a6 6 0 0 0 12 0v-7"/><path d="M6 9.5h4.5M13.5 9.5H18"/><path d="M6 4.5h4.5M13.5 4.5H18"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Captación">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">05</span>
+          <h4>Captación</h4>
+          <span class="mod__gancho">Prospección y recomendación con seguimiento de verdad.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>La captación no falla por falta de contactos: falla por el seguimiento. Este módulo pone programa y calendario donde ahora hay memoria y buena voluntad.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>Programas de prospección</b><p>Qué hacer cada semana, con quién y en qué orden. El agente no decide cada mañana por dónde empezar.</p></div>
+            <div class="mp__col"><b>Recomendación</b><p>El cliente satisfecho como fuente de negocio, trabajado como un canal y no como un accidente.</p></div>
+          </div></div>
       </article>
-      <article data-extra class="bento__item foco bloq t-violeta">
-        <span class="bloq__cab" aria-hidden="true"><span class="bloq__candado" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="9.5" rx="2.2"/><path d="M8.2 10.5V8a3.8 3.8 0 0 1 7.6 0v2.5"/></svg></span><span class="bloq__num">07</span></span>
-        <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 15.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 12V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M12 7.8l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></div>
-        <h4>Copiloto</h4>
-        <p>Transversal a todo: sabe en qué pantalla estás y actúa por ti sin que salgas de donde trabajas.</p>
-        <span class="marca-estado">Próximamente · módulo aparte</span>
+      <article class="mod t-oro" data-modulo
+               data-num="06" data-nombre="Expedientes" data-sub="Todo lo del cliente en un sitio, y solo en un sitio."
+               data-tono="t-oro">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 16h5"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Expedientes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">06</span>
+          <h4>Expedientes</h4>
+          <span class="mod__gancho">La operación entera en una ficha, de la firma a la postventa.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>La ficha del cliente con la operación completa dentro: documentos, hitos, plazos y quién hizo qué. Cuando alguien se va de vacaciones, el expediente sigue contando la historia.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>De la firma a la postventa</b><p>El ciclo entero, sin que la información viva en el móvil de una persona.</p></div>
+            <div class="mp__col"><b>Con el historial detrás</b><p>El mismo agente que entrena una objeción abre después el expediente. Una sola cuenta de usuarios.</p></div>
+          </div></div>
       </article>
-
+      <article class="mod t-violeta" data-modulo
+               data-num="07" data-nombre="Copiloto" data-sub="Transversal a todos los módulos, no una pestaña más."
+               data-tono="t-violeta">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 15.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 12V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M12 7.8l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Copiloto">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">07</span>
+          <h4>Copiloto</h4>
+          <span class="mod__gancho">Sabe en qué pantalla estás y actúa por ti.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>El copiloto no es otro sitio al que ir: está en cualquier pantalla y conoce el contexto. Le pides que busque un contacto, que lea un expediente o que lance una valoración, y lo hace sin que salgas de donde estabas trabajando.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>Con contexto</b><p>Sabe qué inmueble o qué cliente tienes delante, así que no hay que explicárselo cada vez.</p></div>
+            <div class="mp__col"><b>Con permiso</b><p>Las acciones que tienen consecuencias se confirman siempre. La IA propone; la persona decide.</p></div>
+          </div></div>
+      </article>
       </div>
 
-      <button class="mas-movil" type="button" data-mas="suite-modulos"
-              data-ver="Ver los 7 módulos" data-ocultar="Ver solo los primeros">
-        <span>Ver los 7 módulos</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg>
-      </button>
+      <div class="mods__mando">
+        <button class="mods__flecha" type="button" data-mods="prev" aria-label="M&oacute;dulos anteriores">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 6l-6 6 6 6"/></svg>
+        </button>
+        <div class="mods__puntos" id="mods-puntos" aria-hidden="true"></div>
+        <button class="mods__flecha" type="button" data-mods="next" aria-label="M&oacute;dulos siguientes">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 6l6 6-6 6"/></svg>
+        </button>
+      </div>
 
       <div class="suite__nota">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
@@ -2098,6 +2262,25 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   </div>
 </footer>
 
+<!-- ============ PANEL DE MÓDULO (se rellena al pulsar una tarjeta) ============ -->
+<div class="mod-panel" id="mod-panel" role="dialog" aria-modal="true" aria-labelledby="mp-titulo" hidden>
+  <div class="mod-panel__velo" data-cerrar-panel></div>
+  <div class="mod-panel__caja">
+    <button class="mod-panel__x" type="button" data-cerrar-panel aria-label="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="mod-panel__scroll" id="mp-scroll">
+      <div class="mp__cab">
+        <span class="mp__num" id="mp-num"></span>
+        <h3 id="mp-titulo"></h3>
+        <p class="mp__sub" id="mp-sub"></p>
+        <span class="mp__sello" id="mp-sello"></span>
+      </div>
+      <div class="mp__cuerpo" id="mp-cuerpo"></div>
+    </div>
+  </div>
+</div>
+
 <!-- ============ BARRA DE COMPRA · SOLO MÓVIL ============ -->
 <div class="barra-movil" id="barra-movil">
   <div class="barra-movil__txt">
@@ -2227,6 +2410,135 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       a.addEventListener('click', function(){ calc.setAttribute('data-abierto', ''); });
     });
   }
+})();
+
+/* ---------- Escaparate de módulos y su panel ---------- */
+(function(){
+  var pista  = document.getElementById('mods');
+  var panel  = document.getElementById('mod-panel');
+  if (!pista || !panel) return;
+
+  var tarjetas = [].slice.call(pista.querySelectorAll('[data-modulo]'));
+  var caja     = panel.querySelector('.mod-panel__caja');
+  var scroll   = document.getElementById('mp-scroll');
+  var elNum    = document.getElementById('mp-num');
+  var elTit    = document.getElementById('mp-titulo');
+  var elSub    = document.getElementById('mp-sub');
+  var elSello  = document.getElementById('mp-sello');
+  var elCuerpo = document.getElementById('mp-cuerpo');
+  var puntos   = document.getElementById('mods-puntos');
+  var abridor  = null;   /* a qué botón devolvemos el foco al cerrar */
+
+  /* los tonos de cada módulo, para pintar el panel a juego */
+  var TONOS = {
+    't-violeta': ['#8b7cff', '#8b7cff2e'],
+    't-teal':    ['#2ad3bb', '#2ad3bb2e'],
+    't-oro':     ['#f0c95f', '#f0c95f2e'],
+    't-lima':    ['#c4ea34', '#c4ea342e']
+  };
+
+  /* ---------- abrir y cerrar ---------- */
+  function abrir(t, boton){
+    var tono = TONOS[t.dataset.tono] || TONOS['t-violeta'];
+    caja.style.setProperty('--tono', tono[0]);
+    caja.style.setProperty('--tono-soft', tono[1]);
+
+    elNum.textContent = 'Módulo ' + t.dataset.num;
+    elTit.textContent = t.dataset.nombre;
+    elSub.textContent = t.dataset.sub;
+
+    var vivo = t.hasAttribute('data-vivo');
+    elSello.textContent = vivo ? 'Encendido · disponible hoy' : 'Próximamente · módulo aparte';
+    elSello.className = 'mp__sello' + (vivo ? ' mp__sello--vivo' : '');
+
+    var detalle = t.querySelector('.mod__detalle');
+    elCuerpo.innerHTML = detalle ? detalle.innerHTML : '';
+
+    /* el mismo recordatorio para todos, al final del panel */
+    var pie = document.createElement('div');
+    pie.className = 'mp__pie';
+    pie.innerHTML = vivo
+      ? '<span>Incluido en cualquiera de las tres licencias, con todo el catálogo desbloqueado.</span>' +
+        '<a href="#precios" class="btn" data-cerrar-panel>Ver las licencias</a>'
+      : '<span>Se enciende sobre la cuenta que ya tienes, sin migrar nada y solo si lo activas. ' +
+        'No hay fecha comprometida todavía: te avisamos antes de que salga.</span>' +
+        '<a href="#precios" class="btn btn--sec" data-cerrar-panel>Empezar por la formación</a>';
+    elCuerpo.appendChild(pie);
+
+    abridor = boton || null;
+    panel.hidden = false;
+    document.body.style.overflow = 'hidden';
+    scroll.scrollTop = 0;
+    panel.querySelector('.mod-panel__x').focus();
+  }
+
+  function cerrar(){
+    panel.hidden = true;
+    document.body.style.overflow = '';
+    if (abridor) { abridor.focus(); abridor = null; }
+  }
+
+  tarjetas.forEach(function(t){
+    var boton = t.querySelector('.mod__mas');
+    function lanzar(ev){ ev.preventDefault(); abrir(t, boton); }
+    if (boton) boton.addEventListener('click', lanzar);
+    /* toda la tarjeta abre, que en el móvil el dedo no acierta un círculo */
+    t.addEventListener('click', function(ev){
+      if (ev.target.closest('a')) return;
+      lanzar(ev);
+    });
+  });
+
+  panel.addEventListener('click', function(ev){
+    if (ev.target.closest('[data-cerrar-panel]')) cerrar();
+  });
+  document.addEventListener('keydown', function(ev){
+    if (ev.key === 'Escape' && !panel.hidden) cerrar();
+  });
+
+  /* ---------- puntos y flechas ---------- */
+  function paso(){
+    var t = tarjetas[0];
+    return t ? t.getBoundingClientRect().width + 16 : 300;
+  }
+  function activo(){
+    var i = Math.round(pista.scrollLeft / paso());
+    return Math.max(0, Math.min(tarjetas.length - 1, i));
+  }
+
+  tarjetas.forEach(function(t, i){
+    var p = document.createElement('button');
+    p.type = 'button';
+    p.setAttribute('aria-label', 'Ir al módulo ' + t.dataset.num);
+    p.addEventListener('click', function(){
+      pista.scrollTo({ left: i * paso(), behavior: 'smooth' });
+    });
+    puntos.appendChild(p);
+  });
+
+  var flechas = [].slice.call(document.querySelectorAll('[data-mods]'));
+  flechas.forEach(function(f){
+    f.addEventListener('click', function(){
+      var d = f.dataset.mods === 'next' ? 1 : -1;
+      pista.scrollBy({ left: d * paso(), behavior: 'smooth' });
+    });
+  });
+
+  function pintarMando(){
+    var i = activo();
+    [].slice.call(puntos.children).forEach(function(p, n){
+      p.setAttribute('aria-current', n === i ? 'true' : 'false');
+    });
+    var fin = pista.scrollLeft + pista.clientWidth >= pista.scrollWidth - 4;
+    flechas.forEach(function(f){
+      var next = f.dataset.mods === 'next';
+      if ((next && fin) || (!next && pista.scrollLeft <= 4)) f.setAttribute('disabled', '');
+      else f.removeAttribute('disabled');
+    });
+  }
+  pista.addEventListener('scroll', pintarMando, { passive: true });
+  window.addEventListener('resize', pintarMando);
+  pintarMando();
 })();
 
 /* ---------- Barra de compra en móvil ---------- */
