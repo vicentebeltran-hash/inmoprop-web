@@ -614,6 +614,65 @@ section{padding-block:clamp(56px,8vw,110px)}
   letter-spacing:.09em;text-transform:uppercase
 }
 
+
+/* ---- selector de módulos dentro de la tarjeta de precio ---- */
+.plan__mods{align-self:stretch;margin-bottom:var(--sp-4)}
+.plan__mods-cab{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--sp-2);margin-bottom:var(--sp-2)
+}
+.plan__mods-cab > span{
+  font-size:.66rem;font-weight:var(--peso-fuerte);letter-spacing:.09em;
+  text-transform:uppercase;color:var(--faint)
+}
+.plan__mods-cab > b{
+  font-size:.66rem;font-weight:var(--peso-fuerte);letter-spacing:.05em;
+  color:var(--acento-fuerte);white-space:nowrap
+}
+.plan__chips{display:flex;flex-wrap:wrap;gap:5px}
+.chipm{
+  display:inline-flex;align-items:center;gap:4px;
+  padding:5px 10px;border-radius:var(--r-full);
+  border:1px solid var(--card-borde);background:var(--surface-2);
+  font-family:inherit;font-size:.68rem;font-weight:var(--peso-medio);
+  line-height:1.15;color:var(--dim);cursor:pointer;
+  transition:background var(--trans),border-color var(--trans),color var(--trans)
+}
+.chipm::before{
+  content:"+";width:9px;text-align:center;
+  font-weight:var(--peso-black);opacity:.5
+}
+.chipm i{
+  font-style:normal;font-variant-numeric:tabular-nums;
+  font-size:.62rem;font-weight:var(--peso-fuerte);opacity:.6
+}
+.chipm i::after{content:"\00a0€"}
+@media(hover:hover){
+  .chipm:hover{border-color:var(--acento);color:var(--text)}
+}
+.chipm:focus-visible{outline:2px solid var(--acento);outline-offset:2px}
+.chipm[aria-pressed="true"],.chipm--base{
+  background:var(--acento-soft);border-color:var(--acento);
+  color:var(--acento-fuerte);font-weight:var(--peso-fuerte)
+}
+.chipm[aria-pressed="true"]::before,.chipm--base::before{content:"\2713";opacity:1}
+.chipm--base{cursor:default}
+.chipm[data-tope]{opacity:.72}
+
+.plan__precio b{transition:color .18s var(--curva)}
+.plan__precio[data-late] b{animation:latePrecio .42s var(--curva)}
+@keyframes latePrecio{
+  0%{transform:scale(1)}35%{transform:scale(1.075);color:var(--acento-fuerte)}100%{transform:scale(1)}
+}
+.plan__precio{transform-origin:left center}
+
+.plan__mods-info{
+  margin:calc(var(--sp-2) * -1) 0 var(--sp-3);
+  font-size:var(--txt-mini);line-height:1.45;color:var(--dim)
+}
+.plan__mods-info b{color:var(--secundario);font-weight:var(--peso-fuerte)}
+.plan__mods-info em{font-style:normal;color:var(--faint)}
+
 /* ============================================================
    ESCAPARATE DE MÓDULOS · fila deslizable + panel a pantalla
    ============================================================ */
@@ -1155,7 +1214,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
   background:var(--grad-marca);box-shadow:0 0 16px var(--acento);
   transition:width 1.6s var(--curva) .2s
 }
-.visible .medidor__barra i{width:14.3%}
+.visible .medidor__barra i{width:12.5%}
 
 /* barrido de "aún por encender" sobre los módulos pendientes */
 .mod:not([data-vivo])::after{
@@ -1378,7 +1437,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="hero__txt">
       <span class="chip" style="margin-bottom:var(--sp-4)">Role play con IA por voz · en español</span>
       <h1>Tu equipo inmobiliario, <span class="grad-marca-txt">entrenado por IA</span>.</h1>
-      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y el role play; después irás sumando módulos aparte — marketing, valoración, inversión, captación y expedientes — sobre la misma cuenta. Sin entrada, sin permanencia y sin cambiar de marca.</p>
+      <p class="hero__sub">Tus agentes practican las objeciones reales antes de enfrentarse al cliente. Empiezas por la formación y el role play; después irás sumando módulos aparte — marketing, valoración, inversión, prospección, recomendación y expedientes — sobre la misma cuenta. Sin entrada, sin permanencia y sin cambiar de marca.</p>
       <div class="hero__ctas">
         <a href="#precios" class="btn">Empezar gratis</a>
       </div>
@@ -1752,7 +1811,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         <span class="etiqueta">La suite Inmoprop</span>
         <h2>Un módulo ya está en marcha.<br>Faltan seis.</h2>
         <p class="subtitulo">Inmoprop no es una plataforma de formación: es la suite que va a cubrir tu negocio entero. Siete módulos que recorren la operación completa — entrenar al agente, conseguir el contacto, poner precio, comercializar, cerrar y hacer la postventa — más el copiloto de IA que los atraviesa todos.</p>
-        <p class="subtitulo">Y una suite no es un paquete de productos sueltos con el mismo logo. Es <b style="color:var(--text)">una sola cuenta de usuarios</b>. El agente que hoy entrena una objeción es el mismo que mañana abre un expediente, genera una creatividad de marketing para captar o publica un inmueble en los portales. Hoy está encendido el primero. Los seis restantes ya están dibujados y en cola — cada uno se enciende sobre esta misma cuenta, sin migrar nada y solo si lo activas. Amplías la suite a tu ritmo, según lo que necesites y lo que uses.</p>
+        <p class="subtitulo">Y una suite no es un paquete de productos sueltos con el mismo logo. Es <b style="color:var(--text)">una sola cuenta de usuarios</b>. El agente que hoy entrena una objeción es el mismo que mañana abre un expediente, genera una creatividad de marketing para captar o publica un inmueble en los portales. Hoy está encendido el primero. Los siete restantes ya están dibujados y en cola — cada uno se enciende sobre esta misma cuenta, sin migrar nada y solo si lo activas. Amplías la suite a tu ritmo, según lo que necesites y lo que uses.</p>
         <div class="suite__claims">
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Un solo acceso</span>
           <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M4 12.5l5 5L20 6.5"/></svg> Una plataforma</span>
@@ -1762,7 +1821,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </div>
 
       <div class="medidor">
-        <div class="medidor__fila"><span>Módulos en marcha</span><b>1 de 7</b></div>
+        <div class="medidor__fila"><span>Módulos en marcha</span><b>1 de 8</b></div>
         <div class="medidor__barra" aria-hidden="true"><i></i></div>
         <p class="medidor__pie">El orden ya está decidido. Las fechas se anuncian módulo a módulo. Abre cualquiera para ver qué hará.</p>
       </div>
@@ -1869,53 +1928,73 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
           </div></div>
       </article>
       <article class="mod t-teal" data-modulo
-               data-num="05" data-nombre="Captación" data-sub="Que ningún contacto se quede sin la segunda llamada."
+               data-num="05" data-nombre="Prospección" data-sub="Que ningún contacto se quede sin la segunda llamada."
                data-tono="t-teal">
         <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4.5v7a6 6 0 0 0 12 0v-7"/><path d="M6 9.5h4.5M13.5 9.5H18"/><path d="M6 4.5h4.5M13.5 4.5H18"/></svg></span>
         <span class="mod__estado">Pr&oacute;ximamente</span>
-        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Captación">
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Prospección">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         </button>
         <div class="mod__pie">
           <span class="mod__cifra">05</span>
-          <h4>Captación</h4>
-          <span class="mod__gancho">Prospección y recomendación con seguimiento de verdad.</span>
+          <h4>Prospección</h4>
+          <span class="mod__gancho">Un programa semanal, no la memoria del agente.</span>
         </div>
         <div class="mod__detalle" hidden><p>La captación no falla por falta de contactos: falla por el seguimiento. Este módulo pone programa y calendario donde ahora hay memoria y buena voluntad.</p>
           <div class="mp__cols">
-            <div class="mp__col"><b>Programas de prospección</b><p>Qué hacer cada semana, con quién y en qué orden. El agente no decide cada mañana por dónde empezar.</p></div>
-            <div class="mp__col"><b>Recomendación</b><p>El cliente satisfecho como fuente de negocio, trabajado como un canal y no como un accidente.</p></div>
+            <div class="mp__col"><b>Qué hacer cada semana</b><p>Con quién hablar, en qué orden y con qué motivo. El agente no decide cada mañana por dónde empezar.</p></div>
+            <div class="mp__col"><b>Nadie se queda sin segunda llamada</b><p>El contacto entra en un circuito con fecha. Si toca hoy, aparece hoy; no depende de que alguien se acuerde.</p></div>
           </div></div>
       </article>
       <article class="mod t-oro" data-modulo
-               data-num="06" data-nombre="Expedientes" data-sub="Todo lo del cliente en un sitio, y solo en un sitio."
+               data-num="06" data-nombre="Recomendación" data-sub="El cliente satisfecho como canal, no como accidente."
                data-tono="t-oro">
+        <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><path d="m18 4.5 1.1 2.3 2.4.35-1.75 1.7.42 2.4L18 10.1l-2.17 1.15.42-2.4L14.5 7.15l2.4-.35z"/></svg></span>
+        <span class="mod__estado">Pr&oacute;ximamente</span>
+        <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Recomendación">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+        <div class="mod__pie">
+          <span class="mod__cifra">06</span>
+          <h4>Recomendación</h4>
+          <span class="mod__gancho">Convertir a quien ya te compró en tu mejor fuente.</span>
+        </div>
+        <div class="mod__detalle" hidden><p>Casi toda la inmobiliaria dice que vive de la recomendación y casi ninguna la trabaja como un canal. Este módulo la convierte en un proceso con momentos, peticiones y seguimiento.</p>
+          <div class="mp__cols">
+            <div class="mp__col"><b>El momento de pedirla</b><p>Después de la firma, del cambio de llaves, de la postventa bien resuelta. El sistema avisa cuando toca, que es cuando funciona.</p></div>
+            <div class="mp__col"><b>Y el rastro de lo que dio</b><p>Quién recomendó, a quién, y en qué acabó. La recomendación deja de ser una intuición y pasa a ser una cifra.</p></div>
+          </div></div>
+      </article>
+      <article class="mod t-violeta" data-modulo
+               data-num="07" data-nombre="Expedientes y Portales" data-sub="Todo lo del cliente en un sitio, y solo en un sitio."
+               data-tono="t-violeta">
         <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7a2 2 0 0 1 2-2h3.2l1.8 2H18a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2z"/><path d="M8 13h8M8 16h5"/></svg></span>
         <span class="mod__estado">Pr&oacute;ximamente</span>
         <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Expedientes">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         </button>
         <div class="mod__pie">
-          <span class="mod__cifra">06</span>
+          <span class="mod__cifra">07</span>
           <h4>Expedientes</h4>
           <span class="mod__gancho">La operación entera en una ficha, de la firma a la postventa.</span>
         </div>
         <div class="mod__detalle" hidden><p>La ficha del cliente con la operación completa dentro: documentos, hitos, plazos y quién hizo qué. Cuando alguien se va de vacaciones, el expediente sigue contando la historia.</p>
           <div class="mp__cols">
             <div class="mp__col"><b>De la firma a la postventa</b><p>El ciclo entero, sin que la información viva en el móvil de una persona.</p></div>
+            <div class="mp__col"><b>Con los portales dentro</b><p>El inmueble se publica desde el propio expediente en los portales que tengas contratados, sin rellenar la misma ficha tres veces.</p></div>
             <div class="mp__col"><b>Con el historial detrás</b><p>El mismo agente que entrena una objeción abre después el expediente. Una sola cuenta de usuarios.</p></div>
           </div></div>
       </article>
-      <article class="mod t-violeta" data-modulo
-               data-num="07" data-nombre="Copiloto" data-sub="Transversal a todos los módulos, no una pestaña más."
-               data-tono="t-violeta">
+      <article class="mod t-lima" data-modulo
+               data-num="08" data-nombre="Copiloto" data-sub="Transversal a todos los módulos, no una pestaña más."
+               data-tono="t-lima">
         <span class="mod__fondo" aria-hidden="true"></span><span class="mod__marca" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4.5h8a3.5 3.5 0 0 1 3.5 3.5v4A3.5 3.5 0 0 1 16 15.5h-3l-4 3.5v-3.5H8A3.5 3.5 0 0 1 4.5 12V8A3.5 3.5 0 0 1 8 4.5Z"/><path d="M12 7.8l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span>
         <span class="mod__estado">Pr&oacute;ximamente</span>
         <button class="mod__mas" type="button" aria-label="Ver el m&oacute;dulo Copiloto">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
         </button>
         <div class="mod__pie">
-          <span class="mod__cifra">07</span>
+          <span class="mod__cifra">08</span>
           <h4>Copiloto</h4>
           <span class="mod__gancho">Sabe en qué pantalla estás y actúa por ti.</span>
         </div>
@@ -2011,8 +2090,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="alcance rev">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.2h.01M12 11v5"/></svg>
       <div>
-        <b>Las tres licencias son de Inmoprop, la plataforma formativa.</b>
-        <span>Incluyen la formación completa y el entrenamiento en role play con IA — toda, en cualquier licencia: aquí no se paga por desbloquear contenido. Los módulos que se vayan estrenando — marketing, valoración, inversión, captación y expedientes — se contratan aparte, cada uno con su propio precio, y nunca cambian el de lo que ya tengas.</span>
+        <b>La formación va incluida en las tres licencias. Los demás módulos, los eliges tú.</b>
+        <span>Toda la formación y el entrenamiento en role play con IA entran en cualquier licencia: aquí no se paga por desbloquear contenido. Los otros siete módulos se encienden sobre la misma cuenta cuando los quieras, a 19 € cada uno — 35 € Expedientes, que lleva los portales dentro. <b>Pulsa sus nombres en cada tarjeta</b> y verás lo que costaría tu suite: el catálogo entero son 198 € por persona, y en una oficina bastante menos.</span>
       </div>
     </div>
 
@@ -2027,10 +2106,23 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     <div class="planes">
       <!-- ---- LICENCIA AGENTE ---- -->
       <article class="tarjeta plan foco">
-        <span class="plan__alcance">Plataforma formativa</span>
+        <div class="plan__mods" data-mods-plan="agente">
+          <div class="plan__mods-cab"><span>Tu suite</span><b data-mods-n>1 de 8 módulos</b></div>
+          <div class="plan__chips">
+            <span class="chipm chipm--base" title="La formación va incluida en todas las licencias">Formación<i>49</i></span>
+            <button type="button" class="chipm" data-m="mkt" aria-pressed="false">Marketing<i>19</i></button>
+            <button type="button" class="chipm" data-m="val" aria-pressed="false">Valoración<i>19</i></button>
+            <button type="button" class="chipm" data-m="inv" aria-pressed="false">Inversión<i>19</i></button>
+            <button type="button" class="chipm" data-m="pro" aria-pressed="false">Prospección<i>19</i></button>
+            <button type="button" class="chipm" data-m="rec" aria-pressed="false">Recomendación<i>19</i></button>
+            <button type="button" class="chipm" data-m="cop" aria-pressed="false">Copiloto<i>19</i></button>
+            <button type="button" class="chipm" data-m="exp" aria-pressed="false">Expedientes<i>35</i></button>
+          </div>
+        </div>
         <h3>Licencia Agente</h3>
         <p class="plan__perfil">Para el agente que quiere cerrar más.</p>
         <div class="plan__precio"><b data-mes="49" data-anual="39">49</b><small>€ / mes + IVA</small></div>
+        <p class="plan__mods-info" data-mods-info></p>
         <p class="plan__nota">Un usuario. Facturación mensual, cancelable en cualquier momento.</p>
         <ul>
           <li><b>Acceso completo a toda la formación</b>, también a lo que se vaya estrenando</li>
@@ -2045,10 +2137,23 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 
       <!-- ---- LICENCIA GERENTE ---- -->
       <article class="tarjeta plan foco">
-        <span class="plan__alcance">Plataforma formativa</span>
+        <div class="plan__mods" data-mods-plan="gerente">
+          <div class="plan__mods-cab"><span>Tu suite</span><b data-mods-n>1 de 8 módulos</b></div>
+          <div class="plan__chips">
+            <span class="chipm chipm--base" title="La formación va incluida en todas las licencias">Formación<i>49</i></span>
+            <button type="button" class="chipm" data-m="mkt" aria-pressed="false">Marketing<i>19</i></button>
+            <button type="button" class="chipm" data-m="val" aria-pressed="false">Valoración<i>19</i></button>
+            <button type="button" class="chipm" data-m="inv" aria-pressed="false">Inversión<i>19</i></button>
+            <button type="button" class="chipm" data-m="pro" aria-pressed="false">Prospección<i>19</i></button>
+            <button type="button" class="chipm" data-m="rec" aria-pressed="false">Recomendación<i>19</i></button>
+            <button type="button" class="chipm" data-m="cop" aria-pressed="false">Copiloto<i>19</i></button>
+            <button type="button" class="chipm" data-m="exp" aria-pressed="false">Expedientes<i>35</i></button>
+          </div>
+        </div>
         <h3>Licencia Gerente</h3>
         <p class="plan__perfil">Para el gerente que se entrena como agente <b>y</b> como gerente.</p>
         <div class="plan__precio"><b data-mes="98" data-anual="78">98</b><small>€ / mes + IVA</small></div>
+        <p class="plan__mods-info" data-mods-info></p>
         <p class="plan__nota">Un usuario con los dos roles. No existe licencia de solo gerente.</p>
         <p class="plan__hereda">Todo lo de Agente, más:</p>
         <ul>
@@ -2067,17 +2172,30 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <!-- ---- LICENCIA MULTI (recomendada) ---- -->
       <article class="tarjeta plan plan--rec aro">
         <span class="plan__badge">Mejor para una oficina</span>
-        <span class="plan__alcance">Plataforma formativa</span>
+        <div class="plan__mods" data-mods-plan="multi">
+          <div class="plan__mods-cab"><span>Tu suite</span><b data-mods-n>1 de 8 módulos</b></div>
+          <div class="plan__chips">
+            <span class="chipm chipm--base" title="La formación va incluida en todas las licencias">Formación<i>49</i></span>
+            <button type="button" class="chipm" data-m="mkt" aria-pressed="false">Marketing<i>19</i></button>
+            <button type="button" class="chipm" data-m="val" aria-pressed="false">Valoración<i>19</i></button>
+            <button type="button" class="chipm" data-m="inv" aria-pressed="false">Inversión<i>19</i></button>
+            <button type="button" class="chipm" data-m="pro" aria-pressed="false">Prospección<i>19</i></button>
+            <button type="button" class="chipm" data-m="rec" aria-pressed="false">Recomendación<i>19</i></button>
+            <button type="button" class="chipm" data-m="cop" aria-pressed="false">Copiloto<i>19</i></button>
+            <button type="button" class="chipm" data-m="exp" aria-pressed="false">Expedientes<i>35</i></button>
+          </div>
+        </div>
         <h3>Licencia Multi</h3>
         <p class="plan__perfil">Para el gerente que monta su oficina virtual y suma a sus agentes.</p>
         <div class="plan__precio"><b data-mes="179" data-anual="143">179</b><small>€ / mes + IVA</small></div>
-        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Una oficina virtual agrupa siempre al menos una de Gerente más las de Agente que necesites. Adicionales desde <span data-precio-extra>39</span> € y bajando, sin IVA.</p>
+        <p class="plan__mods-info" data-mods-info></p>
+        <p class="plan__nota"><b>1 licencia de Gerente + 3 de Agente incluidas.</b> Una oficina virtual agrupa siempre al menos una de Gerente más las de Agente que necesites. Cada agente adicional desde <span data-precio-extra>39</span> €, y cuantos más seáis, más baratos los módulos para todos.</p>
         <p class="plan__hereda">Todo lo de Gerente, para los 4, más:</p>
         <ul>
           <li><b>Tu oficina virtual montada</b> desde el primer día: tú como gerente y tus agentes debajo</li>
           <li>Estadísticas y progresos de todo el equipo en un sitio</li>
           <li>Añades y quitas agentes cuando quieras</li>
-          <li>Cada agente que sumas abarata a todos los demás</li>
+          <li>Cada agente que sumas abarata los módulos de todo el equipo</li>
           <li>Una sola factura para toda la oficina</li>
         </ul>
         <a href="#" class="btn" data-plan="multi">Comenzar ya</a>
@@ -2090,7 +2208,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       <div class="calc__grid">
         <div>
           <h3>¿Cuántos agentes tienes?</h3>
-          <p class="calc__intro">La Multi arranca con el gerente y tres agentes. Cada agente que añades cuesta un 5&nbsp;% menos que el anterior, hasta el suelo de <span data-suelo>29</span>&nbsp;€ por licencia.</p>
+          <p class="calc__intro">Mueve el mando y verás el precio de tu oficina con los módulos que hayas encendido en la tarjeta Multi. Cada persona que sumas abarata los módulos de todo el equipo, hasta el suelo de <span data-suelo-persona>86</span>&nbsp;€ por persona con la suite completa.</p>
           <div class="calc__valor"><b id="calc-n">3</b><span id="calc-n-txt">agentes en el equipo</span></div>
           <input type="range" id="calc-slider" min="3" max="25" step="1" value="3" aria-label="Número de agentes en el equipo">
           <div class="calc__limites"><span>3 incluidos</span><span>25+</span></div>
@@ -2098,9 +2216,9 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         </div>
         <div>
           <ul class="calc__desglose">
-            <li><span>Multi base · 1 gerente + 3 agentes</span><i id="calc-base">179,00 €</i></li>
+            <li><span>Formación · 1 gerente + 3 agentes</span><i id="calc-base">179,00 €</i></li>
             <li><span id="calc-extra-txt">Agentes adicionales</span><i id="calc-extra">0,00 €</i></li>
-            <li><span>Precio por licencia adicional</span><i id="calc-unit">—</i></li>
+            <li><span id="calc-mods-txt">Módulos · ninguno elegido</span><i id="calc-mods">0,00 €</i></li>
           </ul>
           <div class="calc__total"><span>Total al mes <em style="font-style:normal;font-weight:var(--peso-normal);color:var(--faint)">(sin IVA)</em></span><b id="calc-total">179,00 €</b></div>
           <div class="calc__ahorro">
@@ -2136,8 +2254,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </details>
       <details>
         <summary>¿Qué es la «suite Inmoprop» y qué incluye? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Es el plan completo de la plataforma: siete módulos que recorren la operación inmobiliaria de principio a fin, sobre una sola cuenta y un solo censo de personas. <b>01 · Formación</b> (role play por voz, cursos en cuatro formatos, progreso y directo semanal) es el único encendido hoy, y es el que cubre tu licencia. Los otros seis están dibujados y en cola: <b>02 · Marketing</b>, creatividades adaptadas a tu marca; <b>03 · Valoración</b>, para poner precio con criterio y entregar el informe en la misma visita; <b>04 · Inversión</b>, oportunidades, NPL y REO con su análisis dentro; <b>05 · Captación</b>, prospección, recomendación y seguimiento de cada contacto; <b>06 · Expedientes</b>, la ficha del cliente con la operación entera, de la firma a la postventa; y <b>07 · Copiloto</b>, transversal a todos: sabe en qué pantalla estás y actúa por ti.</p>
-        <p>La gracia de que sea una suite y no siete productos sueltos es que comparten la cuenta y los datos: el agente que hoy entrena una objeción es el mismo que mañana abre un expediente, sin dar de alta a nadie otra vez ni migrar nada. Cada módulo nuevo se contrata aparte, con su propio precio, y solo si lo quieres — el precio de lo que ya tengas no sube porque salga uno nuevo. Todavía no hay fechas comprometidas; te avisamos antes de encender cada uno.</p>
+        <p>Es el plan completo de la plataforma: ocho módulos que recorren la operación inmobiliaria de principio a fin, sobre una sola cuenta y un solo censo de personas. <b>01 · Formación</b> (role play por voz, cursos en cuatro formatos, progreso y directo semanal) es el único encendido hoy, y es el que cubre tu licencia. Los otros siete están dibujados y en cola: <b>02 · Marketing</b>, creatividades adaptadas a tu marca; <b>03 · Valoración</b>, para poner precio con criterio y entregar el informe en la misma visita; <b>04 · Inversión</b>, oportunidades, NPL y REO con su análisis dentro; <b>05 · Prospección</b>, el programa semanal para que ningún contacto se quede sin segunda llamada; <b>06 · Recomendación</b>, el cliente satisfecho trabajado como un canal; <b>07 · Expedientes</b>, la ficha del cliente con la operación entera, de la firma a la postventa; y <b>08 · Copiloto</b>, transversal a todos: sabe en qué pantalla estás y actúa por ti.</p>
+        <p>La gracia de que sea una suite y no ocho productos sueltos es que comparten la cuenta y los datos: el agente que hoy entrena una objeción es el mismo que mañana abre un expediente, sin dar de alta a nadie otra vez ni migrar nada. Cada módulo nuevo se contrata aparte, con su propio precio, y solo si lo quieres — el precio de lo que ya tengas no sube porque salga uno nuevo. Todavía no hay fechas comprometidas; te avisamos antes de encender cada uno.</p>
       </details>
       <details>
         <summary>¿Qué escenarios puedo entrenar? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -2181,7 +2299,7 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
       </details>
       <details data-extra>
         <summary>¿Los módulos que vengan están incluidos en mi licencia? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
-        <p>Sí, si los quieres: cada módulo tiene su propio precio y se contrata aparte. Tu licencia de Agente, Gerente o Multi cubre Inmoprop como plataforma formativa — la formación completa y el entrenamiento en role play — y eso no cambia. Marketing, valoración, inversión, captación y expedientes se activan sobre la cuenta que ya tienes cuando decidas sumarlos, sin migrar nada. Y el precio de lo que ya tengas contratado no sube porque salga un módulo nuevo.</p>
+        <p>Sí, si los quieres: cada módulo tiene su propio precio y se contrata aparte. Tu licencia de Agente, Gerente o Multi cubre Inmoprop como plataforma formativa — la formación completa y el entrenamiento en role play — y eso no cambia. Marketing, valoración, inversión, prospección, recomendación, expedientes y el copiloto se activan sobre la cuenta que ya tienes cuando decidas sumarlos, sin migrar nada. Y el precio de lo que ya tengas contratado no sube porque salga un módulo nuevo.</p>
       </details>
       <details data-extra>
         <summary>¿Los precios llevan IVA? <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 9.5l6 6 6-6"/></svg></summary>
@@ -2583,43 +2701,125 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
 
 /* ---------- Precios y calculadora ---------- */
 (function(){
-  /* ===== CONFIG · cambia solo estos números ===== */
+  /* ==========================================================
+     CONFIG · aquí se cambian TODOS los precios de la web.
+     Lo que pongas aquí tiene que coincidir con el bloque CFG
+     de /api/checkout.js, que es quien cobra de verdad.
+     ========================================================== */
   var CFG = {
-    multiBase: 179,      // Multi: 1 gerente + 3 agentes
-    agentesIncl: 3,      // agentes incluidos en la Multi
-    extraBase: 39,       // precio de la 1ª licencia de agente adicional
-    descuento: 0.05,     // 5 % menos por cada licencia adicional (acumulativo)
-    suelo: 29,           // precio mínimo por licencia
-    sueltaAgente: 49,    // licencia de agente por separado
-    sueltaGerente: 98,   // licencia de gerente por separado
-    factorAnual: 0.8     // −20 % con facturación anual
+    sueltaAgente:  49,   // licencia de Agente (solo formación)
+    extraGerente:  49,   // lo que suma el rol de gerente
+    multiBase:    179,   // pack Multi: 1 gerente + 3 agentes, solo formación
+    agentesIncl:    3,   // agentes incluidos en el pack
+    extraBase:     39,   // 1.ª licencia de agente adicional (parte de formación)
+    descuento:   0.03,   // cada licencia adicional abarata un 3 % a TODAS
+    suelo:         29,   // suelo de la licencia adicional de formación
+    sueloPersona:  86,   // suelo por persona con la suite completa
+    personasTope:  26,   // 25 agentes + el gerente: donde se toca el suelo
+    factorAnual:  0.8    // −20 % con facturación anual
   };
-  /* ============================================== */
+  CFG.sueltaGerente = CFG.sueltaAgente + CFG.extraGerente;   // 98
+
+  /* ===== CATÁLOGO DE MÓDULOS · precio por persona y mes ===== */
+  var MODULOS = [
+    { k:'form', n:'Formación',     p:49, base:true },
+    { k:'mkt',  n:'Marketing',     p:19 },
+    { k:'val',  n:'Valoración',    p:19 },
+    { k:'inv',  n:'Inversión',     p:19 },
+    { k:'pro',  n:'Prospección',   p:19 },
+    { k:'rec',  n:'Recomendación', p:19 },
+    { k:'cop',  n:'Copiloto',      p:19 },
+    { k:'exp',  n:'Expedientes',   p:35 }   // Portales va dentro
+  ];
+  /* suma de todo menos la formación: 149 → techo del agente 198 */
+  var SUMA_MODS = MODULOS.reduce(function(t,m){ return m.base ? t : t + m.p; }, 0);
+  /* ========================================================== */
 
   var periodo = 'mes';
-  var btnMes = document.getElementById('btn-mes');
+  var btnMes   = document.getElementById('btn-mes');
   var btnAnual = document.getElementById('btn-anual');
-  var precios = document.querySelectorAll('[data-mes]');
+  var precios  = document.querySelectorAll('[data-mes]');
   var etiquetas = document.querySelectorAll('.plan__precio small');
+  var slider   = document.getElementById('calc-slider');
 
   var eur = function(n){
     return n.toLocaleString('es-ES', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' €';
   };
   var f = function(){ return periodo === 'anual' ? CFG.factorAnual : 1; };
 
-  /* precio unitario de cada licencia adicional según cuántas haya */
-  function unitario(n){
-    if (n <= 0) return CFG.extraBase;
-    var p = CFG.extraBase * Math.pow(1 - CFG.descuento, n - 1);
-    return Math.max(CFG.suelo, Math.round(p * 100) / 100);
+  /* ---------- la parte de formación de una oficina ----------
+     Todas las licencias adicionales van al precio de la última,
+     así cada agente que sumas abarata de verdad a los anteriores. */
+  function licenciaExtra(k){
+    if (k <= 0) return CFG.extraBase;
+    return Math.max(CFG.suelo, Math.round(CFG.extraBase * Math.pow(1 - CFG.descuento, k - 1) * 100) / 100);
+  }
+  function basesOficina(agentes){
+    var extras = Math.max(0, agentes - CFG.agentesIncl);
+    return CFG.multiBase + extras * licenciaExtra(extras);
+  }
+
+  /* ---------- el descuento de los módulos según el tamaño ----------
+     Curva saturante: baja rápido en las oficinas pequeñas y se frena,
+     porque una curva recta llegaría a hacer que sumar un agente
+     ABARATASE la factura total. Los tres números salen solos del
+     suelo por persona que hay en CFG, así que si cambias el suelo o
+     el precio de un módulo la curva se recalcula sola. */
+  var DM_MIN = 0.15;                                  // con 3 agentes
+  var _pT = CFG.personasTope;
+  var _dmTope = 1 - (_pT * CFG.sueloPersona - basesOficina(_pT - 1)) / (_pT * SUMA_MODS);
+  var _DM_D = _dmTope + 0.045;                        // asíntota
+  var _DM_R = Math.exp(Math.log(0.045 / (_DM_D - DM_MIN)) / (_pT - 4));
+  function dm(personas){
+    var p = Math.min(Math.max(personas, 4), _pT);
+    return _DM_D - (_DM_D - DM_MIN) * Math.pow(_DM_R, p - 4);
+  }
+
+  /* ---------- módulos elegidos, uno por tarjeta ---------- */
+  var elegidos = { agente:{}, gerente:{}, multi:{} };
+
+  function sumaMods(plan){
+    var t = 0, e = elegidos[plan] || {};
+    MODULOS.forEach(function(m){ if (!m.base && e[m.k]) t += m.p; });
+    return t;
+  }
+  function nMods(plan){
+    var n = 1, e = elegidos[plan] || {};
+    MODULOS.forEach(function(m){ if (!m.base && e[m.k]) n++; });
+    return n;
+  }
+
+  /* ---------- los precios ---------- */
+  function pAgente(x){  return CFG.sueltaAgente  + x; }
+  function pGerente(x){ return CFG.sueltaGerente + x; }
+  function oficina(agentes, x){
+    var personas = agentes + 1;
+    return basesOficina(agentes) + personas * x * (1 - dm(personas));
+  }
+  function pMulti(x){ return Math.round(oficina(CFG.agentesIncl, x)); }
+
+  function precioPlan(plan){
+    var x = sumaMods(plan);
+    return plan === 'agente' ? pAgente(x) : plan === 'gerente' ? pGerente(x) : pMulti(x);
+  }
+  /* lo mismo comprado como licencias sueltas */
+  function brutoPlan(plan){
+    var x = sumaMods(plan);
+    if (plan === 'agente')  return pAgente(x);
+    if (plan === 'gerente') return pGerente(x);
+    return pGerente(x) + CFG.agentesIncl * pAgente(x);
+  }
+  /* el techo: con el catálogo entero encendido */
+  function techoPlan(plan){
+    return plan === 'agente' ? pAgente(SUMA_MODS)
+         : plan === 'gerente' ? pGerente(SUMA_MODS)
+         : pMulti(SUMA_MODS);
   }
 
   /* ---- botones de pago · llaman a /api/checkout ---- */
   function pintarEnlaces(){
-    /* href de reserva por si el JS falla o la API no responde */
     document.querySelectorAll('[data-plan]').forEach(function(a){ a.href = '#precios'; });
   }
-
   function agentesElegidos(){
     return slider ? parseInt(slider.value, 10) : CFG.agentesIncl;
   }
@@ -2645,7 +2845,8 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
         body: JSON.stringify({
           plan: boton.dataset.plan,
           periodo: periodo,
-          agentes: boton.dataset.plan === 'multi' ? agentesElegidos() : 1
+          agentes: boton.dataset.plan === 'multi' ? agentesElegidos() : 1,
+          modulos: Object.keys(elegidos[boton.dataset.plan] || {})
         })
       })
       .then(function(r){ return r.json().then(function(d){ return { ok: r.ok, d: d }; }); })
@@ -2657,8 +2858,48 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     });
   });
 
-  /* ---- tarjetas ---- */
+  /* ---- las tarjetas ---- */
+  function pintarMods(){
+    document.querySelectorAll('[data-mods-plan]').forEach(function(caja){
+      var plan  = caja.dataset.modsPlan;
+      var art   = caja.closest('.plan');
+      var x     = sumaMods(plan);
+      var mes   = precioPlan(plan);
+      var n     = nMods(plan), completa = (n === MODULOS.length);
+
+      var b = art.querySelector('.plan__precio b[data-mes]');
+      if (b) { b.dataset.mes = mes; b.dataset.anual = Math.round(mes * CFG.factorAnual); }
+
+      var cont = caja.querySelector('[data-mods-n]');
+      if (cont) cont.textContent = completa
+        ? 'Suite completa · 8 de 8'
+        : n + ' de ' + MODULOS.length + ' módulos';
+
+      caja.querySelectorAll('.chipm[data-m]').forEach(function(ch){
+        ch.setAttribute('aria-pressed', elegidos[plan][ch.dataset.m] ? 'true' : 'false');
+      });
+
+      var info = art.querySelector('[data-mods-info]');
+      if (info) {
+        var ahorro = Math.round((brutoPlan(plan) - mes) * f());
+        var techo  = Math.round(techoPlan(plan) * f());
+        if (completa) {
+          info.innerHTML = plan === 'multi'
+            ? 'Suite completa para los cuatro. <b>Ahorras ' + ahorro + ' € al mes</b> frente a cuatro licencias sueltas.'
+            : 'Suite completa: los ocho módulos.';
+        } else if (x > 0) {
+          info.innerHTML = 'Formación y ' + (n - 1) + (n - 1 === 1 ? ' módulo más' : ' módulos más') +
+            '. Con los ocho: <b>' + techo + ' €</b>.';
+        } else {
+          info.innerHTML = '<em>Solo la formación, incluida en toda licencia.</em> ' +
+            'Con los ocho módulos: <b>' + techo + ' €</b>.';
+        }
+      }
+    });
+  }
+
   function pintarPlanes(){
+    pintarMods();
     precios.forEach(function(b){
       b.textContent = periodo === 'anual' ? b.dataset.anual : b.dataset.mes;
     });
@@ -2669,45 +2910,69 @@ details p{margin:0;padding:0 var(--sp-5) var(--sp-5);font-size:var(--txt-small);
     document.querySelectorAll('[data-precio-extra]').forEach(function(el){
       el.textContent = Math.round(CFG.extraBase * f());
     });
-    document.querySelectorAll('[data-suelo]').forEach(function(el){
-      el.textContent = Math.round(CFG.suelo * f());
+    document.querySelectorAll('[data-suelo-persona]').forEach(function(el){
+      el.textContent = Math.round(CFG.sueloPersona * f());
     });
   }
 
-  /* ---- calculadora ---- */
-  var slider = document.getElementById('calc-slider');
-
+  /* ---- la calculadora de la oficina ---- */
   function pintarCalc(){
     if (!slider) return;
-    var total   = parseInt(slider.value, 10);
-    var extras  = Math.max(0, total - CFG.agentesIncl);
-    var unit    = unitario(extras) * f();
-    var base    = periodo === 'anual' ? Math.round(CFG.multiBase * CFG.factorAnual) : CFG.multiBase;
-    var costeEx = extras * unit;
-    var mensual = base + costeEx;
-    var personas = total + 1;                                    // los agentes + el gerente
-    var suelto  = (CFG.sueltaGerente + CFG.sueltaAgente * total) * f();
-    var ahorro  = suelto - mensual;
-    var pct     = suelto > 0 ? Math.round(ahorro / suelto * 100) : 0;
+    var agentes  = parseInt(slider.value, 10);
+    var personas = agentes + 1;
+    var extras   = Math.max(0, agentes - CFG.agentesIncl);
+    var x        = sumaMods('multi');
 
-    document.getElementById('calc-n').textContent = total;
-    document.getElementById('calc-n-txt').textContent = total === 1 ? 'agente en el equipo' : 'agentes en el equipo';
-    document.getElementById('calc-base').textContent = eur(base);
+    var unit    = Math.round(licenciaExtra(extras) * f() * 100) / 100;
+    var pack    = periodo === 'anual' ? Math.round(CFG.multiBase * CFG.factorAnual) : CFG.multiBase;
+    var costeEx = extras * unit;
+    var descM   = dm(personas);
+    var unitMod = Math.round(x * (1 - descM) * f() * 100) / 100;
+    var costeM  = personas * unitMod;
+    var mensual = pack + costeEx + costeM;
+
+    var suelto = (pGerente(x) + pAgente(x) * agentes) * f();
+    var ahorro = suelto - mensual;
+    var pct    = suelto > 0 ? Math.round(ahorro / suelto * 100) : 0;
+
+    document.getElementById('calc-n').textContent = agentes;
+    document.getElementById('calc-n-txt').textContent = agentes === 1 ? 'agente en el equipo' : 'agentes en el equipo';
+    document.getElementById('calc-base').textContent = eur(pack);
     document.getElementById('calc-extra-txt').textContent = extras === 0
       ? 'Agentes adicionales'
-      : extras + (extras === 1 ? ' agente adicional' : ' agentes adicionales');
+      : extras + (extras === 1 ? ' agente adicional' : ' agentes adicionales') + ' × ' + eur(unit);
     document.getElementById('calc-extra').textContent = eur(costeEx);
-    document.getElementById('calc-unit').textContent = extras === 0 ? '—' : eur(unit) + ' / mes';
+    document.getElementById('calc-mods-txt').textContent = x === 0
+      ? 'Módulos · ninguno elegido'
+      : (nMods('multi') - 1) + (nMods('multi') - 1 === 1 ? ' módulo' : ' módulos') +
+        ' × ' + personas + ' personas (−' + Math.round(descM * 100) + ' %)';
+    document.getElementById('calc-mods').textContent = eur(costeM);
     document.getElementById('calc-total').textContent = eur(mensual);
-    document.getElementById('calc-ahorro').textContent = ahorro > 0
+    document.getElementById('calc-ahorro').textContent = ahorro > 0.5
       ? 'Ahorras ' + eur(ahorro) + ' al mes frente a licencias sueltas (−' + pct + ' %)'
       : 'Mismo precio que las licencias sueltas';
     document.getElementById('calc-porusuario').textContent =
       'Sale a ' + eur(mensual / personas) + ' por persona y mes, gerente incluido.';
 
-    var recorrido = (total - slider.min) / (slider.max - slider.min) * 100;
+    var recorrido = (agentes - slider.min) / (slider.max - slider.min) * 100;
     slider.style.background = 'linear-gradient(90deg, var(--acento) ' + recorrido + '%, var(--surface-2) ' + recorrido + '%)';
   }
+
+  /* ---- pulsar un módulo ---- */
+  document.querySelectorAll('[data-mods-plan]').forEach(function(caja){
+    var plan = caja.dataset.modsPlan;
+    caja.addEventListener('click', function(ev){
+      var ch = ev.target.closest('.chipm[data-m]');
+      if (!ch || !caja.contains(ch)) return;
+      var k = ch.dataset.m;
+      if (elegidos[plan][k]) delete elegidos[plan][k];
+      else elegidos[plan][k] = 1;
+      pintarPlanes();
+      pintarCalc();
+      var pr = caja.closest('.plan').querySelector('.plan__precio');
+      if (pr) { pr.removeAttribute('data-late'); void pr.offsetWidth; pr.setAttribute('data-late',''); }
+    });
+  });
 
   function set(nuevoPeriodo){
     periodo = nuevoPeriodo;
