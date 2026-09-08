@@ -24,17 +24,20 @@
    Ojo: aquí es donde se cobra de verdad. El navegador solo pide un
    plan; los importes se calculan SIEMPRE en el servidor.          */
 const CFG = {
-  multiBase: 179,      // Multi: 1 gerente + 3 agentes
-  agentesIncl: 3,      // agentes incluidos en la Multi
-  extraBase: 39,       // precio de la 1.ª licencia de agente adicional
-  descuento: 0.05,     // 5 % menos por cada licencia adicional (acumulativo)
-  suelo: 29,           // precio mínimo por licencia
-  agente: 49,          // licencia de Agente suelta
-  gerente: 98,         // licencia de Gerente suelta
-  factorAnual: 0.8,    // −20 % con facturación anual
+  agente: 49,          // licencia de Agente (solo formación)
+  extraGerente: 49,    // lo que suma el rol de gerente
+  agentesMin: 1,       // la Multi arranca con 1 gerente + 1 agente
   maxAgentes: 25,      // por encima de esto, se habla con ventas
+  anclaAgentes: 3,     // ancla de la curva: 1 gerente + 3 agentes…
+  anclaPrecio: 179,    // …con formación siguen costando 179
+  dfMin: 0.15,         // descuento de formación con 1 agente
+  dfMax: 0.40,         // techo del descuento de formación
+  sueloPersona: 86,    // suelo por persona con la suite completa
+  personasTope: 26,    // 25 agentes + el gerente: donde se toca el suelo
+  factorAnual: 0.8,    // −20 % con facturación anual
   pruebaDias: 7        // días de prueba gratis (con tarjeta)
 };
+CFG.gerente = CFG.agente + CFG.extraGerente;   // 98
 
 /* IVA · los precios de la web son SIN IVA, así que Stripe lo calcula
    y lo suma aparte según el país del cliente y su NIF-IVA.
@@ -64,19 +67,118 @@ const MANAGED_PAYMENTS = false;
    Stripe lo exige con Managed Payments y lo usa Stripe Tax.        */
 const CODIGO_FISCAL = 'txcd_10103001';
 
-/* --- precio de cada licencia adicional según cuántas haya --- */
-function unitario(n) {
-  if (n <= 0) return CFG.extraBase;
-  const p = CFG.extraBase * Math.pow(1 - CFG.descuento, n - 1);
-  return Math.max(CFG.suelo, Math.round(p * 100) / 100);
+/* ===== CATÁLOGO DE MÓDULOS =====================================
+   Estos precios y estas fórmulas tienen que ser IDÉNTICOS a los del
+   bloque MODULOS de index.html. Si cambias uno, cambia los dos.
+   El navegador manda solo las claves elegidas; el importe se calcula
+   siempre aquí.                                                     */
+const MODULOS = {
+  form: { n: 'Formación',     p: 49, base: true },
+  mkt:  { n: 'Marketing',     p: 19 },
+  val:  { n: 'Valorador',     p: 19 },
+  inv:  { n: 'Inversión',     p: 19 },
+  pro:  { n: 'Prospección',   p: 19 },
+  rec:  { n: 'Recomendación', p: 19 },
+  cop:  { n: 'Copiloto',      p: 19 },
+  exp:  { n: 'Expedientes',   p: 35 }   // Portales va dentro
+};
+/* suma de todo menos la formación: 149 -> techo del agente 198 */
+const SUMA_MODS = Object.keys(MODULOS)
+  .reduce((t, k) => (MODULOS[k].base ? t : t + MODULOS[k].p), 0);
+
+/* PAQUETES · cómo se agrupan los módulos en la web. La pasarela sigue
+   trabajando con módulos (es lo que viaja al back office); los paquetes
+   solo sirven para describir la compra con las palabras de la web.    */
+const PAQUETES = [
+  { k: 'form', n: 'Formación por IA',              mods: ['form'] },
+  { k: 'cap',  n: 'Captación por IA',              mods: ['pro', 'rec', 'mkt', 'val'] },
+  { k: 'ope',  n: 'Gestión de operaciones por IA', mods: ['exp', 'cop', 'inv'] }
+];
+function paquetesDe(claves) {
+  const set = {}; claves.forEach(k => { set[k] = 1; });
+  return PAQUETES.filter(q => q.k !== 'form' && q.mods.every(m => set[m])).map(q => q.k);
+}
+
+/* limpia lo que llega del navegador y devuelve claves válidas */
+function modulosValidos(lista) {
+  if (!Array.isArray(lista)) return [];
+  const vistos = {};
+  return lista
+    .map(function (k) { return String(k || '').toLowerCase(); })
+    .filter(function (k) {
+      if (!MODULOS[k] || MODULOS[k].base || vistos[k]) return false;
+      vistos[k] = 1;
+      return true;
+    });
+}
+function sumaMods(claves) {
+  return claves.reduce(function (t, k) { return t + MODULOS[k].p; }, 0);
+}
+
+/* --- precios por persona, sin tope: el precio ES la suma --- */
+function pAgente(x)  { return CFG.agente  + x; }
+function pGerente(x) { return CFG.gerente + x; }
+
+/* --- la formación de una oficina: una sola curva ---
+   Precio suelto de todos (gerente + agentes) con un descuento que
+   crece con el tamaño y que alcanza a todos, gerente incluido.
+   Anclada para que 1 gerente + 3 agentes sigan costando 179 €.      */
+function sueltosFormacion(personas) {
+  return CFG.gerente + (personas - 1) * CFG.agente;
+}
+const D_ANCLA = 1 - CFG.anclaPrecio / sueltosFormacion(CFG.anclaAgentes + 1);
+const DF_R = Math.sqrt((CFG.dfMax - D_ANCLA) / (CFG.dfMax - CFG.dfMin));
+function df(personas) {
+  const p = Math.min(Math.max(personas, 2), CFG.personasTope);
+  return CFG.dfMax - (CFG.dfMax - CFG.dfMin) * Math.pow(DF_R, p - 2);
+}
+function basesOficina(agentes) {
+  const p = agentes + 1;
+  return Math.round(sueltosFormacion(p) * (1 - df(p)));   // euros enteros
+}
+
+/* --- descuento de los módulos según el tamaño de la oficina ---
+   Curva saturante, derivada del suelo por persona de CFG. Una curva
+   recta acabaría haciendo que sumar un agente ABARATASE la factura
+   total; esta no. Cambia el suelo y la curva se recalcula sola.    */
+const DM_MIN = 0.15;
+const DM_TOPE = 1 - (CFG.personasTope * CFG.sueloPersona -
+  basesOficina(CFG.personasTope - 1)) / (CFG.personasTope * SUMA_MODS);
+const DM_D = DM_TOPE + 0.045;
+const DM_R = Math.exp(Math.log(0.045 / (DM_D - DM_MIN)) / (CFG.personasTope - 4));
+function dm(personas) {
+  const p = Math.min(Math.max(personas, 2), CFG.personasTope);
+  return Math.max(0, DM_D - (DM_D - DM_MIN) * Math.pow(DM_R, p - 4));
+}
+function unidadPaquetes(personas, x) {
+  return Math.round(x * (1 - dm(personas)) * 100) / 100;     // a céntimos
+}
+function oficina(agentes, x) {
+  const personas = agentes + 1;
+  return basesOficina(agentes) + personas * unidadPaquetes(personas, x);
+}
+function pMulti(x) { return Math.round(oficina(CFG.agentesMin, x)); }
+
+/* texto legible de los módulos elegidos, para la descripción de la línea */
+function textoMods(claves) {
+  if (!claves.length) return 'Formación por IA.';
+  const paqs = paquetesDe(claves);
+  const enPaquetes = paqs.reduce((n, k) => n + PAQUETES.find(q => q.k === k).mods.length, 0);
+  if (enPaquetes === claves.length) {
+    const nombres = paqs.map(k => PAQUETES.find(q => q.k === k).n);
+    const todos = paqs.length === PAQUETES.length - 1;
+    return (todos ? 'Suite completa: ' : 'Paquetes: ') + 'Formación por IA, ' + nombres.join(', ') + '.';
+  }
+  /* módulos sueltos (no debería pasar desde la web, pero se describe igual) */
+  return 'Módulos: Formación, ' + claves.map(k => MODULOS[k].n).join(', ') + '.';
 }
 
 /* --- convierte euros/mes en lo que se cobra de verdad ---
    Mensual: ese importe cada mes.
    Anual:   se aplica el −20 %, se redondea igual que en la web
             y se cobran 12 mensualidades de una vez al año.
-   `entero` = true para los precios de las tarjetas (49 / 98 / 179),
-   que en anual se muestran redondeados a euros (39 / 78 / 143).   */
+   `entero` = true para los precios de las tarjetas (49 / 98 / 125),
+   que en anual se muestran redondeados a euros (39 / 78 / 100).   */
 function importe(eurosMes, periodo, entero) {
   if (periodo !== 'anual') return Math.round(eurosMes * 100);
   let mes = eurosMes * CFG.factorAnual;
@@ -85,15 +187,18 @@ function importe(eurosMes, periodo, entero) {
 }
 
 /* --- construye las líneas del carrito según el plan --- */
-function lineas(plan, periodo, agentes) {
+function lineas(plan, periodo, agentes, mods) {
   const intervalo = periodo === 'anual' ? 'year' : 'month';
   const sufijo = periodo === 'anual' ? ' · facturación anual' : '';
+  const claves = mods || [];
+  const x = sumaMods(claves);
+  const detalle = textoMods(claves);
 
   if (plan === 'agente') {
     return [{
       nombre: 'Inmoprop · Licencia Agente' + sufijo,
-      desc: 'Formación completa y role play con IA. 1 usuario.',
-      importe: importe(CFG.agente, periodo, true),
+      desc: detalle + ' 1 usuario.',
+      importe: importe(pAgente(x), periodo, true),
       cantidad: 1,
       intervalo
     }];
@@ -102,30 +207,35 @@ function lineas(plan, periodo, agentes) {
   if (plan === 'gerente') {
     return [{
       nombre: 'Inmoprop · Licencia Gerente' + sufijo,
-      desc: 'Todo lo de Agente más la parte de dirección. 1 usuario con los dos roles.',
-      importe: importe(CFG.gerente, periodo, true),
+      desc: detalle + ' 1 usuario con los dos roles.',
+      importe: importe(pGerente(x), periodo, true),
       cantidad: 1,
       intervalo
     }];
   }
 
-  // multi
-  const extras = Math.max(0, agentes - CFG.agentesIncl);
+  /* ---- multi ----
+     Dos conceptos, igual que el desglose que ve el cliente en la web:
+       1) la formación de toda la oficina (gerente + agentes), con su
+          descuento de tamaño, en euros enteros
+       2) los paquetes, por persona, con el descuento de tamaño       */
+  const personas = agentes + 1;
   const items = [{
     nombre: 'Inmoprop · Licencia Multi' + sufijo,
-    desc: '1 licencia de Gerente + 3 de Agente. Oficina virtual incluida.',
-    importe: importe(CFG.multiBase, periodo, true),
+    desc: 'Formación por IA para 1 gerente + ' + agentes + (agentes === 1 ? ' agente' : ' agentes') +
+          ' (−' + Math.round(df(personas) * 100) + ' %). Oficina virtual incluida.',
+    importe: importe(basesOficina(agentes), periodo, true),
     cantidad: 1,
     intervalo
   }];
 
-  if (extras > 0) {
-    const unit = unitario(extras);
+  if (x > 0) {
     items.push({
-      nombre: 'Inmoprop · Licencia de Agente adicional' + sufijo,
-      desc: 'Precio por licencia con ' + extras + ' agentes adicionales en la oficina.',
-      importe: importe(unit, periodo, false),
-      cantidad: extras,
+      nombre: 'Inmoprop · Paquetes de la suite' + sufijo,
+      desc: detalle + ' Precio por persona con el descuento de ' + personas +
+            ' personas (−' + Math.round(dm(personas) * 100) + ' %).',
+      importe: importe(unidadPaquetes(personas, x), periodo, false),
+      cantidad: personas,
       intervalo
     });
   }
@@ -262,8 +372,10 @@ async function handler(req, res) {
     const plan = String(cuerpo.plan || '').toLowerCase();
     const periodo = cuerpo.periodo === 'anual' ? 'anual' : 'mes';
     let agentes = parseInt(cuerpo.agentes, 10);
-    if (!Number.isFinite(agentes)) agentes = CFG.agentesIncl;
-    agentes = Math.min(CFG.maxAgentes, Math.max(CFG.agentesIncl, agentes));
+    if (!Number.isFinite(agentes)) agentes = CFG.agentesMin;
+    agentes = Math.min(CFG.maxAgentes, Math.max(CFG.agentesMin, agentes));
+
+    const mods = modulosValidos(cuerpo.modulos);
 
     if (['agente', 'gerente', 'multi'].indexOf(plan) === -1) {
       return res.status(400).json({ error: 'Plan no reconocido.' });
@@ -290,12 +402,15 @@ async function handler(req, res) {
         (CFG.pruebaDias + 1) + '. Puedes cancelar antes sin pagar nada.',
       'subscription_data[metadata][plan]': plan,
       'subscription_data[metadata][periodo]': periodo,
-      'subscription_data[metadata][agentes]': String(plan === 'multi' ? agentes : 1)
+      'subscription_data[metadata][agentes]': String(plan === 'multi' ? agentes : 1),
+      'subscription_data[metadata][modulos]': (['form'].concat(mods)).join(','),
+      'subscription_data[metadata][paquetes]': (['form'].concat(paquetesDe(mods))).join(','),
+      'subscription_data[metadata][personas]': String(plan === 'multi' ? agentes + 1 : 1)
     };
 
     if (!MANAGED_PAYMENTS) p['managed_payments[enabled]'] = 'false';
 
-    lineas(plan, periodo, agentes).forEach(function (item, i) {
+    lineas(plan, periodo, agentes, mods).forEach(function (item, i) {
       const k = 'line_items[' + i + ']';
       p[k + '[quantity]'] = String(item.cantidad);
       p[k + '[price_data][currency]'] = 'eur';
