@@ -216,20 +216,25 @@ function ficha(tipo, evento, ses, sub, fac) {
   /* las líneas de lo comprado, con sus importes sin IVA */
   const fuente = (fac && fac.lines && fac.lines.data) ||
                  (ses && ses.line_items && ses.line_items.data) || [];
-  const lineas = fuente.map(li => ({
-    concepto: li.description || (li.price && li.price.nickname) || '—',
-    cantidad: li.quantity || 1,
-    unitario_sin_iva: cent(
-      (li.price && li.price.unit_amount) ||
-      (li.pricing && li.pricing.unit_amount_decimal && Number(li.pricing.unit_amount_decimal)) ||
-      (li.amount_excluding_tax != null && li.quantity ? li.amount_excluding_tax / li.quantity : null)
-    ),
-    total_sin_iva: cent(
-      li.amount_excluding_tax != null ? li.amount_excluding_tax
-      : li.amount_subtotal != null ? li.amount_subtotal
-      : li.amount
-    )
-  }));
+  const lineas = fuente.map(li => {
+    const cantidad = li.quantity || 1;
+    /* el precio unitario recurrente: lo que se paga cada periodo */
+    const unit = (li.price && li.price.unit_amount != null) ? li.price.unit_amount
+      : (li.pricing && li.pricing.unit_amount_decimal != null) ? Number(li.pricing.unit_amount_decimal)
+      : (li.amount_excluding_tax != null ? li.amount_excluding_tax / cantidad : null);
+    /* lo facturado en ESTE mensaje (en una factura real) o, si estamos en la
+       sesión de compra con prueba gratis, el importe recurrente que vendrá */
+    const facturado = li.amount_excluding_tax != null ? li.amount_excluding_tax
+      : li.amount_subtotal != null ? li.amount_subtotal : li.amount;
+    const recurrente = unit != null ? unit * cantidad : facturado;
+    return {
+      concepto: li.description || (li.price && li.price.nickname) || '—',
+      cantidad,
+      unitario_sin_iva: cent(unit),
+      total_sin_iva: cent(fac ? facturado : recurrente)
+    };
+  });
+  const sumaLineas = lineas.reduce((t, l) => t + (l.total_sin_iva || 0), 0);
 
   const idSub = (sub && sub.id) || (ses && ses.subscription) || null;
 
@@ -281,13 +286,17 @@ function ficha(tipo, evento, ses, sub, fac) {
       moneda: ((ses && ses.currency) || (fac && fac.currency) || 'eur').toUpperCase(),
       facturacion: lic.periodo === 'anual' ? 'anual (12 meses de una vez)' : 'mensual',
       lineas,
-      subtotal_sin_iva: cent(
-        (fac && (fac.subtotal_excluding_tax != null ? fac.subtotal_excluding_tax : fac.subtotal)) ||
-        (ses && ses.amount_subtotal)
-      ),
+      /* en la reserva es el importe recurrente que se cobrará cada periodo;
+         en un cobro, lo que se ha facturado en ese recibo */
+      subtotal_sin_iva: fac
+        ? cent(fac.subtotal_excluding_tax != null ? fac.subtotal_excluding_tax : fac.subtotal)
+        : Math.round(sumaLineas * 100) / 100,
       impuestos,
       regimen_fiscal: reg,
-      total: cent((fac && fac.total) || (ses && ses.amount_total)),
+      total: fac ? cent(fac.total) : Math.round(sumaLineas * 100) / 100,
+      /* lo que se ha cargado hoy en la tarjeta: 0 durante la prueba */
+      cobrado_hoy: cent(fac ? (fac.amount_paid != null ? fac.amount_paid : fac.total)
+                            : (ses && ses.amount_total) || 0),
       descuento: cent(
         (fac && fac.total_discount_amounts && fac.total_discount_amounts[0] &&
          fac.total_discount_amounts[0].amount) ||
@@ -397,8 +406,10 @@ function resumenHtml(f) {
       <td style="text-align:right;font-weight:600">${eur(f.compra.subtotal_sin_iva)}</td></tr>
     <tr><td colspan="2" style="padding:2px 0">IVA (${f.compra.impuestos.estado})</td>
       <td style="text-align:right;font-weight:600">${eur(f.compra.impuestos.importe_total)}</td></tr>
-    <tr><td colspan="2" style="padding:2px 0;font-size:15px"><b>Total cobrado hoy</b></td>
-      <td style="text-align:right;font-size:15px"><b>${eur(f.compra.total)}</b></td></tr>
+    <tr><td colspan="2" style="padding:2px 0">${f.tipo === 'reserva_licencias' ? 'Recurrente por periodo (sin IVA)' : 'Total del recibo'}</td>
+      <td style="text-align:right;font-weight:600">${eur(f.compra.total)}</td></tr>
+    <tr><td colspan="2" style="padding:2px 0;font-size:15px"><b>Cobrado hoy</b></td>
+      <td style="text-align:right;font-size:15px"><b>${eur(f.compra.cobrado_hoy)}</b></td></tr>
   </table>
 
   <p style="margin:14px 0 20px;padding:10px 14px;background:#f2f0ff;border-left:3px solid #6c5ce7;
@@ -577,6 +588,13 @@ async function handler(req, res) {
     } else if (evento.type === 'invoice.paid' || evento.type === 'invoice.payment_failed') {
       tipo = evento.type === 'invoice.paid' ? 'cobro_confirmado' : 'cobro_fallido';
       fac = await stripeGet('invoices/' + obj.id + '?expand[]=lines', clave);
+      /* Al arrancar una prueba gratis Stripe emite una factura de 0 € y la marca
+         pagada. No es un cobro: la reserva ya se creó con la sesión, y el IVA
+         real llega con el primer recibo del día 8. Se acepta y se ignora. */
+      if (evento.type === 'invoice.paid' && !(fac.amount_paid > 0) && !(fac.total > 0)) {
+        console.log('[webhook] factura de 0 € (arranque de prueba) ignorada:', fac.id);
+        return res.status(200).json({ recibido: true, ignorado: 'factura de 0 € al iniciar la prueba', factura: fac.id });
+      }
       const idSub = fac.subscription || (fac.parent && fac.parent.subscription_details &&
                                          fac.parent.subscription_details.subscription);
       if (idSub) sub = await stripeGet('subscriptions/' + idSub, clave);
